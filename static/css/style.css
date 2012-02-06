@@ -1,0 +1,144 @@
+body {
+    font: 13px "Helvetica", "Arial", sans-serif;
+    margin:0;
+    padding:0;
+    background:#FFF;    
+}
+nav, aside, header, footer, section, article {
+    display:block;
+    position:relative;
+}
+header {
+    position:fixed;
+    left:3em;
+    top: 1em;
+    z-index:9999;
+    font-size:1.3em;
+}
+
+section {
+    position: relative;
+    padding: 4em 18em;
+    
+}
+article {
+    float:left;
+    margin: 1em;
+    width: 30%;
+}
+details {
+    clear:both;
+}
+pre {
+    white-space: pre-wrap;
+}
+ul, li {
+    margin:0;
+    padding:0;
+    list-style: none;
+}
+li {
+    margin:3px 0;
+}
+
+a {
+    text-decoration:none;
+    background-color: #004161;
+    color: #FFF;
+    padding: 0 5px;
+    -webkit-transition: background-color 0.3s;
+    -moz-transition: background 0.3s;
+    transition: background 0.3s;
+    
+} 
+a:hover {
+    background: #FFF;
+    color: #004161;
+    -webkit-transition: background-color 0.3s;
+    -moz-transition: background 0.3s;
+    transition: background 0.3s;
+}
+
+#logo {
+    background: url(/static/img/iso_logo.png) no-repeat;
+    margin-left:-10px;
+}
+#logo a{
+    text-indent:-9999px;
+    display:block;
+    overflow:hidden;
+    height:117px;
+    width:110px;
+    background:transparent;    
+}
+
+/* Main */
+#rojo  {
+    background: url(/static/img/onda_roja.png) repeat-x;
+    height: 16px;
+    width:40%;
+    position: absolute;
+    right: 0;
+    bottom: 45%;
+}
+#naranja  {
+    background: url(/static/img/onda_naranja.png) repeat-x;
+    height: 14px;
+    width: 64%;
+    position: absolute;
+    right: 0;
+    bottom: 40%;
+}
+#amarillo  {
+    background: url(/static/img/onda_roja.png) repeat-x;
+    height: 16px;
+    width: 85%;
+    position: absolute;
+    right: 0;
+    bottom: 30%;
+}
+#verde  {
+    background: url(/static/img/onda_verde.png) repeat-x;
+    height: 17px;
+    width: 90%;
+    position: absolute;
+    right: 0;
+    bottom: 25%;
+
+}
+#turquesa {
+    background: url(/static/img/onda_turquesa.png) repeat-x;
+    height: 38px;
+    width: 97%;
+    position: absolute;
+    right: 0;
+    bottom: 13%;
+}
+#azul {
+    background: url(/static/img/onda_azul.png) repeat-x;
+    height: 36px;
+    width: 100%;
+    position: absolute;
+    right: 0;
+    bottom: 5%;
+}
+#periscopio {
+    background: url(/static/img/logo_periscopio.png) no-repeat;
+    height: 198px;
+    width:132px;
+    position: absolute;
+    left: 50%;
+    margin-left: -66px;
+    bottom: 24%;
+}
+
+/* Form */
+label {
+    display: block;
+}
+input[type="text"], textarea {
+    border: 1px solid #CCC;
+    border-radius: 3px;
+    box-shadow: 0 0 1px #6DE373;
+    font:1.5em "Helvetica", "Arial", sans-serif;
+}
