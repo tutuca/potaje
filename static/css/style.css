@@ -2,35 +2,60 @@ body {
     font: 13px "Helvetica", "Arial", sans-serif;
     margin:0;
     padding:0;
-    background:#FFF;    
+    background:#414057 url(../images/background.jpg) no-repeat;    
+    background-attachment: fixed;
+    background-position: center center;
 }
 nav, aside, header, footer, section, article {
     display:block;
     position:relative;
 }
+#container {
+    position:relative;
+    width:100%;
+}
 header {
     position:fixed;
-    left:3em;
-    top: 1em;
+    width:100%;
     z-index:9999;
     font-size:1.3em;
+}
+header .wrapper {
+    padding:2em;
+    overflow: hidden;
+}
+nav {
+    float:right;
+    text-align:right;        
+}
+nav li {
+    margin-bottom:15px;
+}
+nav a {
+    box-shadow: -5px 5px 20px #000;
 }
 
 section {
     position: relative;
-    padding: 4em 18em;
+    padding: 3em 18em 3em 10em;
+    margin-bottom: 20em;
     
-}
-article {
-    float:left;
-    margin: 1em;
-    width: 30%;
 }
 details {
     clear:both;
 }
-pre {
-    white-space: pre-wrap;
+article li {
+    list-style: square;
+    margin: 3px 1.3em;
+}
+h1 {
+    font:2em "Helvetica", "Arial", san-serif;
+    text-shadow:    
+        -1px -1px 1px #FFF,
+        1px -1px 1px #FFF,
+        -1px 1px 1px #FFF,
+        1px 1px 1px #FFF;
+    color:#000;
 }
 ul, li {
     margin:0;
@@ -52,7 +77,7 @@ a {
     
 } 
 a:hover {
-    background: #FFF;
+    background: #FFF !important;
     color: #004161;
     -webkit-transition: background-color 0.3s;
     -moz-transition: background 0.3s;
@@ -60,78 +85,44 @@ a:hover {
 }
 
 #logo {
-    background: url(/static/img/iso_logo.png) no-repeat;
-    margin-left:-10px;
+    background: url(../images/pojo.png) no-repeat;
+    float: left;
 }
 #logo a{
-    text-indent:-9999px;
+    text-indent: -9999px;
+    display: block;
+    overflow: hidden;
+    height: 98px;
+    width: 97px;
+    background: transparent;    
+}
+.work {
+    float: left;
+    margin: 1em;
+    position: relative;
+}
+.work h2 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+}
+.thumb {
+    display: block;
+    overflow: hidden;
+    background: transparent;
+    padding: 0;
+    width: 200px;
+    height: 180px;
+    box-shadow: 2px 2px 15px #000;
+}
+/* Canvas */
+
+#main {
     display:block;
-    overflow:hidden;
-    height:117px;
-    width:110px;
-    background:transparent;    
+    margin: 0 0 50em;
+    padding: 0;
 }
-
-/* Main */
-#rojo  {
-    background: url(/static/img/onda_roja.png) repeat-x;
-    height: 16px;
-    width:40%;
-    position: absolute;
-    right: 0;
-    bottom: 45%;
-}
-#naranja  {
-    background: url(/static/img/onda_naranja.png) repeat-x;
-    height: 14px;
-    width: 64%;
-    position: absolute;
-    right: 0;
-    bottom: 40%;
-}
-#amarillo  {
-    background: url(/static/img/onda_roja.png) repeat-x;
-    height: 16px;
-    width: 85%;
-    position: absolute;
-    right: 0;
-    bottom: 30%;
-}
-#verde  {
-    background: url(/static/img/onda_verde.png) repeat-x;
-    height: 17px;
-    width: 90%;
-    position: absolute;
-    right: 0;
-    bottom: 25%;
-
-}
-#turquesa {
-    background: url(/static/img/onda_turquesa.png) repeat-x;
-    height: 38px;
-    width: 97%;
-    position: absolute;
-    right: 0;
-    bottom: 13%;
-}
-#azul {
-    background: url(/static/img/onda_azul.png) repeat-x;
-    height: 36px;
-    width: 100%;
-    position: absolute;
-    right: 0;
-    bottom: 5%;
-}
-#periscopio {
-    background: url(/static/img/logo_periscopio.png) no-repeat;
-    height: 198px;
-    width:132px;
-    position: absolute;
-    left: 50%;
-    margin-left: -66px;
-    bottom: 24%;
-}
-
 /* Form */
 label {
     display: block;
@@ -140,5 +131,5 @@ input[type="text"], textarea {
     border: 1px solid #CCC;
     border-radius: 3px;
     box-shadow: 0 0 1px #6DE373;
-    font:1.5em "Helvetica", "Arial", sans-serif;
+    font: 1.5em "Helvetica", "Arial", sans-serif;
 }
