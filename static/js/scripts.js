@@ -42,7 +42,7 @@ $(function(){
         $(this).css({'background-color':style})
     })
     image = new Image();
-    image.src = '/static/img/logo_periscopio.png';
+    image.src = '/static/images/logo_periscopio.png';
     
     canvas = $('canvas')[0];
     ctx = canvas.getContext("2d");

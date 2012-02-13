@@ -12,7 +12,9 @@ nav, aside, header, footer, section, article {
 }
 #container {
     position:relative;
+    
     width:100%;
+    overflow:hidden;
 }
 header {
     position:fixed;
@@ -37,7 +39,7 @@ nav a {
 
 section {
     position: relative;
-    padding: 3em 18em 3em 10em;
+    padding: 4em 18em 3em 13em;
     margin-bottom: 20em;
     
 }
@@ -49,7 +51,7 @@ article li {
     margin: 3px 1.3em;
 }
 h1 {
-    font:2em "Helvetica", "Arial", san-serif;
+    font:3em "Helvetica", "Arial", san-serif;
     text-shadow:    
         -1px -1px 1px #FFF,
         1px -1px 1px #FFF,
@@ -77,11 +79,14 @@ a {
     
 } 
 a:hover {
-    background: #FFF !important;
+    background: #FFF;
     color: #004161;
     -webkit-transition: background-color 0.3s;
     -moz-transition: background 0.3s;
     transition: background 0.3s;
+}
+nav a:hover {
+    background: #FFF !important;
 }
 
 #logo {
@@ -96,15 +101,22 @@ a:hover {
     width: 97px;
     background: transparent;    
 }
+#logo a:hover {
+    background:transparent;
+}
 .work {
     float: left;
     margin: 1em;
     position: relative;
 }
+.work img {
+    margin-top:-30%;
+    margin-left:-50%;
+}
 .work h2 {
     position: absolute;
-    bottom: 0;
-    left: 0;
+    bottom: 4px;
+    left: 4px;
     margin: 0;
 }
 .thumb {
@@ -114,7 +126,16 @@ a:hover {
     padding: 0;
     width: 200px;
     height: 180px;
+    border: 4px solid transparent;
+    box-shadow: 0 0 4px #000;
+    transition: all 0.4s;
+}
+.thumb:hover {
     box-shadow: 2px 2px 15px #000;
+    border: 4px solid #FFF;
+    -webkit-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
 }
 /* Canvas */
 

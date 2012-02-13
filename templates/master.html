@@ -40,7 +40,7 @@
         {% for work in section.album_set.all %}
         <article class="work"> 
             <h2><a href="/album/{{work.id}}">{{work.name}}</a></h2>
-            <a class="thumb" href="/album/{{work.id}}"><img width="400" src="{{work.picture_set.all.1.image.url}}"></a>
+            <a class="thumb" href="/album/{{work.id}}"><img width="400" src="{{work.picture_set.all.0.image.url}}"></a>
         </article>
         {% endfor %}
         <p class="detail">{{section.description|markdown}}</p>
