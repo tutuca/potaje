@@ -1,0 +1,10 @@
+{% load markup %}
+<ul id="images">
+    {% for picture in album.picture_set.all %}
+    <li>
+        <img src="{{picture.image.url}}"/>
+        {{picture.caption|markdown|urlize}}
+    </li>
+    {% endfor %}
+</ul>
+

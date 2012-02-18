@@ -41,19 +41,13 @@ $(function(){
         style = styles[i];
         $(this).css({'background-color':style})
     })
-    image = new Image();
-    image.src = '/static/images/logo_periscopio.png';
     
     canvas = $('canvas')[0];
     ctx = canvas.getContext("2d");
-    image.onload = function(){
-        console.log(image.height);
-        img_y = (vp.height/2)-(image.height/1.3);
-        img_x = (vp.width/2)-image.width;
-        ctx.drawImage(image, img_x, img_y)
-        waves(ctx, 0, vp.height/2, vp.width, vp.height/2);
-    }
-
+    waves(ctx, 0, vp.height/2, vp.width, vp.height/2);
+    $('.work a').on('click', function(){
+        
+    })
 
 
 })
