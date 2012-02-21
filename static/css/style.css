@@ -2,7 +2,8 @@ body {
     font: 13px "Helvetica", "Arial", sans-serif;
     margin:0;
     padding:0;
-    background:#414057 url(../images/background.jpg) no-repeat;    
+    background:url(../images/fondo.gif) no-repeat;
+    background-size:100%;
     background-attachment: fixed;
     background-position: center center;
 }
@@ -10,6 +11,13 @@ body {
 nav, aside, header, footer, section, article {
     display:block;
     position:relative;
+}
+hr {
+    width: 45em;
+    margin: 0 auto;
+    background: #414057;
+    border:0;
+    height:4px;
 }
 h1 {
     font:3em "Helvetica", "Arial", san-serif;
@@ -48,26 +56,21 @@ a img {
     width:100%;
     overflow:hidden;
 }
-#logo {
+header {
     position:fixed;
-    left:2em;
+    left:0;
     top:2em;
     z-index:9999;
     font-size:1.3em;
 }
 nav {
-    font-size:1.3em;
-    z-index:9999;
-    position:fixed;
-    right:2em;
-    top:2em;
-    text-align:right;        
+    margin: 0 0 0 1em;
 }
 nav li {
     margin-bottom:15px;
 }
 nav a {
-    box-shadow: 0 0 4px #000;
+    box-shadow: 0 0 0px #000;
     text-decoration:none;
     background-color: #004161;
     color: #FFF;
@@ -77,7 +80,6 @@ nav a {
     transition: all 0.3s;
     
 } 
-
 nav a:hover {
     background: #FFF !important;
     color: 333;
@@ -87,12 +89,33 @@ nav a:hover {
     transition: all 0.3s;
 
 }
-
+nav .current a{
+    display:block;
+    text-align:right;
+    margin-left:-2em;
+    padding-left: 2em;
+}
 section {
     position: relative;
-    padding: 4em 18em 3em 13em;
+    text-align: center;
     margin-bottom: 20em;
     
+}
+/* The ghost, nudged to maintain perfect centering */
+section:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -0.25em; /* Adjusts for spacing */
+}
+
+/* The element to be centered, can
+   also be of any width and height */
+.wrapper {
+    display: inline-block;
+    vertical-align: middle;
+    width: 60%;
 }
 details {
     clear:both;
@@ -104,7 +127,6 @@ article li {
 
 #logo {
     background: url(../images/pojo.png) no-repeat;
-    float: left;
 }
 #logo a{
     text-indent: -9999px;
@@ -132,6 +154,7 @@ article li {
     left: 4px;
     margin: 0;
     color:transparent;
+    
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     transition: all 0.3s;
@@ -163,7 +186,7 @@ article li {
 #periscopio {
     position: absolute;
     left: 50%;
-    margin: -60px -95px;
+    margin: -160px -95px;
     top: 50%;
     z-index:-1;
 }
@@ -172,9 +195,38 @@ article li {
     margin: 0 0 50em;
     padding: 0;
 }
+#contact {
+
+}
+#contact h2 {
+    font-size:4em;
+}
+#contact h3 {
+    font-size:3.5em;
+}
+#contact h2 a {
+    font-size:87%;
+
+}
+#contact h2, #contact h2 a, #contact h3 {
+    color: #414057;
+    text-align: center;
+    text-shadow: 2px 2px 5px #999;
+    line-height:0.5em;
+    
+}
+
 /* Form */
+form {
+    width: 50em;
+    margin: 0 auto;
+}
 label {
     display: block;
+    font-size: 2em;
+    font-weight: bold;
+    color: #000;
+    text-shadow: 1px 1px 0 #FFF, 0 0 6px #FFF;
 }
 input[type="text"], textarea {
     border: 1px solid #CCC;
@@ -182,3 +234,5 @@ input[type="text"], textarea {
     box-shadow: 0 0 1px #6DE373;
     font: 1.5em "Helvetica", "Arial", sans-serif;
 }
+
+

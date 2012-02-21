@@ -7,9 +7,16 @@
     <meta name="description" content="Un manojo de ideas">
     <meta name="author" content="Matías Iturburu<maturburu@gmail.com>; Ana Comes <anacomes@gmail.com>">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="icon" href="/static/images/favicon.ico" type="image/png" />
     <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/flexslider.css">
     <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/jquery.ui.js"></script>
     <script src="/static/js/modernizr.js"></script>
+    <script src="/static/js/jquery.flexslider.js"></script>
+    <script src="/static/js/jquery.pjax.js"></script>
+    <script src="/static/js/jquery.scrollTo.js"></script>
+    <script src="/static/js/jquery.nav.js"></script>
     <script src="/static/js/scripts.js"></script>
 </head>
 <body>
@@ -29,12 +36,13 @@
         </nav>
     </header>
     <section id="main">
-    <img id="periscopio" src="/static/images/logo_periscopio.png" /> 
+           <div class="wrapper">
     <canvas id="waves"></canvas>
+            </div>
     </section>
     {% for section in sections %}
     <section id="{{section|slugify}}">
-        <h1>{{section}}</h1>
+       <div class="wrapper">
         {% for work in section.album_set.all %}
         <article class="work"> 
             <h2>{{work.name}}</h2>
@@ -42,22 +50,20 @@
         </article>
         {% endfor %}
         <p class="detail">{{section.description|markdown|urlize}}</p>
+        </div>
     </section>        
     {% endfor %}
-
     <section id="contact" role="main">
-    <h1>Contacto / Contact</h1>
-    <p>Bla bla bla Yackiri Smackiri</p>
-    <form action="/contact/" method="post">
-        {{form.as_p}}
-        <p><input type="submit" value="Enviar / Submit" /></p>
-    </form>
+       <div class="wrapper">
+            <h2><a href="mailto:anacomes@gmail.com">anacomes@gmail.com</a></h2>
+            <h2>(54) 351 - 153848533</h2>
+            <hr />
+            <h3>Córdoba - Argentina</h3>
+       </div>
     </section>
     <footer>
-
     </footer>
     {% endblock %}
 </div>
-
 </body>
 </html>

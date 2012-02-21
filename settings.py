@@ -35,7 +35,7 @@ USE_L10N = True
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-MEDIA_URL = 'http://localhost/potaje/'
+MEDIA_URL = 'http://192.168.0.12/potaje/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 

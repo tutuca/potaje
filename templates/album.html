@@ -1,4 +1,5 @@
 {% load markup %}
+<title>{{album.name}}</title>
 <ul id="images">
     {% for picture in album.picture_set.all %}
     <li>
