@@ -1,11 +1,29 @@
+{% extends "master.html" %}
 {% load markup %}
-<title>{{album.name}}</title>
-<ul id="images">
-    {% for picture in album.picture_set.all %}
-    <li>
-        <img src="{{picture.image.url}}"/>
-        {{picture.caption|markdown|urlize}}
-    </li>
-    {% endfor %}
-</ul>
+{% block title %}{{album.name}}{% endblock %}
+{% block head %}
+<script>
+    $(function(){
+        $('#slide-wrapper').flexslider({animation:'slide'})
+    })
+</script>
+{% endblock %}
+
+{% block page %}
+<section id="{{section|slugify}}">
+   <div class="wrapper">
+
+        <div id="slide-wrapper">
+            <ul class="slides">
+                {% for picture in album.picture_set.all %}
+                <li>
+                    <img src="{{picture.image.url}}"/>
+                    {{picture.caption|markdown|urlize}}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</section>
+{% endblock %}
 
