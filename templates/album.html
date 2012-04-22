@@ -1,18 +1,32 @@
-<ul id="display" class="album">
-{{#pictures}}<li ><img src="/picture/{{id}}?height=700" alt="{{id}}" id="{{id}}" height="100%" /></li>{{/pictures}}
-</ul>
-{{#album}}
-<!-- section>
-    <h1>{{name}}</h1>
-    <p>{{description}}</p>
-</section -->
-<footer>        
-    <ul id="pictures">
-        {{#pictures}}
-        <li>
-            <a href="#{{id}}" ><img src="/picture/{{id}}?height=35" alt="{{id}} - {{name}}" /></a>
-        </li>
-        {{/pictures}}
-    </ul>
-</footer>
-{{/album}}
+{% extends "master.html" %}
+{% load markup %}
+{% block title %}{{album.name}}{% endblock %}
+{% block head %}
+<script>
+    $(function(){
+        $('#slide-wrapper').flexslider({
+            animation:'slide',
+            controlNav: false,
+        })
+    })
+</script>
+{% endblock %}
+
+{% block page %}
+<section id="{{section|slugify}}">
+   <div class="wrapper">
+
+        <div id="slide-wrapper">
+            <a class="control" href="/">Cerrar</a>
+            <ul class="slides">
+                {% for picture in album.picture_set.all %}
+                <li>
+                    <img src="{{picture.image.url}}"/>
+                    {{picture.caption|markdown|urlize}}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</section>
+{% endblock %}

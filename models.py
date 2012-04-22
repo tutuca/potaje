@@ -17,7 +17,11 @@ class Album(models.Model):
     section = models.ForeignKey('Section')
     description = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True, editable = False)
-
+    
+    @property
+    def first_image(self):
+        return self.picture_set.all()[0].image
+        
     def __unicode__(self):
         return self.name
     
