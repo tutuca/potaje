@@ -2,7 +2,7 @@ body {
     font: 13px "Helvetica", "Arial", sans-serif;
     margin:0;
     padding:0;
-    background:url(//localhost/potaje/bg/index.php) no-repeat;
+    background:url(//localhost/potaje_media/bg/index.php) no-repeat;
     background-size:100%;
     background-attachment: fixed;
     background-position: center center;
@@ -126,14 +126,23 @@ article li {
 }
 
 #logo {
-    background: url(../images/pojo.png) no-repeat;
+    background: #67e2ad url(../images/pojo.png) no-repeat;
+    background-position: center bottom;
+    border-radius: 50px;
+    height: 70px;
+    width: 70px;
+    margin: 1em;
+    -webkit-transition: color 0.3s;
+    -moz-transition: color 0.3s;
+    transition: color 0.3s;
+
 }
 #logo a{
     text-indent: -9999px;
     display: block;
     overflow: hidden;
-    height: 98px;
-    width: 97px;
+    height: 70px;
+    width: 70px;
     background: transparent;    
 }
 #logo a:hover {
@@ -249,6 +258,12 @@ input[type="text"], textarea {
     box-shadow: 0 0 81px #000;
     max-height:90%;
 }
+#slide-wrapper .control {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    
+}
 
 .flexslider .slides {zoom: 1;}
 .flexslider .slides > li {position: relative;}
@@ -256,8 +271,8 @@ input[type="text"], textarea {
 
 /* Direction Nav */
 .flex-direction-nav li a {
-    width: 52px; 
-    height: 52px; 
+    width: 70px; 
+    height: 70px; 
     margin: -13px 0 0; 
     display: block; 
     background: url(../images/bg_direction_nav.png) no-repeat 0 0; 
@@ -267,7 +282,7 @@ input[type="text"], textarea {
     text-indent: -9999px;
 }
 .flex-direction-nav li .next {
-    background-position: -52px 0; 
+    background-position: -70px 0; 
     right: 10px;
 }
 .flex-direction-nav li .prev {

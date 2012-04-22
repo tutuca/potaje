@@ -4,7 +4,10 @@
 {% block head %}
 <script>
     $(function(){
-        $('#slide-wrapper').flexslider({animation:'slide'})
+        $('#slide-wrapper').flexslider({
+            animation:'slide',
+            controlNav: false,
+        })
     })
 </script>
 {% endblock %}
@@ -14,6 +17,7 @@
    <div class="wrapper">
 
         <div id="slide-wrapper">
+            <a class="control" href="/">Cerrar</a>
             <ul class="slides">
                 {% for picture in album.picture_set.all %}
                 <li>

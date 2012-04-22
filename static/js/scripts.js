@@ -26,11 +26,11 @@ $(function(){
         style = styles[i];
         $(this).css({'background-color':style})
     })
-    
-    $('.work').each(function(i,e){
-        pos = $(this).position();
-        $(this).css({'left':pos['left'], 'top':pos['top']})
-     }).css({'position':'absolute',});
+    setTimeout(function(){
+        new_color = styles[Math.floor(Math.random()*styles.length)];
+        $('#logo').css('background-color', new_color)
+    }, 5000);
+
     $('.work a').on("click", function(event){
         selected = this;
         hash = window.location.hash;
@@ -53,17 +53,15 @@ $(function(){
                 });
                 $('#slide-wrapper').flexslider({
                     animation:'slide',
+                    controlNav: false,
                     
                 })
             }
         });
-        $('#slide-wrapper').one('click',function() {
-            event.stopPropagation();
+        $('#slide-wrapper .control').one('click',function(e) {
+            e.stopPropagation();
             $('nav').toggle('fade');
-            rest.each(function(){
-                $(this).parent('article').toggle('fade');
-            });
-            $(this).remove();
+            $('#slide-wrapper').remove();
             $('body').css({'overflow':'auto'});
             history.pushState({}, "Potaje ", "/"+hash);
 
