@@ -24,7 +24,7 @@
 <div id="container">
     <header>
         <h1 id="logo"><a href="/">Potaje Creativo</a></h1>
-        {% if not album %}
+        {% if sections %}
         <nav>
         <ul>
             <li><a href="#main">Inicio / Home</a></li>
@@ -66,8 +66,10 @@
     {% endblock %}
     </section>
     <footer>
+    <a rel="license" href="/about/">
+        <img alt="Licencia Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" />
+    </a>
     </footer>
-
 </div>
 </body>
 </html>

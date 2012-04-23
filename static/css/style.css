@@ -2,10 +2,11 @@ body {
     font: 13px "Helvetica", "Arial", sans-serif;
     margin:0;
     padding:0;
-    background:url(//localhost/potaje_media/bg/index.php) no-repeat;
+    background:url(/media/bg/index.php) no-repeat;
     background-size:100%;
     background-attachment: fixed;
     background-position: center center;
+    color:#EEE;
 }
 
 nav, aside, header, footer, section, article {
@@ -49,7 +50,14 @@ a:hover {
 a img {
     outline: none;
 }
-
+p {
+    color: #EEE;
+    text-align: left;
+    font-size: 1.1em;
+}
+p a {
+    text-shadow: none;
+}
 #container {
     position:relative;
     
@@ -124,7 +132,11 @@ article li {
     list-style: square;
     margin: 3px 1.3em;
 }
-
+footer {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}
 #logo {
     background: #67e2ad url(../images/pojo.png) no-repeat;
     background-position: center bottom;
@@ -154,7 +166,7 @@ article li {
     position: relative;
 }
 .work img {
-    margin-top:-30%;
+    margin-top:-20%;
     margin-left:-50%;
 }
 .work h2 {
@@ -163,7 +175,7 @@ article li {
     left: 4px;
     margin: 0;
     color:transparent;
-    
+    text-align: left;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     transition: all 0.3s;
@@ -174,6 +186,8 @@ article li {
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     transition: all 0.3s;
+    cursor: pointer;
+    
 }
 .thumb {
     display: block;
@@ -325,10 +339,4 @@ input[type="text"], textarea {
 }
 .slides p {
     position:absolute;
-    font-size: 1.5em;
-    text-align: left;
-    margin: -5em 0 15em 5em;
-    max-width:20em;
-    color: black;
-    text-shadow: 1px 1px 0px white;
 }

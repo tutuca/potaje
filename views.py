@@ -24,6 +24,13 @@ def album(request, id):
         {'album':album_object}
     )
 
+def about(request):
+    return render(
+        request,
+        'about.html',
+        {}
+    )
+
 def contact(request):
     form = EmailForm()
     if request.method == 'POST':
