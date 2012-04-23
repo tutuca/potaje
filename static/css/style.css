@@ -2,7 +2,7 @@ body {
     font: 13px "Helvetica", "Arial", sans-serif;
     margin:0;
     padding:0;
-    background:url(/media/bg/index.php) no-repeat;
+    background:url(//localhost/potaje_media/bg/index.php) no-repeat;
     background-size:100%;
     background-attachment: fixed;
     background-position: center center;
@@ -86,7 +86,6 @@ nav a {
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     transition: all 0.3s;
-    
 } 
 nav a:hover {
     background: #FFF !important;
@@ -98,10 +97,12 @@ nav a:hover {
 
 }
 nav .current a{
-    display:block;
-    text-align:right;
-    margin-left:-2em;
-    padding-left: 2em;
+    background: #FFF !important;
+    color: #004161;
+    box-shadow: 4px 4px 15px #000;
+    display: block;
+    margin-left: -1em;
+    text-align: right;
 }
 section {
     position: relative;
@@ -143,11 +144,14 @@ footer {
     border-radius: 50px;
     height: 70px;
     width: 70px;
-    margin: 1em;
+    margin: 1em 0.5em;
     -webkit-transition: color 0.3s;
     -moz-transition: color 0.3s;
     transition: color 0.3s;
 
+}
+#logo:hover {
+    box-shadow: 4px 4px 15px #000;
 }
 #logo a{
     text-indent: -9999px;
@@ -234,7 +238,7 @@ footer {
 #contact h2, #contact h2 a, #contact h3 {
     color: #414057;
     text-align: center;
-    text-shadow: 2px 2px 5px #999;
+    text-shadow: 2px 2px 5px #000;
     line-height:0.5em;
     
 }
