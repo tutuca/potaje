@@ -368,3 +368,7 @@ input[type="text"], textarea {
     padding: 1em;
 
 }
+#manojo {
+    display: block;
+    margin: 1em auto;
+}
