@@ -1,4 +1,4 @@
-function viewport(){
+function viewport_size(){
     e = window;
     a = 'inner';
     if ( !( 'innerWidth' in window ) ){
@@ -8,39 +8,63 @@ function viewport(){
     return { width : e[ a+'Width' ] , height : e[ a+'Height' ] };
 };
 
-$(function(){
-    $('#slide-wrapper').flexslider({
-        animation:'slide',
-        
-    })
+function create_slider(){
+    if ($('#slide-wrapper').length){
+        $('#slide-wrapper').flexslider({
+            animation:'slide',
+            controlNav: false,
+        });
+        $('#slide-wrapper .close').on('click',function(e) {
+            e.preventDefault();
+            $('nav').toggle('fade');
+            $('#slide-wrapper').remove();
+            $('body').css({'overflow':'auto'});
+            history.pushState({}, "Potaje ", "/"+hash);
+        })
 
-    vp = viewport();
+        $('.slide').each(function(){
+            $(this).find('img').load(function(){
+                w = $(this).width();
+                $(this).siblings('.caption').css({
+                    'margin-left': -w/2,
+                    'width':w,
+                })
+            })
+        })
+        
+    }
+    
+};
+
+$(function(){
+    styles = ['#67e2ad','#003e5f','#fa8e53','#f84c53'];
+    create_slider();
     $("nav ul").onePageNav({
         'currentClass':'current',
         'changeHash':true,
         
-    })
-    $('section').height(vp.height);
+    });
+
+    $('section').height(viewport_size().height);
+
+    $(window).resize(function(){
+        console.log(viewport_size().height);
+        $('section').height(viewport_size().height);
+    });
+
     $('nav a').each(function(i, e){
-        styles = ['#67e2ad','#003e5f','#fa8e53','#f84c53'];
+
         style = styles[i];
         $(this).css({'background-color':style})
-    })
-    setTimeout(function(){
-        new_color = styles[Math.floor(Math.random()*styles.length)];
-        $('#logo').css('background-color', new_color)
-    }, 5000);
+    });
 
     $('.work a').on("click", function(event){
-        selected = this;
         hash = window.location.hash;
         event.preventDefault();
         event.stopPropagation();
         $('#slide-wrapper').remove();
         container = $(this).parents('section').append($('<div>').attr('id','slide-wrapper'));
         target = $(this).attr('href');
-        rest = $('.work a').not(selected);
-        length = rest.lentgh;
         $.pjax({
             url:target,
             container: '#slide-wrapper',
@@ -48,23 +72,10 @@ $(function(){
             success: function(){
                 $('body').css({'overflow':'hidden'});
                 $('nav').toggle('fade', 1000);
-                rest.each(function(index){
-                    $(this).parent('article').toggle('fade', 1500*index);
-                });
-                $('#slide-wrapper').flexslider({
-                    animation:'slide',
-                    controlNav: false,
-                    
-                })
+                create_slider()
             }
         });
-        $('#slide-wrapper .control').one('click',function(e) {
-            e.stopPropagation();
-            $('nav').toggle('fade');
-            $('#slide-wrapper').remove();
-            $('body').css({'overflow':'auto'});
-            history.pushState({}, "Potaje ", "/"+hash);
 
-        })
-    })
+    });
+
 })

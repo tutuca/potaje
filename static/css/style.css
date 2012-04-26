@@ -1,8 +1,8 @@
 body {
-    font: 13px "Helvetica", "Arial", sans-serif;
+    font: 12px "Helvetica", "Arial", sans-serif;
     margin:0;
     padding:0;
-    background:url(//localhost/potaje_media/bg/index.php) no-repeat;
+    background:url(//192.168.0.16/potaje_media/bg/index.php) no-repeat;
     background-size:100%;
     background-attachment: fixed;
     background-position: center center;
@@ -68,6 +68,7 @@ header {
     position:fixed;
     left:0;
     top:2em;
+    width: 13em;
     z-index:9999;
     font-size:1.3em;
 }
@@ -107,7 +108,6 @@ nav .current a{
 section {
     position: relative;
     text-align: center;
-    margin-bottom: 20em;
     
 }
 /* The ghost, nudged to maintain perfect centering */
@@ -169,13 +169,22 @@ footer {
     margin: 1em;
     position: relative;
 }
+.work:hover {
+    background: rgba(109, 230, 177, 0.9);
+    -webkit-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+}
 .work img {
     margin-top:-20%;
     margin-left:-50%;
 }
+.work:hover img{
+    display:none;
+}
 .work h2 {
     position: absolute;
-    bottom: 4px;
+    top: 4px;
     left: 4px;
     margin: 0;
     color:transparent;
@@ -185,30 +194,24 @@ footer {
     transition: all 0.3s;
 }
 .work:hover h2 {
-    color: #000;
-    text-shadow: 0 1px 0 #FFF;
+    color:#FFF;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     transition: all 0.3s;
     cursor: pointer;
     
 }
-.thumb {
+.work a  {
     display: block;
     overflow: hidden;
     background: transparent;
     padding: 0;
     width: 200px;
     height: 180px;
-    box-shadow: 0 0 4px #000;
     transition: all 0.4s;
 }
-.thumb:hover {
-    box-shadow: 4px 4px 15px #000;
-    -webkit-transition: all 0.4s;
-    -moz-transition: all 0.4s;
-    transition: all 0.4s;
-}
+
+
 /* Canvas */
 #periscopio {
     position: absolute;
@@ -258,7 +261,7 @@ label {
 input[type="text"], textarea {
     border: 1px solid #CCC;
     border-radius: 3px;
-    box-shadow: 0 0 1px #6DE373;
+    box-shadow: 0 0 1px #6DE6B1;
     font: 1.5em "Helvetica", "Arial", sans-serif;
 }
 
@@ -270,17 +273,23 @@ input[type="text"], textarea {
     left:0;
     width:100%;
     padding:2em 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.8);
+    height:100%;
 }
 #slide-wrapper img{
     box-shadow: 0 0 81px #000;
     max-height:90%;
 }
-#slide-wrapper .control {
+.close {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    
+    top: 2em;
+    right: 2em;
+    z-index:9999;
+    background:url(../images/close.png) no-repeat;
+    width:35px;
+    height:35px;
+    overflow:hidden;
+    text-indent:-9999px;
 }
 
 .flexslider .slides {zoom: 1;}
@@ -289,8 +298,8 @@ input[type="text"], textarea {
 
 /* Direction Nav */
 .flex-direction-nav li a {
-    width: 70px; 
-    height: 70px; 
+    width: 51px; 
+    height: 51px; 
     margin: -13px 0 0; 
     display: block; 
     background: url(../images/bg_direction_nav.png) no-repeat 0 0; 
@@ -300,11 +309,11 @@ input[type="text"], textarea {
     text-indent: -9999px;
 }
 .flex-direction-nav li .next {
-    background-position: -70px 0; 
-    right: 10px;
+    background-position: -50px 0; 
+    right: 2em;
 }
 .flex-direction-nav li .prev {
-    left: 10px;
+    left: 2em;
 }
 .flex-direction-nav li .disabled {
     opacity: .3; 
@@ -316,6 +325,8 @@ input[type="text"], textarea {
     position: absolute; 
     bottom: 10px; 
     text-align: center;
+    margin: 0;
+    padding: 0;
 }
 .flex-control-nav li {
     margin: 0 0 0 5px; 
@@ -341,6 +352,17 @@ input[type="text"], textarea {
     background-position: 0 -26px; 
     cursor: default;
 }
-.slides p {
+.slide {
+    position:relative;    
+}
+.caption {
     position:absolute;
+    bottom: 0;
+    left:50%;
+    background: #000;
+}
+.caption p{
+    margin: 0;
+    padding: 1em;
+
 }
