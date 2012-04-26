@@ -217,14 +217,16 @@ footer {
     margin: 0 0 50em;
     padding: 0;
 }
-#contact .wrapper {
+.content{
     min-width: 25em;
-    width: 55%;
-    min-height: 35em;
+    width: 50%;
+    height: 60%;
     background: #FFF;
     padding: 7em 8em;
 }
-#contact a {
+.content a,
+.content h3,
+.content p {
     color: #000;
 }
 #contact h3,
@@ -241,6 +243,9 @@ footer {
     border-color: #000 transparent;
     padding: 0.5em 0;
     margin: 0.7em 0;
+}
+#about .content{
+    text-align: left;
 }
 /* Form */
 form {
