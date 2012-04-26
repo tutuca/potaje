@@ -13,13 +13,6 @@ nav, aside, header, footer, section, article {
     display:block;
     position:relative;
 }
-hr {
-    width: 45em;
-    margin: 0 auto;
-    background: #414057;
-    border:0;
-    height:4px;
-}
 h1 {
     font:3em "Helvetica", "Arial", san-serif;
     text-shadow:    
@@ -52,7 +45,6 @@ a img {
 }
 p {
     color: #EEE;
-    text-align: left;
     font-size: 1.1em;
 }
 p a {
@@ -225,27 +217,31 @@ footer {
     margin: 0 0 50em;
     padding: 0;
 }
-#contact {
-
+#contact .wrapper {
+    min-width: 25em;
+    width: 55%;
+    min-height: 35em;
+    background: #FFF;
+    padding: 7em 8em;
 }
-#contact h2 {
-    font-size:4em;
+#contact a {
+    color: #000;
 }
-#contact h3 {
-    font-size:3.5em;
-}
-#contact h2 a {
-    font-size:87%;
-
-}
-#contact h2, #contact h2 a, #contact h3 {
-    color: #414057;
-    text-align: center;
-    text-shadow: 2px 2px 5px #000;
-    line-height:0.5em;
+#contact h3,
+#contact p {
+    width: 10em;
+    color: #000;
+    font-size: 20px;
+    margin: 0 0 0.25em ;
+    font-weight: normal;
     
 }
-
+#contact h3 {
+    border: 1px solid #000;
+    border-color: #000 transparent;
+    padding: 0.5em 0;
+    margin: 0.7em 0;
+}
 /* Form */
 form {
     width: 50em;
@@ -359,6 +355,7 @@ input[type="text"], textarea {
     position:absolute;
     bottom: 0;
     left:50%;
+    text-align: left;
     background: #000;
 }
 .caption p{
