@@ -71,6 +71,7 @@ nav li {
     margin-bottom:15px;
 }
 nav a {
+    outline: 0;
     box-shadow: 0 0 0px #000;
     text-decoration:none;
     background-color: #004161;
@@ -221,7 +222,7 @@ footer {
     min-width: 25em;
     width: 50%;
     height: 60%;
-    background: #FFF;
+    background: rgba(255,255,255,0.8);
     padding: 7em 8em;
 }
 .content a,
