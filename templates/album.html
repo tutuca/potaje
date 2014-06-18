@@ -1,5 +1,4 @@
 {% extends "master.html" %}
-{% load markup %}
 {% block title %}{{album.name}}{% endblock %}
 {% block page %}
 <section id="{{section|slugify}}">
@@ -12,7 +11,7 @@
                     <div class="slide">
                         <img src="{{picture.image.url}}"/>
                         <div class="caption">
-                        {{picture.caption|markdown|urlize}}                        
+                        {{picture.caption|urlize}}
                         </div>
                     </div>
                 </li>

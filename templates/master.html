@@ -1,4 +1,3 @@
-{% load markup %}
 <!doctype html>
 <html lang="es-AR">
 <head>
@@ -76,7 +75,7 @@
             <h2>{{work.name}}</h2>
         </article>
         {% endfor %}
-        <p class="detail">{{section.description|markdown|urlize}}</p>
+        <p class="detail">{{section.description|urlize}}</p>
         </div>
     </section>        
     {% endfor %}
