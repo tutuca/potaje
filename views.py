@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from potaje.models import Section, Album
 from potaje.forms import EmailForm
@@ -12,17 +12,19 @@ def home(request):
         'master.html',
         {
             'sections': sections,
-            'form':form
+            'form': form
         }
     )
+
 
 def album(request, id):
     album_object = Album.objects.get(pk=id)
     return render(
         request,
         'album.html',
-        {'album':album_object}
+        {'album': album_object}
     )
+
 
 def about(request):
     return render(
@@ -30,6 +32,7 @@ def about(request):
         'about.html',
         {}
     )
+
 
 def contact(request):
     form = EmailForm()
@@ -48,13 +51,14 @@ def contact(request):
             return redirect('/gracias/')
 
     return render(
-        request, 
+        request,
         'contact.html',
         {
             'form': form,
             'section': 'contact',
         }
     )
+
 
 def email_success(request):
     return render(request, 'email_success.html')
