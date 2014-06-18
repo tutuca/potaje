@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
-from potaje.models import Section, Album
-from potaje.forms import EmailForm
+from albums.models import Section, Album
+from albums.forms import EmailForm
 
 
 def home(request):
