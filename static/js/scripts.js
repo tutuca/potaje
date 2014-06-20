@@ -19,9 +19,8 @@ function create_slider(){
             $('nav').toggle('fade');
             $('#slide-wrapper').remove();
             $('body').css({'overflow':'auto'});
-            history.pushState({}, "Potaje ", "/"+hash);
+            history.pushState({}, "", "/"+hash);
         })
-
         $('.slide').each(function(){
             $(this).find('img').load(function(){
                 w = $(this).width();
@@ -31,7 +30,6 @@ function create_slider(){
                 })
             })
         })
-        
     }
     
 };
@@ -39,24 +37,25 @@ function create_slider(){
 $(function(){
     styles = ['#67e2ad','#003e5f','#fa8e53','#f84c53'];
     create_slider();
+    
     $("nav ul").onePageNav({
         'currentClass':'current',
         'changeHash':true,
         
     });
-
-    $('section').height(viewport_size().height);
-
-    $(window).resize(function(){
-        console.log(viewport_size().height);
-        $('section').height(viewport_size().height);
-    });
-
+    
     $('nav a').each(function(i, e){
-
         style = styles[i];
         $(this).css({'background-color':style})
     });
+
+    $('section').height(viewport_size().height);
+
+    $(window).on('resize', function(event){
+        $('section').height(viewport_size().height);
+    });
+
+
 
     $('.work a').on("click", function(event){
         hash = window.location.hash;
