@@ -9,6 +9,7 @@ function viewport_size(){
 };
 
 function create_slider(){
+/* refactor this into a proper plugin or closure. */
     if ($('#slide-wrapper').length){
         $('#slide-wrapper').flexslider({
             animation:'slide',
@@ -37,24 +38,24 @@ function create_slider(){
 $(function(){
     styles = ['#67e2ad','#003e5f','#fa8e53','#f84c53'];
     create_slider();
-    
+    vp = viewport_size();
     $("nav ul").onePageNav({
         'currentClass':'current',
         'changeHash':true,
         
     });
     
+    
     $('nav a').each(function(i, e){
         style = styles[i];
         $(this).css({'background-color':style})
     });
 
-    $('section').height(viewport_size().height);
+    $('section').height(vp.height);
 
     $(window).on('resize', function(event){
-        $('section').height(viewport_size().height);
+        $('section').height(vp.height);
     });
-
 
 
     $('.work a').on("click", function(event){

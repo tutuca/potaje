@@ -54,6 +54,14 @@ p {
         text-shadow: none;
     }
 }
+#reel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height:100%;
+    background-color: #FF0000;
+}
 #container {
     position:relative;
     
