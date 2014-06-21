@@ -23,6 +23,10 @@ class Album(models.Model):
     def first_image(self):
         return self.picture_set.all()[0].image
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('album', (self.pk, ), )
+
     def __unicode__(self):
         return self.name
 
