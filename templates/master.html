@@ -19,19 +19,21 @@
     {% block head %}{% endblock %}
     </style>
     
-<script type="text/javascript">
+<!--script type="text/javascript">
 
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-20150902-1']);
   _gaq.push(['_trackPageview']);
 
   (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; 
+        ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; 
+        s.parentNode.insertBefore(ga, s);
   })();
 
-</script>
+</script-->
 </head>
 <body>
 <div id="reel">
@@ -40,28 +42,26 @@
 </video>
 </div>
 <div id="container">
+
     <header>
         <h1 id="logo"><a href="/">Potaje Creativo</a></h1>
         {% if sections %}
         <nav>
         <ul>
-            <li><a href="#main">Inicio / Home</a></li>
             {% for section in sections %}
             <li><a href="#{{section|slugify}}">{{section.name}}</a></li>
             {% endfor %}
             <li><a href="#about">Acerca de / About</a></li>
             <li><a href="#contact">Contacto / Contact</a></li>
+            {% if is_staff %}
+            <li><a href="/lobby/">Administración</a></li>
+            {% endif %}
         </ul>
         </nav>
         {% endif %}
     </header>
 
     {% block page %}
-    <section id="main">
-           <div class="wrapper">
-    <canvas id="waves"></canvas>
-            </div>
-    </section>
     {% for section in sections %}
     <section id="{{section|slugify}}">
        <div class="wrapper">
@@ -80,14 +80,17 @@
             <p>
                 <a href="http://potajecreativo.com.ar">POTAJE CREATIVO</a> es diseño gráfico  y audiovisual. 
             </p>
-            <p>
-                Por <strong>Ana Comes</strong>,
-                <ul>
-                    <li>diseñadora gráfica y directora artistica.</li>
-                    <li>Técnica productora de cine y tv - Universidad Nacional de Cordoba.</li>
-                    <li>Graphic designer, art director.</li>
-                </ul>
-            </p>
+            {% for profile in profiles %}
+            <article>
+                <h1>{{profile.user.get_full_name}}</h1>
+                {{profile.biopic|safe}}
+                <p>
+                {% for sc in profile.user.serviceconfiguration_set.all %}
+                    <a href="{{sc.user_profile}}" target="blank"><img src="{{sc.service.icon.url}}" alt="{{sc.service.name}}" /></a>
+                {% endfor %}
+                </p>
+            </article>            
+            {% endfor %}
             <p>
                 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"> <img alt="Licencia Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a>
             </p>
@@ -111,8 +114,9 @@
                 <a href="http://vimeo.com/user9007483" target="blank"><img src="/static/images/vimeo.png" alt="description" /></a>
             </p>
        </div>
-    {% endblock %}
     </section>
+    {% endblock %}
+
     <footer>
     <a rel="license" href="#about">
         <img alt="Licencia Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" />

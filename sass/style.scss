@@ -225,8 +225,11 @@ footer {
     height: 60%;
     background: rgba(255,255,255,0.8);
     padding: 7em 8em;
-    a, h3, p {
+    a, h3, p, ul {
         color: #000;
+    }
+    ul {
+        margin: 1em 0;
     }
 }
 #contact {
