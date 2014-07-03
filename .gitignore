@@ -5,3 +5,5 @@ __pycache__
 *.sqlite3
 .sass-cache/*
 pictures/
+media/
+conf/
