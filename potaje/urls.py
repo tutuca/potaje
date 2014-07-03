@@ -3,6 +3,9 @@ from django.contrib import admin
 from django.http import HttpResponse
 from django.contrib.sitemaps import GenericSitemap
 from albums.models import Album
+from django.conf.urls.static import static
+from django.conf import settings
+
 admin.autodiscover()
 
 info_dict = {
@@ -25,7 +28,7 @@ urlpatterns += patterns('',
     url(r'^lobby/', include(admin.site.urls)),
     (r'^robots\.txt$', lambda r: HttpResponse(
         "User-agent: *\nDisallow: /media/*\nDisallow: /lobby/*", mimetype="text/plain")),
-    (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', 
+    (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap',
         {'sitemaps': sitemaps})
 
-)
+) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
