@@ -4,3 +4,26 @@ Potaje Cretivo
 Un manojo de ideas.
 
 http://potaje.com.ar
+
+# Requiere:
+
+    - python 2.7+, python 3.3+
+    - django 1.7+
+    - pillow
+
+# Instalación:
+    
+Bajar el repo, crear el entorno, bla, bla:
+
+    $ git clone https://github.com/tutuca/potaje potaje
+    $ pvenv potaje 
+    $ cd potaje 
+    $ source ./bin/actiate
+    $ pip install django pillow
+
+Sincronizar la db y correr.
+
+    $ manage syncdb
+    $ manage migrate
+    $ manage runserver
+

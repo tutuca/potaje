@@ -36,7 +36,6 @@ function create_slider(){
 };
 
 $(function(){
-
     create_slider();
     vp = viewport_size();
     $("nav ul").onePageNav({
@@ -47,8 +46,8 @@ $(function(){
     
     $('nav a').each(function(i, e){
         colors = ['#67e2ad','#003e5f','#fa8e53','#f84c53'];
-        index = i % colors.length
-        $(this).css({'background-color':colors[index]})
+        index = i % colors.length;
+        $(this).css({'background-color':colors[index]});
     });
 
     $('section').height(vp.height);
