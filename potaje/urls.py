@@ -2,9 +2,10 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.http import HttpResponse
 from django.contrib.sitemaps import GenericSitemap
-from albums.models import Album
 from django.conf.urls.static import static
 from django.conf import settings
+from albums.models import Album
+from albums.resources import AlbumResource, SectionResource
 
 admin.autodiscover()
 
@@ -23,7 +24,11 @@ urlpatterns = patterns('albums.views',
     url(r'^album/(?P<id>\d+)$', 'album', name='album'),
     url(r'^about/$', 'about', name='about'),
 )
+urlpatterns += patterns('',
+    url(r'api/section/', include(SectionResource.urls())),
+    url(r'api/album/', include(AlbumResource.urls())),
 
+    )
 urlpatterns += patterns('',
     url(r'^lobby/', include(admin.site.urls)),
     (r'^robots\.txt$', lambda r: HttpResponse(

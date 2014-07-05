@@ -20,7 +20,7 @@ class Album(models.Model):
     created = models.DateTimeField(auto_now_add=True, editable=False)
 
     @property
-    def first_image(self):
+    def cover(self):
         return self.picture_set.all()[0].image
 
     @models.permalink

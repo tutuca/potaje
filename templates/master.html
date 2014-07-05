@@ -67,7 +67,7 @@
        <div class="wrapper">
         {% for work in section.album_set.all %}
         <article class="work"> 
-            <a class="thumb" href="/album/{{work.id}}"><img width="400" src="{{work.first_image.url}}"></a>
+            <a class="thumb" href="/album/{{work.id}}"><img width="400" src="{{work.cover.url}}"></a>
             <h2>{{work.name}}</h2>
         </article>
         {% endfor %}
