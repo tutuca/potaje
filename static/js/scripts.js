@@ -41,7 +41,6 @@ $(function(){
     $("nav ul").onePageNav({
         'currentClass':'current',
         'changeHash':true,
-        
     });
     
     $('nav a').each(function(i, e){
