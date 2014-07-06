@@ -6,12 +6,12 @@
         <div id="slide-wrapper">
             <a class="close" href="/">Cerrar</a>
             <ul class="slides">
-                {% for picture in album.picture_set.all %}
+                {% for content in album.content_set.all %}
                 <li>
                     <div class="slide">
-                        <img src="{{picture.image.url}}"/>
+                        {{content.html}}
                         <div class="caption">
-                        <p>{{picture.caption|urlize}}</p>
+                        <p>{{content.caption|urlize}}</p>
                         </div>
                     </div>
                 </li>

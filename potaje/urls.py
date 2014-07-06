@@ -28,7 +28,7 @@ urlpatterns += patterns('',
     url(r'api/section/', include(SectionResource.urls())),
     url(r'api/album/', include(AlbumResource.urls())),
 
-    )
+)
 urlpatterns += patterns('',
     url(r'^lobby/', include(admin.site.urls)),
     (r'^robots\.txt$', lambda r: HttpResponse(

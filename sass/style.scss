@@ -200,6 +200,7 @@ footer {
     &:hover {
         background: rgba(109, 230, 177, 0.9);
         transition: all 0.4s;
+        box-shadow: 4px 4px 15px #000;
         h2 {
             height:100%;
             width:100%;
@@ -288,14 +289,6 @@ input[type="text"], textarea {
     padding:2em 0;
     background: rgba(0,0,0,0.8);
     height:100%;
-    h1 {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        font:10em "Helvetica", "Arial", san-serif;
-        text-shadow: -1px -1px 15px #FFF;
-        color:rgba(0,0,0,0.8);
-    }
     img{
         box-shadow: 0 0 81px #000;
         max-height:90%;
