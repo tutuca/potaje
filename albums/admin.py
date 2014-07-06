@@ -1,10 +1,16 @@
 from django.contrib import admin
-from albums.models import Album, Picture, Section
+from albums.models import Album, Picture, Video, Section
 
 
 class PictureInLine(admin.TabularInline):
     model = Picture
     extra = 1
+    fields = ('image', 'caption', )
+
+class VideoInLine(admin.TabularInline):
+    model = Video
+    extra = 1
+    fields = ('source', 'caption',)
 
 
 class PictureAdmin(admin.ModelAdmin):
@@ -13,7 +19,7 @@ class PictureAdmin(admin.ModelAdmin):
 
 
 class AlbumAdmin(admin.ModelAdmin):
-    inlines = [PictureInLine]
+    inlines = [PictureInLine, VideoInLine]
     list_display = ('name', 'section', 'created')
     list_filter = ('section', )
 

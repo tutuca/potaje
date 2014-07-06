@@ -9,7 +9,7 @@
                 {% for content in album.content_set.all %}
                 <li>
                     <div class="slide">
-                        {{content.html}}
+                        {{content.html|safe}}
                         <div class="caption">
                         <p>{{content.caption|urlize}}</p>
                         </div>

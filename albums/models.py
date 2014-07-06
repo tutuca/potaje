@@ -22,9 +22,10 @@ class Album(models.Model):
     description = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True, editable=False)
 
-    @property
     def cover(self):
-        return self.content_set.all()[0]
+        content = self.content_set.all()[0]
+        if content:
+            return content.thumbnail
 
     @models.permalink
     def get_absolute_url(self):
@@ -38,38 +39,35 @@ class Content(models.Model):
     caption = models.CharField(max_length=128, null=True, blank=True)
     album = models.ForeignKey('Album')
     created = models.DateTimeField(auto_now_add=True, editable=False)
+    thumbnail = models.URLField(editable=False)
+    code = models.TextField(editable=False)
 
-    class Meta:
-        abstract = True
-
-    @property
-    def html(self):
-        raise NotImplemented
+    def __str__(self):
+        return self.caption
 
 
 class Video(Content):
     source = models.URLField()
-    thumbnail = models.URLField(editable=False)
-    html = models.TextField(editable=False)
-
-    def __str__(self):
-        return self.thumbnail
 
     def save(self, *args, **kwargs):
-        target = "http://vimeo.com/api/oembed.json?url=%s')" % self.source_url
+        target = "http://vimeo.com/api/oembed.json?url=%s" % self.source
         response = requests.get(target)
         data = json.loads(response.text)
+        self.caption = data['title']
         self.thumbnail = data['thumbnail_url']
-        self.html = data['html']
+        self.code = data['html']
         super(Video, self).save(*args, **kwargs)
+
+    @property
+    def html(self):
+        return super(Picture, self).html(self.code)
 
 
 class Picture(Content):
     image = models.ImageField(upload_to='pictures')
 
-    def __str__(self):
-        return self.image.url
+    def save(self, *args, **kwargs):
+        self.thumbnail = self.image.url
+        self.code = '<img src="%s" alt="%s" />' % (self.image.url, self.caption)
+        super(Picture, self).save(*args, **kwargs)
 
-    @property
-    def html(self):
-        return '<img src="%s" alt="%s" />' % (self.image.url, self.caption)
