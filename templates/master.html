@@ -53,9 +53,6 @@
             {% endfor %}
             <li><a href="#about">Acerca de / About</a></li>
             <li><a href="#contact">Contacto / Contact</a></li>
-            {% if is_staff %}
-            <li><a href="/lobby/">Administración</a></li>
-            {% endif %}
         </ul>
         </nav>
         {% endif %}
@@ -65,10 +62,12 @@
     {% for section in sections %}
     <section id="{{section|slugify}}">
        <div class="wrapper">
-        {% for work in section.album_set.all %}
-        <article class="work"> 
-            <a class="thumb" href="/album/{{work.id}}"><img width="400" src="{{work.first_image.url}}"></a>
-            <h2>{{work.name}}</h2>
+        {% for album in section.album_set.all %}
+        <article class="album"> 
+            <a class="thumb" href="/album/{{album.id}}">
+            <img width="400" src="{{album.first_image.url}}">
+            <h2>{{album.name}}</h2>
+            </a>
         </article>
         {% endfor %}
         <p class="detail">{{section.description|urlize}}</p>
