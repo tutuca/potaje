@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Album',
             fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, primary_key=True, verbose_name='ID')),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
                 ('name', models.CharField(max_length=60)),
                 ('description', models.TextField(null=True, blank=True)),
                 ('created', models.DateTimeField(auto_now_add=True)),
@@ -25,9 +25,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Picture',
             fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, primary_key=True, verbose_name='ID')),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
                 ('image', models.ImageField(upload_to='pictures')),
-                ('caption', models.CharField(blank=True, null=True, max_length=128)),
+                ('caption', models.CharField(null=True, max_length=128, blank=True)),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('album', models.ForeignKey(to='albums.Album')),
             ],
@@ -38,7 +38,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Section',
             fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, primary_key=True, verbose_name='ID')),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
                 ('name', models.CharField(max_length=60)),
                 ('description', models.TextField(null=True, blank=True)),
                 ('created', models.DateTimeField(auto_now_add=True)),
