@@ -64,7 +64,7 @@
        <div class="wrapper">
         {% for album in section.album_set.all %}
         <article class="album"> 
-            <a class="thumb" href="/album/{{album.id}}">
+            <a class="thumb" href="{{album.get_absolute_url}}">
             <img width="400" src="{{album.cover}}">
             <h2>{{album.name}}</h2>
             </a>

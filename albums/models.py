@@ -23,7 +23,7 @@ class Album(models.Model):
     created = models.DateTimeField(auto_now_add=True, editable=False)
 
     def cover(self):
-        content = self.content_set.all()[0]
+        content = self.content_set.first()
         if content:
             return content.thumbnail
 
@@ -43,14 +43,14 @@ class Content(models.Model):
     code = models.TextField(editable=False)
 
     def __str__(self):
-        return self.caption
+        return self.caption or 'sin-titulo'
 
 
 class Video(Content):
     source = models.URLField()
 
     def save(self, *args, **kwargs):
-        target = "http://vimeo.com/api/oembed.json?url=%s" % self.source
+        target = "http://vimeo.com/api/oembed.json?url=%s&portrait=0&title=0&byline=0" % self.source
         response = requests.get(target)
         data = json.loads(response.text)
         self.caption = data['title']
@@ -67,7 +67,8 @@ class Picture(Content):
     image = models.ImageField(upload_to='pictures')
 
     def save(self, *args, **kwargs):
+        self.save_base()
         self.thumbnail = self.image.url
-        self.code = '<img src="%s" alt="%s" />' % (self.image.url, self.caption)
+        self.code = '<img src="%s" alt="%s" />' % (
+            self.image.url, self.caption)
         super(Picture, self).save(*args, **kwargs)
-

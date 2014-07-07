@@ -7,6 +7,7 @@ class PictureInLine(admin.TabularInline):
     extra = 1
     fields = ('image', 'caption', )
 
+
 class VideoInLine(admin.TabularInline):
     model = Video
     extra = 1

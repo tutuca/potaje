@@ -1,3 +1,5 @@
+$.pjax.defaults.scrollTo = false;
+
 function viewport_size(){
     e = window;
     a = 'inner';
@@ -44,10 +46,12 @@ function handle_album(){
     create_slider()
 }
 $(document).on('pjax:success', handle_album)
+
 $(function(){
     vp = viewport_size();
     hash = '';
     create_slider();
+    
 
     $("nav ul").onePageNav({
         'currentClass':'current',
@@ -71,6 +75,7 @@ $(function(){
         $('#slide-wrapper').remove();
         container = $(this).parents('section').append($('<div>').attr('id','slide-wrapper'));
         target = $(this).attr('href');
+        
         $.pjax({
             url:target,
             container: '#slide-wrapper',

@@ -289,9 +289,10 @@ input[type="text"], textarea {
     padding:2em 0;
     background: rgba(0,0,0,0.8);
     height:100%;
-    img{
+    img, iframe{
         box-shadow: 0 0 81px #000;
-        max-height:90%;
+        max-height: 90%;
+        max-width: 90%;
     }
     .close {
         position: absolute;
