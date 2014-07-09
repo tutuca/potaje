@@ -22,6 +22,6 @@ class Service(models.Model):
 class ServiceConfiguration(models.Model):
     profile = models.ForeignKey('auth.User')
     service = models.ForeignKey(Service)
-    app_key = models.CharField(max_length=255)
-    app_secret = models.CharField(max_length=255)
+    app_key = models.CharField(max_length=255, null=True, blank=True)
+    app_secret = models.CharField(max_length=255, null=True, blank=True)
     user_profile = models.URLField(max_length=200)

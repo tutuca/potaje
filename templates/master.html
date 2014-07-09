@@ -83,9 +83,10 @@
             <article>
                 <h1>{{profile.user.get_full_name}}</h1>
                 {{profile.biopic|safe}}
-                <p>
-                {% for sc in profile.user.serviceconfiguration_set.all %}
-                    <a href="{{sc.user_profile}}" target="blank"><img src="{{sc.service.icon.url}}" alt="{{sc.service.name}}" /></a>
+                <p>{% for sc in profile.user.serviceconfiguration_set.all %}
+                    <a href="{{sc.user_profile}}" target="blank">
+                        <img src="{{sc.service.icon.url}}" alt="{{sc.service.name}}" />
+                    </a>
                 {% endfor %}
                 </p>
             </article>            

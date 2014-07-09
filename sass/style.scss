@@ -5,6 +5,8 @@
 
 @import "compass/reset";
 
+$fg_color = $FFF;
+
 body {
     font: 20px "Helvetica", "Arial", sans-serif;
     line-height: 26px;
@@ -20,11 +22,11 @@ nav, aside, header, footer, section, article {
 h1 {
     font:3em "Helvetica", "Arial", san-serif;
     text-shadow:    
-        -1px -1px 1px #FFF,
-        1px -1px 1px #FFF,
-        -1px 1px 1px #FFF,
-        1px 1px 1px #FFF;
-    color:#000;
+        -1px -1px 1px $fg_color,
+        1px -1px 1px $fg_color,
+        -1px 1px 1px $fg_color,
+        1px 1px 1px $fg_color;
+    color:$fg_color;
 }
 ul, li {
     margin:0;
@@ -45,8 +47,6 @@ a {
         transition: color 0.3s;
     }
 }
-
-
 p {
     color: #EEE;
     font-size: 1.1em;

@@ -1,30 +1,24 @@
 from django.contrib import admin
-from albums.models import Album, Picture, Video, Section
+from albums.models import Album, Section, Content
 
 
-class PictureInLine(admin.TabularInline):
-    model = Picture
+class ContentInLine(admin.TabularInline):
+    model = Content
     extra = 1
-    fields = ('image', 'caption', )
+    fields = ('source', 'image', 'caption',)
 
 
-class VideoInLine(admin.TabularInline):
-    model = Video
-    extra = 1
-    fields = ('source', 'caption',)
-
-
-class PictureAdmin(admin.ModelAdmin):
-    list_display = ('image', 'album', 'created')
-    list_filter = ('album', )
+class ContentAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'caption', 'kind', 'album', 'created')
+    list_filter = ('album', 'kind')
 
 
 class AlbumAdmin(admin.ModelAdmin):
-    inlines = [PictureInLine, VideoInLine]
+    inlines = [ContentInLine]
     list_display = ('name', 'section', 'created')
     list_filter = ('section', )
 
 
 admin.site.register(Album, AlbumAdmin)
-admin.site.register(Picture, PictureAdmin)
+admin.site.register(Content, ContentAdmin)
 admin.site.register(Section)
