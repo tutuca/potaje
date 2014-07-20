@@ -1,6 +1,6 @@
 $.pjax.defaults.scrollTo = false;
 
-function viewport_size(){
+function viewport(){
     e = window;
     a = 'inner';
     if ( !( 'innerWidth' in window ) ){
@@ -9,13 +9,36 @@ function viewport_size(){
     };
     return { width : e[ a+'Width' ] , height : e[ a+'Height' ] };
 };
+
+function get_fit(srcWidth, srcHeight, maxWidth, maxHeight) {
+
+    var ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
+
+    return { width: srcWidth*ratio, height: srcHeight*ratio };
+ }
+
 function layout_images(selector){
+    var vp, padding, max_height, max_width;
+
+    vp = viewport();
+    padding = 15;
+    max_height = vp.height - padding;
+    max_width = vp.width - padding;
+
     $(selector).each(function(){
-        $(this).find('img').load(function(){
-            w = $(this).width();
-            $(this).siblings('.caption').css({
-                'margin-left': -w/2,
-                'width':w,
+        var slide;
+        slide = $(this);
+        
+        slide.find('img, iframe').load(function(){
+            var content, fit, width_delta;
+            content = $(this);
+            fit = get_fit(content.width(), content.height(), max_width, max_height);
+            width_delta = (max_width - content.width())/2;
+            content.width(fit.width);
+            content.height(fit.height);
+            slide.find('.caption').css({
+                'margin-left': - (fit.width / 2),
+                'width': fit.width,
             })
         })
     })
@@ -48,7 +71,7 @@ function handle_album(){
 $(document).on('pjax:success', handle_album)
 
 $(function(){
-    vp = viewport_size();
+    vp = viewport();
     hash = '';
     create_slider();
     

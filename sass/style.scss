@@ -5,7 +5,7 @@
 
 @import "compass/reset";
 
-$fg_color = $FFF;
+$fg_color: #FFF;
 
 body {
     font: 20px "Helvetica", "Arial", sans-serif;
@@ -173,7 +173,6 @@ footer {
         transition: all 0.3s;
     }
     img {
-        margin-top:-20%;
         margin-left:-50%;
     }
     
