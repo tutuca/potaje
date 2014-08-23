@@ -1,0 +1,25 @@
+{
+  "name": "potaje",
+  "version": "0.1.5",
+  "description": "Potaje Cretivo ======================",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tutuca/potaje.git"
+  },
+  "devDependencies": {
+    "grunt": "~0.4",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-concat": "*",
+    "grunt-sass": "*",
+    "grunt-contrib-watch": "*"
+  },
+  "author": "tutuca",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/tutuca/potaje/issues"
+  }
+}
