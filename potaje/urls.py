@@ -5,6 +5,7 @@ from django.contrib.sitemaps import GenericSitemap
 from django.conf.urls.static import static
 from django.conf import settings
 from albums.models import Album
+from albums import views
 from albums.resources import AlbumResource, SectionResource
 
 admin.autodiscover()
@@ -19,13 +20,15 @@ sitemaps = {
 }
 
 
-urlpatterns = patterns('albums.views',
-    url(r'^$', 'home', name='home'),
-    url(r'^album/(?P<id>\d+)$', 'album', name='album'),
-    url(r'^about/$', 'about', name='about'),
+urlpatterns = patterns(
+    '',
+    url(r'^$', views.home, name='home'),
+    url(r'^album/(?P<id>\d+)$', views.album, name='album'),
+    url(r'^about/$', views.about, name='about'),
 )
-urlpatterns += patterns('',
-    url(r'api/section/', include(SectionResource.urls())),
+urlpatterns += patterns(
+    '',
+    url(r'api/', include(SectionResource.urls())),
     url(r'api/album/', include(AlbumResource.urls())),
 
 )
