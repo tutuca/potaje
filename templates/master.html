@@ -80,18 +80,13 @@
                 <a href="http://potajecreativo.com.ar">POTAJE CREATIVO</a> es diseño gráfico  y audiovisual. 
             </p>
             {% for profile in profiles %}
-            <article>
-                <h1>{{profile.user.get_full_name}}</h1>
-                {{profile.biopic|safe}}
-                <p>{% for sc in profile.user.serviceconfiguration_set.all %}
-                    <a href="{{sc.user_profile}}" target="blank">
-                        <img src="{{sc.service.icon.url}}" alt="{{sc.service.name}}" />
-                    </a>
-                {% endfor %}
-                </p>
+            <article class="{% cycle 'odd','par' %}">
+                <div class="avatar"><img src="{{profile.avatar.url}}"></div>
+                <h1>{{profile.user}}</h1>
+                <p>{{profile.biopic|safe}}</p>
             </article>            
             {% endfor %}
-            <p>
+            <p class="clear">
                 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"> <img alt="Licencia Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a>
             </p>
             <p>
