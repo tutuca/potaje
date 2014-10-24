@@ -1,5 +1,5 @@
 local_settings.py
-
+node_modules/*
 *.pyc
 __pycache__
 *.sqlite3

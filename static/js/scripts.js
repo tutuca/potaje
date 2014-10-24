@@ -1,3 +1,6 @@
+var $ = require('jquery')
+//$().foundation();
+/*
 $.pjax.defaults.scrollTo = false;
 
 function viewport(){
@@ -44,7 +47,7 @@ function layout_images(selector){
     })
 };
 function create_slider(){
-    /* refactor this into a proper plugin or closure. */
+    // refactor this into a proper plugin or closure.
     if ($('#slide-wrapper').length){
         $('#slide-wrapper').flexslider({
             animation:'slide',
@@ -107,3 +110,4 @@ $(function(){
     });
 
 })
+*/
