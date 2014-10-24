@@ -24,6 +24,7 @@ class Album(models.Model):
     description = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True, editable=False)
 
+    @property
     def cover(self):
         content = self.content_set.first()
         if content:

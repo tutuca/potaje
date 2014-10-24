@@ -28,14 +28,15 @@ class SectionResource(DjangoResource):
                     {
                         'pk': x.pk,
                         'name': x.name,
-                        'cover': x.cover.url,
+                        'cover': x.cover,
                     } for x in obj.album_set.all()
-                ]
-            } for obj in Section.objects.all()]
+                ]} for obj in Section.objects.all()]
 
 
 class AlbumResource(DjangoResource):
     """Resource for the Album model"""
+
+    preparer = {}
 
     def detail(self, pk):
         obj = Album.objects.get(pk=pk)

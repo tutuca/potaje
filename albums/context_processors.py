@@ -19,12 +19,7 @@ def random_background(request):
     files = glob('%s/*.webm' % staticfiles.finders.find('bg/'))
     bg_choice = os.path.basename(random.choice(files))
     bg_url = settings.STATIC_URL + 'bg/' + bg_choice
-
-    poster = bg_url.replace('.webm', '_poster.png')
-
+    bg_url = bg_url.replace('.webm', '')
     return {
-        'background': {
-            'url': bg_url,
-            'poster': poster
-        }
+        'background_url': bg_url,
     }
