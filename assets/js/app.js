@@ -1,17 +1,21 @@
-var $ = require('jquery')
+$(function() {
+    'use strict';
+
+    var $ = require('jquery'),
+        Backbone = require('backbone');
+
+    var NavView = Backbone.View.extend({
+         el: $("nav ul"),
+         model: Backbone.Model.extend({
+
+         })
+    });
+});
+
 //$().foundation();
 /*
 $.pjax.defaults.scrollTo = false;
 
-function viewport(){
-    e = window;
-    a = 'inner';
-    if ( !( 'innerWidth' in window ) ){
-        a = 'client';
-        e = document.documentElement || document.body;
-    };
-    return { width : e[ a+'Width' ] , height : e[ a+'Height' ] };
-};
 
 function get_fit(srcWidth, srcHeight, maxWidth, maxHeight) {
 

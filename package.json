@@ -2,25 +2,38 @@
   "name": "potaje",
   "version": "0.3.2",
   "description": "Un manojo de ideas",
-  "main": "assets/js/app.js",
+  "repository": "http://github.com/tutuca/potaje",
+  "main": "assets/js/main.js",
   "directories": {
-    "doc": "docs"
+    "doc": "docs",
+    "src": "assets"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "karma start",
+    "build": "browserify -t hbsfy -g uglifyify assets/js/main.js -o static/js/app.js"
   },
   "author": "Matías Iturburu <maturburu@gmail.com>",
-  "license": "NA",
+  "license": "GPL v3",
   "dependencies": {
-    "zurb-foundation": "*"
+    "jquery": "*",
+    "underscore": "*",
+    "handlebars": "*",
+    "backbone": "*",
+    "slick-carousel": "*"
   },
   "devDependencies": {
     "node-sass": "*",
-    "grunt": "*",
     "browserify": "*",
-    "grunt-browerify": "*",
-    "grunt-sass": "*",
+    "hbsfy": "*",
+    "karma": "*",
+    "uglify-js": "*",
+    "browserify-zlib": "*",
+    "ansi-regex": "*",
+    "amdefine": "*",
+    "grunt": "*",
+    "grunt-browserify": "*",
     "grunt-contrib-watch": "*",
-    "grunt-contrib-copy": "*"
+    "grunt-contrib-uglify": "*",
+    "grunt-sass": "*"
   }
 }

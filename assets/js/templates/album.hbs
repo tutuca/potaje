@@ -1,0 +1,19 @@
+<section id="{{section}}">
+   <div class="wrapper">
+        <div id="slide-wrapper">
+            <a class="close" href="/">Cerrar</a>
+            <ul class="slides">
+                {{#each content}}
+                <li>
+                    <div class="slide">
+                        {{code}}
+                        <div class="caption">
+                        <p>{{caption}}</p>
+                        </div>
+                    </div>
+                </li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+</section>
