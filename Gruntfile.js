@@ -12,7 +12,7 @@ module.exports = function(grunt) {
                 dest: 'static/js/app.js'
             },
             options: {
-                transforms: ['hbsfy'],
+                transform: ['hbsfy'],
                 extensions: ['.hbs']
             }
         },
