@@ -16,14 +16,13 @@ info_dict = {
 }
 
 sitemaps = {
-    'leaks': GenericSitemap(info_dict, priority=0.6),
+    'potaje': GenericSitemap(info_dict, priority=0.6),
 }
 
 
 urlpatterns = patterns(
     '',
     url(r'^$', views.home, name='home'),
-    url(r'^album/(?P<id>\d+)$', views.album, name='album'),
     url(r'^about/$', views.about, name='about'),
 )
 urlpatterns += patterns(
@@ -32,7 +31,8 @@ urlpatterns += patterns(
     url(r'api/album/', include(AlbumResource.urls())),
 
 )
-urlpatterns += patterns('',
+urlpatterns += patterns(
+    '',
     url(r'^lobby/', include(admin.site.urls)),
     (r'^robots\.txt$', lambda r: HttpResponse(
         "User-agent: *\nDisallow: /media/*\nDisallow: /lobby/*", mimetype="text/plain")),

@@ -6,12 +6,11 @@
     <meta name="description" content="Un manojo de ideas">
     <meta name="author" content="Matías Iturburu <maturburu@gmail.com>; Ana Comes <anacomes@gmail.com>">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="icon" href="/static/images/favicon.ico" type="image/png" />
+    <link rel="icon" href="/static/images/favicon.ico" type="image/png">
     <link rel="stylesheet" href="/static/css/style.css">
     <script src="/static/js/app.js"></script>
     {% block head %}{% endblock %}
-    </style>
-    
+
     <!--script type="text/javascript">
 
       var _gaq = _gaq || [];
@@ -33,34 +32,12 @@
 </div>
 <div id="container">
 
-    <header>
-        <h1 id="logo"><a href="/">Potaje Creativo</a></h1>
-        {% if sections %}
-        <nav>
-            <ul>
-                <li><a href="#about">Acerca de / About</a></li>
-                <li><a href="#contact">Contacto / Contact</a></li>
-            </ul>
-        </nav>
-        {% endif %}
-    </header>
+    <header></header>
+
 
     {% block page %}
-    {% for section in sections %}
-    <section id="{{section|slugify}}">
-       <div class="wrapper">
-        {% for album in section.album_set.all %}
-        <article class="album"> 
-            <a class="thumb" href="{{album.get_absolute_url}}">
-            <img width="400" src="{{album.cover}}">
-            <h2>{{album.name}}</h2>
-            </a>
-        </article>
-        {% endfor %}
-        <p class="detail">{{section.description|urlize}}</p>
-        </div>
+    <section id="">
     </section>        
-    {% endfor %}
     <section id="about">
         <div class="wrapper content" >
             <p>
