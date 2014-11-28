@@ -1,20 +1,17 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup, find_packages
+from pip.req import parse_requirements
 
-version = '0.5'
+version = '0.5.1'
 
-dependencies = [
-    'Django',
-    'restless',
-    'requests'
-]
+requirements = parse_requirements('requirements.txt')
 
 setup(
     name='potaje',
     version=version,
     include_package_data=True,
     packages=find_packages(),
-    install_requires=dependencies,
+    install_requires=[str(r.req) for r in requirements],
     entry_points={
         'console_scripts': [
             'manage = potaje.manage:do_manage',
