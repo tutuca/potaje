@@ -4,7 +4,7 @@ module.exports = function (){
     return Backbone.Collection.extend({
         url: '/api/sections/',
         model: Backbone.Model.extend({
-            url: '/api/sections/',
+            url: '/api/sections/'
         })
     });
 };

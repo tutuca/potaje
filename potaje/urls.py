@@ -23,7 +23,6 @@ sitemaps = {
 urlpatterns = patterns(
     '',
     url(r'^$', views.home, name='home'),
-    url(r'^about/$', views.about, name='about'),
 )
 urlpatterns += patterns(
     '',

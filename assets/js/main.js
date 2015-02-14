@@ -1,10 +1,12 @@
 var $ = require('jquery');
+
 $(function() {
     'use strict';
-    var _ = require('underscore'),
-        Backbone = require('backbone'),
- 
-    var Router = Backbone.Router.extend({
+
+    var Backbone = require('backbone'),
+        app, Router;
+
+    Router = Backbone.Router.extend({
         rutes: {
             'home': 'home',
             'album/:album_id': 'album'
@@ -15,13 +17,18 @@ $(function() {
 
         }
 
-    });
-    var app_router = new Router();
-    app_router.on('initialize:after', function() {
-        return Backbone.history.start({
-            pushState: true,
-            hashChange: false
-        });    
-    });
+    })
 
+    app = {
+        router : Router,
+        init : function () {
+            new this.router();
+            Backbone.history.start({
+                pushState: true,
+                hashChange: false
+            });
+        }
+    };
+
+    return app.init();
 });

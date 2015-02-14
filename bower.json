@@ -1,0 +1,10 @@
+{
+  "name": "potaje",
+  "version": "0.3.2",
+
+  "dependencies": {
+    "jquery": "*",
+    "bootstrap-sass-official": "*",
+    "slick": "*"
+  }
+}

@@ -1,0 +1,20 @@
+        routes: {
+            '': 'index',
+            'album/:album_id': 'album'
+        },
+        index: function () {
+            var NavView = require('./views/nav'),
+                Sections = require('./collections/section'),
+                sections,
+                nav;
+
+            sections = new Sections();
+            nav = new NavView({
+                model: sections,
+                el: 'header'
+            });
+
+            return sections.fetch();
+        },
+        album: function (album_id) {
+        }

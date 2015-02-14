@@ -1,58 +1,103 @@
 module.exports = function(grunt) {
-    grunt.loadNpmTasks('grunt-sass');
-    grunt.loadNpmTasks('grunt-browserify'); 
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    
-    grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
-        browserify: {
-            all: {
-                src: ['assets/js/main.js'],
-                dest: 'static/js/app.js'
-            },
-            options: {
-                transform: ['hbsfy'],
-                extensions: ['.hbs']
-            }
+  'use strict';
+  grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
+    sass: {
+      options: {
+        includePaths: [
+          './assets/lib/bootstrap-sass-official/assets/stylesheets',
+        ]
+      },
+      dist: {
+        options: {
+          outputStyle: 'compressed'
         },
-        uglify: {
-            all: {
-                options: {
-                    sourceMap: true,
-                },
-                files: {
-                    'static/js/app.min.js': ['static/js/app.js'],
-                },
-            },
-        },
-        sass: {
-            options: {
-                includePaths: ['assets/sass'],
-                sourceComments: 'none',
-            },
-            dist: {
-                options: {
-                    outputStyle: 'compressed'
-                },
-                files: {
-                    'static/css/styles.css': 'assets/sass/styles.scss'
-                }
-            }
-        },
-        watch: {
-            grunt: { files: ['Gruntfile.js'], tasks: ['build']},
-            js: {
-                files: ['assets/js/*.js', 'assets/js/**/*.js'],
-                tasks: ['browserify', 'uglify']
-            },
-            sass: {
-                files: 'assets/scss/**/*.scss',
-                tasks: ['sass']
-            }
+        files: {
+          './static/css/style.css': './assets/scss/style.scss'
+        }        
+      }
+    },
+    copy: {
+      main: {
+        files: [
+          {
+            flatten:true,
+            cwd: './assets/img/',
+            src: ['*.png', '*.jpg', '*.gif'],
+            dest: './static/img/',
+            expand: true
+          },
+        ]
+      }
+    },
+    concat: {
+      options: {
+        separator: ';'
+      },
+      lib: {
+        src: [
+          './assets/lib/jquery/dist/jquery.js',
+          './assets/lib/bootstrap-sass-official/assets/javascripts/bootstrap/dropdown.js',
+          './assets/lib/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js'
+        ],
+        dest: './static/js/lib.js'
+      },
+      main: {
+        src: [
+          'assets/js/scripts.js'
+        ],
+        dest: './static/js/main.js'
+      }
+    },
+    uglify: {
+      options: {
+        mangle: true,
+        sourceMap: true
+      },
+      lib: {
+        files: {
+          './static/js/lib.min.js': './static/js/lib.js'
         }
-    });
+      },
+      main: {
+        files: {
+          './static/js/main.min.js': './static/js/main.js'
+        }
+      }
+    },
+    watch: {
+      scss: {
+        files: [
+         //watched files
+          'assets/scss/*.scss',
+          ],
+        tasks: ['sass']
+      },
+      js : {
+        files: [
+          'assets/js/*.js',
+        ],
+        tasks: ['copy:main', 'concat:main']
+      },
+      config: {
+        files: [
+          'Gruntfile.js',
+          'bower.json',
+          'package.json'
+        ],
+        tasks: ['copy', 'concat', 'sass']
+      }
+    }
+  });
+  // Plugin loading
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-sass');
 
-    grunt.registerTask('build', ['sass', 'browserify', 'uglify']);
-    grunt.registerTask('default', ['build','watch']);
+  // Task definition
+  grunt.registerTask('build', ['copy', 'sass', 'concat', 'uglify']);
+  grunt.registerTask('default', ['build', 'watch']);
+
 };
