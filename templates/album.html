@@ -1,10 +1,9 @@
 {% extends "master.html" %}
 {% block title %}{{album.name}}{% endblock %}
 {% block page %}
-<section id="{{section|slugify}}">
-   <div class="wrapper">
+<section id="{{section|slugify}}" class="container-fluid">
+   <div class="row">
         <div id="slide-wrapper">
-            <a class="close" href="/">Cerrar</a>
             <ul class="slides">
                 {% for content in album.content_set.all %}
                 <li>

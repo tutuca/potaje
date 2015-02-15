@@ -1,4 +1,38 @@
+var selected,
+    slickOptions = {
+    dots: false,
+    infinite: true,
+    speed: 300,
+    slidesToShow: 1,
+    centerMode: true,
+    variableWidth: true
+}
+function hexToRgb(hex) {
+    /*
+    * Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+    * from http://stackoverflow.com/a/5624139/53468
+    */
+    'use strict';
+    var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+    hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+        return r + r + g + g + b + b;
+    });
+
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
+}
+function toRGBAString (color, a) {
+    if (!a) {a=1}
+    return 'rgba('+color.r+','+color.g+','+color.b+','+a+')';
+}
 function viewport(){
+    /*
+    * Calculates the available surface on the client's window.
+    * */
     'use strict';
     var e = window,
         a = 'inner';
@@ -6,39 +40,39 @@ function viewport(){
         a = 'client';
         e = document.documentElement || document.body;
     }
-    return { width : e[ a+'Width' ] , height : e[ a+'Height' ] };
-};
+    var innerWidth = Math.max(e[a+'Width'], 580),
+        innerHeight = Math.max(e[a+'Height'], 580);
+    return { width : innerWidth , height : innerHeight };
+}
 function renderSection(){
+    /*
+    * Pjax callback funcion
+    * */
     'use strict';
+    if (selected){
+        $('body').css({'overflow':'hidden'});
+        $('nav').toggle('fade', 1000);
 
-    $('body').css({'overflow':'hidden'});
-    $('nav').toggle('fade', 1000);
-
-    $('.work a').not(selected).each(function(index){
-        $(this).parent('article').toggle('fade', 1500*index);
-    });
-    $('#slide-wrapper').flexslider({
-        animation:'slide',
-        controlNav: false
-    });
-};
+        $('.work a').not(selected).each(function(index){
+            $(this).parent('article').toggle('fade', 1500*index);
+        });
+        return $('#slide-wrapper .slides').slick(slickOptions);
+    }
+}
 $(function(){
     'use strict';
     var vp = viewport(),
-        styles = ['#67e2ad','#003e5f','#fa8e53','#f84c53']; // generate this
+        styles = ['#67e2ad','#003e5f','#fa8e53','#f84c53'],  // generate this
+        slide = $('#slide-wrapper .slides').slick(slickOptions );
 
-    $('#slide-wrapper').slick({
-        animation:'slide'
+    $('section').css({'min-height': vp.height});
+    $("header").affix();
 
-    });
-    $("nav ul").onePageNav({
-        'currentClass':'current',
-        'changeHash':true
-
-    });
-    $('section').height(vp.height);
+    $('body').scrollspy({ target: '#main-nav' });
     $('nav a').each(function(i){
-        var style = styles[i];
+        var target = $(this).attr('href'),
+            style = styles[(i%styles.length)];
+        $(target).css({'background-color':toRGBAString(hexToRgb(style), 0.5)});
         $(this).css({'background-color':style});
     });
     setTimeout(function(){
@@ -60,16 +94,15 @@ $(function(){
             container: '#slide-wrapper',
             fragment: '#slide-wrapper',
             success: function() {
-                renderSection(selected);
+                slide = renderSection(selected);
             }
         });
         $('#slide-wrapper .control').one('click',function(e) {
             e.stopPropagation();
             $('nav').toggle('fade');
-            $('#slide-wrapper').remove();
-            $('body').css({'overflow':'auto'});
+            slide.slickRemove();
             history.pushState({}, "Potaje ", "/"+hash);
 
-        })
-    })
-})
+        });
+    });
+});

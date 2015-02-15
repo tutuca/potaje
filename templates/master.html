@@ -11,20 +11,22 @@
     <script src="/static/js/lib.js"></script>
     <script src="/static/js/main.js"></script>
     {% block head %}{% endblock %}
+    <style>
+        #reel {
+            background-image: url({{background.url}});
 
+        }
+    </style>
 </head>
 <body>
-<div id="reel">
-<img src="{{background.url}}" />
-
-</div>
+<div id="reel"></div>
 <div id="container">
 
     <header>
         <h1 id="logo"><a href="/">Potaje Creativo</a></h1>
         {% if sections %}
-        <nav>
-        <ul>
+        <nav id="main-nav">
+        <ul class="nav">
             {% for section in sections %}
             <li><a href="#{{section|slugify}}">{{section.name}}</a></li>
             {% endfor %}
@@ -37,27 +39,26 @@
 
     {% block page %}
     {% for section in sections %}
-    <section id="{{section|slugify}}">
-       <div class="wrapper">
+    <section id="{{section|slugify}}" class="container-fluid">
+       <div class="row">
         {% for album in section.album_set.all %}
-        <article class="album"> 
-            <a class="thumb" href="/album/{{album.id}}">
-            <img width="400" src="{{album.cover}}">
-            <h2>{{album.name}}</h2>
-            </a>
-        </article>
+        <div class="album col-md-3">
+            <div class="inner" style="background-image: url({{album.cover}})">
+                <h2><a class="thumb" href="/album/{{album.id}}">{{album.name}}</a></h2>
+            </div>
+        </div>
         {% endfor %}
         <p class="detail">{{section.description|urlize}}</p>
         </div>
     </section>        
     {% endfor %}
-    <section id="about">
-        <div class="wrapper content" >
-            <p>
+    <section id="about" class="container-fluid">
+        <div class="row" >
+            <h2>
                 <a href="http://potajecreativo.com.ar">POTAJE CREATIVO</a> es diseño gráfico  y audiovisual. 
-            </p>
+            </h2>
             {% for profile in profiles %}
-            <article>
+            <article class="col-md-6 col-sm-1">
                 <h1>{{profile.user.get_full_name}}</h1>
                 {{profile.biopic|safe}}
                 <p>
@@ -67,20 +68,11 @@
                 </p>
             </article>            
             {% endfor %}
-            <p>
-                <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"> <img alt="Licencia Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a>
-            </p>
-            <p>
-                <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Trabajos realizados por Potaje Creativo</span> 
-                por <a xmlns:cc="http://creativecommons.org/ns#" href="http://potajecreativo.com.ar" property="cc:attributionName" rel="cc:attributionURL">Ana Fernandez Comes</a> 
-                se encuentra bajo <br />una Licencia <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">
-                Creative Commons Atribución-NoComercial-CompartirDerivadasIgual 3.0 Unported</a>.
-            </p> 
                 <img src="/static/images/manojo.png" alt="Un manojo de ideas..." id="manojo" />
         </div>
     </section>
-    <section id="contact">
-       <div class="wrapper content">
+    <section id="contact" class="container-fluid">
+       <div class="row">
             <p><a href="mailto:hola@potaje.com" rel="autor">anacomes@gmail.com</a></p>
             <p>(54) 351 - 153848533</p>
             <h3>Córdoba - Argentina</h3>
@@ -89,6 +81,16 @@
                 <a href="http://facebook.com/ana.comes" target="blank" ><img src="/static/images/facebook.png" alt="description" /></a>
                 <a href="http://vimeo.com/user9007483" target="blank"><img src="/static/images/vimeo.png" alt="description" /></a>
             </p>
+           <p>
+                <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"> <img alt="Licencia Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a>
+            </p>
+            <p>
+                <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Trabajos realizados por Potaje Creativo</span>
+                por <a xmlns:cc="http://creativecommons.org/ns#" href="http://potajecreativo.com.ar" property="cc:attributionName" rel="cc:attributionURL">Ana Fernandez Comes</a>
+                se encuentra bajo <br />una Licencia <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+                Creative Commons Atribución-No Comercial-Compartir Derivadas Igual</a>.
+            </p>
+
        </div>
     </section>
     {% endblock %}

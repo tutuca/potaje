@@ -1,25 +1,14 @@
-$fg_color: #FFF;
+@import "variables";
+@import "bootstrap";
+@import "slick";
 
 body {
-    font: 20px "Helvetica", "Arial", sans-serif;
-    line-height: 26px;
     margin:0;
     padding:0;
-    background: #40BDBF;
-    color:#EEE;
 }
 nav, aside, header, footer, section, article {
     display:block;
     position:relative;
-}
-h1 {
-    font:3em "Helvetica", "Arial", san-serif;
-    text-shadow:
-        -1px -1px 1px $fg_color,
-        1px -1px 1px $fg_color,
-        -1px 1px 1px $fg_color,
-        1px 1px 1px $fg_color;
-    color:$fg_color;
 }
 ul, li {
     margin:0;
@@ -30,7 +19,6 @@ li {
     margin:3px 0;
 }
 a {
-    color: #FFF;
     text-decoration: none;
     img {
         outline: none;
@@ -53,10 +41,11 @@ p {
     left: -2em;
     width: 110%;
     min-height:110%;
+    background-size: 100%;
+    background-position: center center;
 }
 #container {
     position:relative;
-
     width:100%;
     overflow:hidden;
 }
@@ -67,32 +56,37 @@ header {
     width: 13em;
     z-index:9999;
     font-size:1.3em;
+    h1 {
+        box-shadow: 0 0 15px rgba(255,255,255,0.7);
+    }
 }
 nav {
     margin: 0 ;
     width: 8em;
     li {
-        margin-bottom:15px;
+        margin:20px 0;
     }
     a {
+        display:inline !important;
+        padding: 0.3em 0.7em !important;  // these two !important should go if we import the right stylsheet
         outline: 0;
-        box-shadow: 0 0 0px #000;
         text-decoration:none;
         background-color: #004161;
         border-radius: 0 3px 3px 0;
+        border: 0px solid #FFF;
         font-size: 80%;
         color: #FFF;
-        padding: 0.3em 0.7em;
-        transition: all 0.3s;
+        transition: all 0.02s;
     }
     a:hover {
         background: #FFF !important;
-        color: 333;
-        box-shadow: 4px 4px 15px #000;
-        transition: all 0.3s;
+        color: #333;
+        box-shadow: 1px 1px 5px rgba(50,50,50,0.7);
+        border: 1px solid #FFF;
+        transition: all 0.2s;
 
     }
-    .current a{
+    .active a{
         background: #FFF !important;
         color: #004161;
         box-shadow: 4px 4px 15px #000;
@@ -105,21 +99,9 @@ section {
     text-align: center;
 
 }
-/* The ghost, nudged to maintain perfect centering */
-section:before {
-    content: '';
-    display: inline-block;
-    height: 100%;
-    vertical-align: middle;
-    margin-right: -0.25em; /* Adjusts for spacing */
-}
-
-/* The element to be centered, can
-   also be of any width and height */
 .wrapper {
-    display: inline-block;
-    vertical-align: middle;
     width: 60%;
+    margin: 0 auto;
 }
 details {
     clear:both;
@@ -134,8 +116,7 @@ footer {
     right: 10px;
 }
 #logo {
-    background: #67e2ad url(../images/pojo.png) no-repeat;
-    background-position: center bottom;
+    background: #67e2ad url(../images/pojo.png) no-repeat center bottom;
     border-radius: 50px;
     height: 70px;
     width: 70px;
@@ -158,59 +139,61 @@ footer {
 
     }
 }
+.row {
+    margin:0 auto;
+    padding: 3em 3em 3em 10em;
+}
 .album {
-    float: left;
-    margin: 1em;
-    position: relative;
+    .inner {
+        border-radius: 5px;
+        overflow: hidden;
+        position: relative;
+        height: 200px;
+
+        background-repeat: no-repeat;
+        background-size: 200%;
+        background-position: center center;
+    }
     * {
         transition: all 0.3s;
     }
     img {
-        margin-left:-50%;
+        margin-left:-20px;
+        margin-top:-20px;
     }
-
     h2 {
         position: absolute;
         top: 0;
         left: 0;
-        height:1px;
         width:100%;
-        margin: 0;
+        margin:0;
+        padding: 4px;
         color:transparent;
+        opacity:0;
         text-align: left;
-        transition: all 0.3s;
+        transition: all 0.2s;
     }
     a  {
         display: block;
-        overflow: hidden;
-        background: transparent;
         padding: 0;
-        width: 200px;
-        height: 180px;
-        transition: all 0.4s;
+        text-decoration: none;
+        transition: all 0.2s;
+
     }
-    &:hover {
+    &:hover .inner{
         background: rgba(109, 230, 177, 0.9);
-        transition: all 0.4s;
-        box-shadow: 4px 4px 15px #000;
+        transition: all 0.2s;
+        box-shadow: 4px 4px 25px rgba(0,0,0,0.6);
         h2 {
             height:100%;
             width:100%;
+            transition: all 0.2s;
             background: #67e2ad;
-            padding: 4px;
             color:#FFF;
-
+            opacity: 100;
             cursor: pointer;
         }
     }
-}
-/* Canvas */
-#periscopio {
-    position: absolute;
-    left: 50%;
-    margin: -160px -95px;
-    top: 50%;
-    z-index:-1;
 }
 #main {
     display:block;
@@ -221,32 +204,8 @@ footer {
     min-width: 25em;
     width: 50%;
     height: 60%;
-    background: rgba(255,255,255,0.8);
-    padding: 7em 8em;
-    a, h3, p, ul {
-        color: #000;
-    }
-    ul {
-        margin: 1em 0;
-    }
 }
-#contact {
-    h3,p {
-        width: 10em;
-        color: #000;
-
-        margin: 0 0 0.25em ;
-        font-weight: normal;
-
-    }
-    h3 {
-        border: 1px solid #000;
-        border-color: #000 transparent;
-        padding: 0.5em 0;
-        margin: 0.7em 0;
-    }
-}
-#about .content{
+#about{
     text-align: center;
     .avatar {
         display: block;
@@ -262,13 +221,6 @@ footer {
     p {
         text-align: left;
     }
-    article {
-        float:left;
-        width:45%;
-        &.par {
-            float:right;
-        }
-    }
 
 }
 /* Form */
@@ -277,7 +229,7 @@ form {
     margin: 0 auto;
 }
 #contact-form {
-    #float: right;
+    float: right;
 }
 label {
     text-align: left;
@@ -290,7 +242,6 @@ input[type="text"], textarea {
     border: 1px solid #CCC;
     border-radius: 3px;
     box-shadow: 0 0 1px #6DE6B1;
-    font: monospace;
 }
 
 /* Slider */
@@ -335,4 +286,100 @@ input[type="text"], textarea {
 #manojo {
     display: block;
     margin: 1em auto;
+}
+/* Slider */
+
+.slick-slider {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -ms-touch-action: pan-y;
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+}
+.slick-list {
+    position: relative;
+    overflow: hidden;
+    display: block;
+    margin: 0;
+    padding: 0;
+
+    &:focus {
+        outline: none;
+    }
+
+    &.dragging {
+        cursor: pointer;
+        cursor: hand;
+    }
+}
+.slick-slider .slick-track,
+.slick-slider .slick-list {
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.slick-track {
+    position: relative;
+    left: 0;
+    top: 0;
+    display: block;
+
+    &:before,
+    &:after {
+        content: "";
+        display: table;
+    }
+
+    &:after {
+        clear: both;
+    }
+
+    .slick-loading & {
+        visibility: hidden;
+    }
+}
+.slick-slide {
+    float: left;
+    height: 100%;
+    min-height: 1px;
+    [dir="rtl"] & {
+        float: right;
+    }
+    img {
+        display: block;
+    }
+    &.slick-loading img {
+        display: none;
+    }
+
+    display: none;
+
+    &.dragging img {
+        pointer-events: none;
+    }
+
+    .slick-initialized & {
+        display: block;
+    }
+
+    .slick-loading & {
+        visibility: hidden;
+    }
+
+    .slick-vertical & {
+        display: block;
+        height: auto;
+        border: 1px solid transparent;
+    }
 }
