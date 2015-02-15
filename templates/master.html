@@ -6,51 +6,68 @@
     <meta name="description" content="Un manojo de ideas">
     <meta name="author" content="Matías Iturburu <maturburu@gmail.com>; Ana Comes <anacomes@gmail.com>">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="icon" href="/static/images/favicon.ico" type="image/png">
+    <link rel="icon" href="/static/images/favicon.ico" type="image/png" />
     <link rel="stylesheet" href="/static/css/style.css">
-    <script src="/static/js/app.js"></script>
+    <script src="/static/js/lib.js"></script>
+    <script src="/static/js/main.js"></script>
     {% block head %}{% endblock %}
 
-    <!--script type="text/javascript">
-
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-20150902-1']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; 
-            ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; 
-            s.parentNode.insertBefore(ga, s);
-      })();
-
-    </script-->
 </head>
 <body>
 <div id="reel">
+<img src="{{background.url}}" />
+
 </div>
 <div id="container">
 
-    <header></header>
-
+    <header>
+        <h1 id="logo"><a href="/">Potaje Creativo</a></h1>
+        {% if sections %}
+        <nav>
+        <ul>
+            {% for section in sections %}
+            <li><a href="#{{section|slugify}}">{{section.name}}</a></li>
+            {% endfor %}
+            <li><a href="#about">Acerca de / About</a></li>
+            <li><a href="#contact">Contacto / Contact</a></li>
+        </ul>
+        </nav>
+        {% endif %}
+    </header>
 
     {% block page %}
-    <section id="">
+    {% for section in sections %}
+    <section id="{{section|slugify}}">
+       <div class="wrapper">
+        {% for album in section.album_set.all %}
+        <article class="album"> 
+            <a class="thumb" href="/album/{{album.id}}">
+            <img width="400" src="{{album.cover}}">
+            <h2>{{album.name}}</h2>
+            </a>
+        </article>
+        {% endfor %}
+        <p class="detail">{{section.description|urlize}}</p>
+        </div>
     </section>        
+    {% endfor %}
     <section id="about">
         <div class="wrapper content" >
             <p>
                 <a href="http://potajecreativo.com.ar">POTAJE CREATIVO</a> es diseño gráfico  y audiovisual. 
             </p>
             {% for profile in profiles %}
-            <article class="{% cycle 'odd','par' %}">
-                <div class="avatar"><img src="{{profile.avatar.url}}"></div>
-                <h1>{{profile.user}}</h1>
-                <p>{{profile.biopic|safe}}</p>
+            <article>
+                <h1>{{profile.user.get_full_name}}</h1>
+                {{profile.biopic|safe}}
+                <p>
+                {% for sc in profile.user.serviceconfiguration_set.all %}
+                    <a href="{{sc.user_profile}}" target="blank"><img src="{{sc.service.icon.url}}" alt="{{sc.service.name}}" /></a>
+                {% endfor %}
+                </p>
             </article>            
             {% endfor %}
-            <p class="clear">
+            <p>
                 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"> <img alt="Licencia Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a>
             </p>
             <p>

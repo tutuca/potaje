@@ -6,6 +6,7 @@ module.exports = function(grunt) {
       options: {
         includePaths: [
           './assets/lib/bootstrap-sass-official/assets/stylesheets',
+          './assets/lib/slick/slick'
         ]
       },
       dist: {
@@ -37,8 +38,8 @@ module.exports = function(grunt) {
       lib: {
         src: [
           './assets/lib/jquery/dist/jquery.js',
-          './assets/lib/bootstrap-sass-official/assets/javascripts/bootstrap/dropdown.js',
-          './assets/lib/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js'
+          './assets/lib/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js',
+          './assets/lib/slick/dist/slick.js'
         ],
         dest: './static/js/lib.js'
       },
@@ -69,7 +70,7 @@ module.exports = function(grunt) {
       scss: {
         files: [
          //watched files
-          'assets/scss/*.scss',
+          'assets/sass/*.scss',
           ],
         tasks: ['sass']
       },

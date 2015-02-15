@@ -1,4 +1,3 @@
-
 $fg_color: #FFF;
 
 body {
@@ -15,7 +14,7 @@ nav, aside, header, footer, section, article {
 }
 h1 {
     font:3em "Helvetica", "Arial", san-serif;
-    text-shadow:    
+    text-shadow:
         -1px -1px 1px $fg_color,
         1px -1px 1px $fg_color,
         -1px 1px 1px $fg_color,
@@ -57,7 +56,7 @@ p {
 }
 #container {
     position:relative;
-    
+
     width:100%;
     overflow:hidden;
 }
@@ -85,7 +84,7 @@ nav {
         color: #FFF;
         padding: 0.3em 0.7em;
         transition: all 0.3s;
-    } 
+    }
     a:hover {
         background: #FFF !important;
         color: 333;
@@ -104,7 +103,7 @@ nav {
 section {
     position: relative;
     text-align: center;
-    
+
 }
 /* The ghost, nudged to maintain perfect centering */
 section:before {
@@ -152,7 +151,7 @@ footer {
         overflow: hidden;
         height: 70px;
         width: 70px;
-        background: transparent;    
+        background: transparent;
         &:hover {
             background:transparent;
         }
@@ -169,7 +168,7 @@ footer {
     img {
         margin-left:-50%;
     }
-    
+
     h2 {
         position: absolute;
         top: 0;
@@ -200,8 +199,8 @@ footer {
             background: #67e2ad;
             padding: 4px;
             color:#FFF;
-            
-            cursor: pointer;           
+
+            cursor: pointer;
         }
     }
 }
@@ -235,17 +234,17 @@ footer {
     h3,p {
         width: 10em;
         color: #000;
-       
+
         margin: 0 0 0.25em ;
         font-weight: normal;
-       
+
     }
     h3 {
         border: 1px solid #000;
         border-color: #000 transparent;
         padding: 0.5em 0;
         margin: 0.7em 0;
-    }    
+    }
 }
 #about .content{
     text-align: center;
@@ -322,69 +321,6 @@ input[type="text"], textarea {
     }
 
 }
-.flexslider .slides {zoom: 1;}
-.flexslider .slides > li {position: relative;}
-.flex-container {zoom: 1; position: relative;}
-
-/* Direction Nav */
-.flex-direction-nav li a {
-    width: 51px; 
-    height: 51px; 
-    margin: -13px 0 0; 
-    display: block; 
-    background: url(../images/bg_direction_nav.png) no-repeat 0 0; 
-    position: absolute; 
-    top: 50%; 
-    cursor: pointer; 
-    text-indent: -9999px;
-}
-.flex-direction-nav li .next {
-    background-position: -50px 0; 
-    right: 2em;
-}
-.flex-direction-nav li .prev {
-    left: 2em;
-}
-.flex-direction-nav li .disabled {
-    opacity: .3; 
-    filter:alpha(opacity=30); 
-    cursor: default;
-}
-.flex-control-nav {
-    width: 100%; 
-    position: absolute; 
-    bottom: 10px; 
-    text-align: center;
-    margin: 0;
-    padding: 0;
-}
-.flex-control-nav li {
-    margin: 0 0 0 5px; 
-    display: inline-block; 
-    zoom: 1; 
-    *display: inline;
-}
-.flex-control-nav li:first-child {
-    margin: 0;
-}
-.flex-control-nav li a {
-    width: 13px; 
-    height: 13px; 
-    display: block; 
-    background: url(../images/bg_control_nav.png) no-repeat 0 0; 
-    cursor: pointer; 
-    text-indent: -9999px;
-}
-.flex-control-nav li a:hover {
-    background-position: 0 -13px;
-}
-.flex-control-nav li a.active {
-    background-position: 0 -26px; 
-    cursor: default;
-}
-.slide {
-    position:relative;    
-}
 .caption {
     position:absolute;
     bottom: 0;
@@ -400,4 +336,3 @@ input[type="text"], textarea {
     display: block;
     margin: 1em auto;
 }
-

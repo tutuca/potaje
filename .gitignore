@@ -9,3 +9,4 @@ node_modules
 potaje.egg-info
 .sass-cache
 .idea
+assets/lib
