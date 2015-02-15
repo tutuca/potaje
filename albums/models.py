@@ -4,6 +4,9 @@ import requests
 from urllib import parse
 
 from django.db import models
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+
 
 
 class Section(models.Model):
@@ -51,47 +54,53 @@ class Content(models.Model):
     caption = models.CharField(max_length=128, null=True, blank=True)
     album = models.ForeignKey('Album')
     created = models.DateTimeField(auto_now_add=True, editable=False)
-    thumbnail = models.URLField(editable=False)
-    code = models.TextField(editable=False)
+    thumbnail = models.URLField(editable=False, default="")
+    code = models.TextField(editable=False, default="")
 
-    def save(self, *args, **kwargs):
-        if self.image:
-            self.caption = self.caption or self.image.name
-            self.kind = 10
-            self.thumbnail = self.image.url
-            self.code = '<img src="%s" alt="%s" />' % (
-                self.image.url, self.caption)
 
-        if "imgur" in self.source:
-            old_code = self.source
-            split = parse.urlsplit(self.source)
-            img_id = split.path[1:]  # sacamos el primer /
-            if any(x in split.path for x in ('.gif', '.jpg', '.png',)):
-                # es una imágen directa, sacamos la extensión
-                img_id = img_id[:-4]
 
-            self.kind = 10
-            self.caption = old_code
-            self.thumbnail = "http://i.imgur.com/%st.jpg" % img_id
-            self.code = '<img src="http://i.imgur.com/%s.jpg" alt="%s" />' % (
-                img_id, self.caption)
+@receiver(post_save, sender=Content)
+def fetch_image(sender, instance, **kwargs):
+    if instance.thumbnail or kwargs.get('raw'):
+        return
 
-        if "vimeo" in self.source:
-            options = {
-                "url": self.source,
-                "&portrait": 0,
-                "title": 0,
-                "byline": 0,
-            }
-            target = "http://vimeo.com/api/oembed.json?%s" % parse.urlencode(
-                options
-            )
-            response = requests.get(target)
-            data = json.loads(response.text)
+    if instance.image:
+        instance.caption = instance.caption or instance.image.name
+        instance.kind = 10
+        instance.thumbnail = instance.image.url
+        instance.code = '<img src="%s" alt="%s" />' % (
+            instance.image.url, instance.caption)
 
-            self.kind = 20
-            self.caption = data['title']
-            self.thumbnail = data['thumbnail_url']
-            self.code = data['html']
+    if "imgur" in instance.source:
+        old_code = instance.source
+        split = parse.urlsplit(instance.source)
+        img_id = split.path[1:]  # sacamos el primer /
+        if any(x in split.path for x in ('.gif', '.jpg', '.png',)):
+            # es una imágen directa, sacamos la extensión
+            img_id = img_id[:-4]
 
-        super(Content, self).save(*args, **kwargs)
+        instance.kind = 10
+        instance.caption = old_code
+        instance.thumbnail = "http://i.imgur.com/%st.jpg" % img_id
+        instance.code = '<img src="http://i.imgur.com/%s.jpg" alt="%s" />' % (
+            img_id, instance.caption)
+
+    if "vimeo" in instance.source:
+        options = {
+            "url": instance.source,
+            "&portrait": 0,
+            "title": 0,
+            "byline": 0,
+        }
+        target = "http://vimeo.com/api/oembed.json?%s" % parse.urlencode(
+            options
+        )
+        response = requests.get(target)
+        data = json.loads(response.text)
+
+        instance.kind = 20
+        instance.caption = data['title']
+        instance.thumbnail = data['thumbnail_url']
+        instance.code = data['html']
+
+    instance.save()
