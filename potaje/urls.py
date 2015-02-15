@@ -20,9 +20,10 @@ sitemaps = {
 }
 
 
-urlpatterns = patterns(
-    '',
-    url(r'^$', views.home, name='home'),
+urlpatterns = patterns('albums.views',
+    url(r'^$', 'home', name='home'),
+    url(r'^album/(?P<id>\d+)$', 'album', name='album'),
+    url(r'^about/$', 'about', name='about'),
 )
 urlpatterns += patterns(
     '',
