@@ -6,15 +6,15 @@ module.exports = function(grunt) {
       options: {
         includePaths: [
           './assets/lib/bootstrap-sass-official/assets/stylesheets',
-          './assets/lib/slick/slick'
+          './assets/lib/slick.js/slick/'
         ]
       },
       dist: {
         options: {
-          outputStyle: 'compressed'
+          outputStyle: 'compact'
         },
         files: {
-          './static/css/style.css': './assets/scss/style.scss'
+          './static/css/style.css': './assets/sass/style.scss'
         }        
       }
     },
@@ -23,9 +23,9 @@ module.exports = function(grunt) {
         files: [
           {
             flatten:true,
-            cwd: './assets/img/',
+            cwd: './assets/images/',
             src: ['*.png', '*.jpg', '*.gif'],
-            dest: './static/img/',
+            dest: './static/images/',
             expand: true
           },
         ]
@@ -38,14 +38,15 @@ module.exports = function(grunt) {
       lib: {
         src: [
           './assets/lib/jquery/dist/jquery.js',
+          './assets/lib/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js',
           './assets/lib/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js',
-          './assets/lib/slick/dist/slick.js'
+          './assets/lib/slick.js/slick/slick.js'
         ],
         dest: './static/js/lib.js'
       },
       main: {
         src: [
-          'assets/js/scripts.js'
+          'assets/js/main.js'
         ],
         dest: './static/js/main.js'
       }
