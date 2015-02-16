@@ -11,17 +11,16 @@
     <script src="/static/js/lib.js"></script>
     <script src="/static/js/main.js"></script>
     {% block head %}{% endblock %}
-    <style>
+    <!--style>
         #reel {
             background-image: url({{background.url}});
 
         }
-    </style>
+    </style-->
 </head>
 <body>
 <div id="reel"></div>
-<div id="container">
-
+<div id="main">
     <header>
         <h1 id="logo"><a href="/">Potaje Creativo</a></h1>
         {% if sections %}
@@ -36,17 +35,19 @@
         </nav>
         {% endif %}
     </header>
-
     {% block page %}
+    <div id="sections">
     {% for section in sections %}
     <section id="{{section|slugify}}" class="container-fluid">
        <div class="row">
         {% for album in section.album_set.all %}
-        <div class="album col-md-3">
+        <article class="album col-md-3">
+            <a class="cover" href="/album/{{album.id}}">
             <div class="inner" style="background-image: url({{album.cover}})">
-                <h2><a class="thumb" href="/album/{{album.id}}">{{album.name}}</a></h2>
             </div>
-        </div>
+            <h2>{{album.name}}</h2>
+            </a>
+        </article>
         {% endfor %}
         <p class="detail">{{section.description|urlize}}</p>
         </div>
@@ -58,7 +59,8 @@
                 <a href="http://potajecreativo.com.ar">POTAJE CREATIVO</a> es diseño gráfico  y audiovisual. 
             </h2>
             {% for profile in profiles %}
-            <article class="col-md-6 col-sm-1">
+            <article class="col-md-6 col-sm-1" id="{{profile.user}}">
+                <a href="#{{profile.user}}" class="avatar"><img src="{{profile.avatar.url}}" alt="{{profile.user.get_full_name}}"/></a>
                 <h1>{{profile.user.get_full_name}}</h1>
                 {{profile.biopic|safe}}
                 <p>
@@ -73,8 +75,8 @@
     </section>
     <section id="contact" class="container-fluid">
        <div class="row">
-            <p><a href="mailto:hola@potaje.com" rel="autor">anacomes@gmail.com</a></p>
-            <p>(54) 351 - 153848533</p>
+            <h3><a href="mailto:hola@potaje.com.ar" rel="autor">hola@potaje.com.ar</a></h3>
+            <h3>(54) 351 - 153848533</h3>
             <h3>Córdoba - Argentina</h3>
             <p>
                 <a href="http://flickr.com/destonosalemusica" target="blank"><img src="/static/images/flickr.png" alt="description" /></a>
@@ -93,13 +95,9 @@
 
        </div>
     </section>
+    </div>
     {% endblock %}
 
-    <footer>
-    <a rel="license" href="#about">
-        <img alt="Licencia Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" />
-    </a>
-    </footer>
 </div>
 </body>
 </html>
