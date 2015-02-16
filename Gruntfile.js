@@ -40,6 +40,7 @@ module.exports = function(grunt) {
           './assets/lib/jquery/dist/jquery.js',
           './assets/lib/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js',
           './assets/lib/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js',
+          './assets/lib/jquery-pjax/jquery.pjax.js',
           './assets/lib/slick.js/slick/slick.js'
         ],
         dest: './static/js/lib.js'
