@@ -3,7 +3,7 @@
 {% block page %}
 <section id="{{section|slugify}}" class="container-fluid">
    <div class="row">
-        <div id="slide-wrapper">
+        <div id="slide-wrapper" class="col-md-12">
             <ul id="slides">
                 {% for content in album.content_set.all %}
                 <li>

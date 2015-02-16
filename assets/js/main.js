@@ -5,8 +5,8 @@ var selected,
     speed: 300,
     slidesToShow: 1,
     centerMode: true,
-    variableWidth: true
-};
+    variableWidth: false
+    };
 function hexToRgb(hex) {
     /*
     * Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
@@ -74,7 +74,7 @@ $(function(){
     'use strict';
     var vp = viewport(),
         styles = ['#67e2ad','#003e5f','#fa8e53','#f84c53'],  // generate this
-        slide = $('#slides').slick(slickOptions );
+        slide = $('#slides').slick(slickOptions);
 
     $('section').css({'min-height': vp.height});
     $("header").affix();
@@ -90,7 +90,7 @@ $(function(){
         var new_color = styles[Math.floor(Math.random()*styles.length)];
         $('#logo').css('background-color', new_color);
     }, 5000);
-
+    /*
     $('.cover').on("click", function(event){
         event.preventDefault();
         event.stopPropagation();
@@ -116,4 +116,5 @@ $(function(){
 
         });
     });
+    */
 });

@@ -28,6 +28,16 @@ module.exports = function(grunt) {
             dest: './static/images/',
             expand: true
           },
+          {
+            cwd: './assets/lib/slick.js/slick/',
+            src: ['*.gif', ],
+            dest: './static/images/'
+          },
+          {
+            cwd: './assets/lib/slick.js/slick/fonts/',
+            src: ['*.eot', '*.svg','*.ttf','*.woff'],
+            dest: './static/fonts/'
+          }
         ]
       }
     },
