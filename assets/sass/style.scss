@@ -44,7 +44,7 @@ p {
     background-size: 100%;
     background-position: center center;
 }
-#container {
+#main {
     position:relative;
     width:100%;
     overflow:hidden;
@@ -144,6 +144,7 @@ footer {
     padding: 3em 3em 3em 10em;
 }
 .album {
+    margin-bottom: 40px;
     .inner {
         border-radius: 5px;
         overflow: hidden;
@@ -163,7 +164,7 @@ footer {
     }
     h2 {
         position: absolute;
-        top: 0;
+        bottom: 0;
         left: 0;
         width:100%;
         margin:0;
@@ -172,6 +173,7 @@ footer {
         opacity:0;
         text-align: left;
         transition: all 0.2s;
+        z-index:999;
     }
     a  {
         display: block;
@@ -180,25 +182,21 @@ footer {
         transition: all 0.2s;
 
     }
-    &:hover .inner{
-        background: rgba(109, 230, 177, 0.9);
-        transition: all 0.2s;
-        box-shadow: 4px 4px 25px rgba(0,0,0,0.6);
-        h2 {
-            height:100%;
-            width:100%;
+    &:hover{
+        .inner{
             transition: all 0.2s;
+            box-shadow: 4px 4px 25px rgba(0,0,0,0.6);
+        }
+        h2 {
+            width:100%;
+            bottom: -2em;
             background: #67e2ad;
             color:#FFF;
             opacity: 100;
             cursor: pointer;
+            transition: all 0.2s;
         }
     }
-}
-#main {
-    display:block;
-    margin: 0 0 50em;
-    padding: 0;
 }
 .content{
     min-width: 25em;

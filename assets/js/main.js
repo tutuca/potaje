@@ -6,7 +6,7 @@ var selected,
     slidesToShow: 1,
     centerMode: true,
     variableWidth: true
-}
+};
 function hexToRgb(hex) {
     /*
     * Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
@@ -26,7 +26,8 @@ function hexToRgb(hex) {
     } : null;
 }
 function toRGBAString (color, a) {
-    if (!a) {a=1}
+    'use strict';
+    if (!a) {a=1;}
     return 'rgba('+color.r+','+color.g+','+color.b+','+a+')';
 }
 function viewport(){
@@ -56,14 +57,24 @@ function renderSection(){
         $('.work a').not(selected).each(function(index){
             $(this).parent('article').toggle('fade', 1500*index);
         });
-        return $('#slide-wrapper .slides').slick(slickOptions);
+        return $('#slides').slick(slickOptions);
     }
 }
+function getSlidesContainer(caller){
+    "use strict";
+    var container = $('#slide-wrapper');
+        if (!container){
+            container = $(caller).after('<div>').attr('id', 'slide-wrapper');
+
+        }
+    return container;
+}
+
 $(function(){
     'use strict';
     var vp = viewport(),
         styles = ['#67e2ad','#003e5f','#fa8e53','#f84c53'],  // generate this
-        slide = $('#slide-wrapper .slides').slick(slickOptions );
+        slide = $('#slides').slick(slickOptions );
 
     $('section').css({'min-height': vp.height});
     $("header").affix();
@@ -80,24 +91,24 @@ $(function(){
         $('#logo').css('background-color', new_color);
     }, 5000);
 
-    $('.work a').on("click", function(event){
-        var selected = this,
-            hash = window.location.hash,
-            target = $(this).attr('href');
-
+    $('.cover').on("click", function(event){
         event.preventDefault();
         event.stopPropagation();
 
-        $('#slide-wrapper').remove();
+        var selected = this,
+            hash = window.location.hash,
+            target = $(this).attr('href'),
+            container = getSlidesContainer();
         $.pjax({
             url:target,
-            container: '#slide-wrapper',
+            container: container,
             fragment: '#slide-wrapper',
             success: function() {
+
                 slide = renderSection(selected);
             }
         });
-        $('#slide-wrapper .control').one('click',function(e) {
+        $('.control').one('click',function(e) {
             e.stopPropagation();
             $('nav').toggle('fade');
             slide.slickRemove();
