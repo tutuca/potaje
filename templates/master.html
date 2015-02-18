@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>Potaje {% block title %}{% endblock %} - Potaje Creativo</title>
     <meta name="description" content="Un manojo de ideas">
-    <meta name="author" content="Matías Iturburu <maturburu@gmail.com>; Ana Comes <anacomes@gmail.com>">
+    <meta name="author" content="Potaje Creativo <hola@potajecreativo.com.ar>">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="icon" href="/static/images/favicon.ico" type="image/png" />
     <link rel="stylesheet" href="/static/css/style.css">
@@ -27,10 +27,10 @@
         <nav id="main-nav">
         <ul class="nav">
             {% for section in sections %}
-            <li><a href="#{{section|slugify}}">{{section.name}}</a></li>
+            <li><a href="/#{{section|slugify}}">{{section.name}}</a></li>
             {% endfor %}
-            <li><a href="#about">Acerca de / About</a></li>
-            <li><a href="#contact">Contacto / Contact</a></li>
+            <li><a href="/#about">Acerca de / About</a></li>
+            <li><a href="/#contact">Contacto / Contact</a></li>
         </ul>
         </nav>
         {% endif %}
@@ -39,7 +39,7 @@
     <div id="sections">
     {% for section in sections %}
     <section id="{{section|slugify}}" class="container-fluid">
-       <div class="row">
+       <div class="row albums">
         {% for album in section.album_set.all %}
         <article class="album col-md-3">
             <a class="cover" href="/album/{{album.id}}">
@@ -51,12 +51,12 @@
         {% endfor %}
         <p class="detail">{{section.description|urlize}}</p>
         </div>
-    </section>        
+    </section>
     {% endfor %}
     <section id="about" class="container-fluid">
         <div class="row" >
             <h2>
-                <a href="http://potajecreativo.com.ar">POTAJE CREATIVO</a> es diseño gráfico  y audiovisual. 
+                <a href="http://potajecreativo.com.ar">POTAJE CREATIVO</a> es diseño gráfico  y audiovisual.
             </h2>
             {% for profile in profiles %}
             <article class="col-md-6 col-sm-1" id="{{profile.user}}">
@@ -68,7 +68,7 @@
                     <a href="{{sc.user_profile}}" target="blank"><img src="{{sc.service.icon.url}}" alt="{{sc.service.name}}" /></a>
                 {% endfor %}
                 </p>
-            </article>            
+            </article>
             {% endfor %}
                 <img src="/static/images/manojo.png" alt="Un manojo de ideas..." id="manojo" />
         </div>
