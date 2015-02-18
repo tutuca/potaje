@@ -30,13 +30,15 @@ module.exports = function(grunt) {
           },
           {
             cwd: './assets/lib/slick.js/slick/',
-            src: ['*.gif', ],
-            dest: './static/images/'
+            src: ['*.gif'],
+            dest: './static/images/',
+            expand: true
           },
           {
             cwd: './assets/lib/slick.js/slick/fonts/',
             src: ['*.eot', '*.svg','*.ttf','*.woff'],
-            dest: './static/fonts/'
+            dest: './static/fonts/',
+            expand: true
           }
         ]
       }
@@ -48,8 +50,10 @@ module.exports = function(grunt) {
       lib: {
         src: [
           './assets/lib/jquery/dist/jquery.js',
+          './assets/lib/bootstrap-sass-official/assets/javascripts/bootstrap/transitions.js',
           './assets/lib/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js',
           './assets/lib/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js',
+          './assets/lib/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js',
           './assets/lib/jquery-pjax/jquery.pjax.js',
           './assets/lib/slick.js/slick/slick.js'
         ],
@@ -57,6 +61,7 @@ module.exports = function(grunt) {
       },
       main: {
         src: [
+          'assets/js/helpers.js',
           'assets/js/main.js'
         ],
         dest: './static/js/main.js'
