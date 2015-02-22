@@ -1,16 +1,18 @@
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
-from albums.models import Album
+from albums.models import Album, Section
 from albums.forms import EmailForm
 from profiles.models import Profile
 
 
 def home(request):
     profiles = Profile.objects.select_related().all()
+    sections = Section.objects.select_related().all()
     return render(
         request,
         'master.html',
         {
+            'sections': sections,
             'profiles': profiles,
             'is_staff': request.user.is_staff
         }

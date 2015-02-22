@@ -108,7 +108,7 @@ footer {
     }
     a {
         display:inline !important;
-        padding: 0.3em 0.7em !important;  // these two !important should go if we import the right stylsheet
+        padding: 0.3em 0.7em;  // these two !important should go if we import the right stylsheet
         outline: 0;
         text-decoration:none;
         background-color: #004161;
@@ -116,19 +116,17 @@ footer {
         border: 0 solid #FFF;
         font-size: 80%;
         color: #FFF;
-        transition: all 0.02s;
+        transition: all 0.2s;
     }
     a:hover {
-        background: #FFF !important;
-        color: #333;
-        box-shadow: 1px 1px 5px rgba(50,50,50,0.7);
-        border: 1px solid #FFF;
-        transition: all 0.2s;
+        font-size: 1em;
+        box-shadow: 4px 4px 15px #000;
+        display: block;
+        text-align: right;
 
     }
     .active a{
-        background: #FFF !important;
-        color: #004161;
+        font-size: 1.1em;
         box-shadow: 4px 4px 15px #000;
         display: block;
         text-align: right;
@@ -227,6 +225,7 @@ footer {
             opacity: 100;
             cursor: pointer;
             transition: all 0.2s;
+            border-radius: 3px 3px 7px 7px;
         }
     }
 }

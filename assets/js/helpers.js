@@ -21,6 +21,7 @@ function hexToRgb(hex) {
 function toRGBAString (color, a) {
     'use strict';
     if (!a) {a=1;}
+    color = hexToRgb(color);
     return 'rgba('+color.r+','+color.g+','+color.b+','+a+')';
 }
 

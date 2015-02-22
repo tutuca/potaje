@@ -27,10 +27,10 @@
         <nav id="main-nav">
         <ul class="nav">
             {% for section in sections %}
-            <li><a href="/#{{section|slugify}}">{{section.name}}</a></li>
+            <li><a href="#{{section|slugify}}">{{section.name}}</a></li>
             {% endfor %}
-            <li><a href="/#about">Acerca de / About</a></li>
-            <li><a href="/#contact">Contacto / Contact</a></li>
+            <li><a href="#about">Acerca de / About</a></li>
+            <li><a href="#contact">Contacto / Contact</a></li>
         </ul>
         </nav>
         {% endif %}

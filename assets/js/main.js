@@ -1,12 +1,11 @@
 /* Globals */
 var selected,
-    slide,
-    styles = [
+    styles = [ // TODO: generate this using http://devmag.org.za/2012/07/29/how-to-choose-colours-procedurally-algorithms/
         '#67e2ad',
         '#003e5f',
         '#fa8e53',
         '#f84c53'
-    ];  // TODO: generate this using http://devmag.org.za/2012/07/29/how-to-choose-colours-procedurally-algorithms/
+    ],
     slickOptions = {
         dots: true,
         accessibility: true,
@@ -18,13 +17,16 @@ var selected,
     };
 
 
-/* Views */
 
 function collapseNavbar (){
-    "use strict";
-    debugger
-    $('#main-nav').hide('fold');
+    'use strict';
+    $('#main-nav').hide();
 }
+function fitImages(){
+    'use strict';
+    fit(this, '#slide-wrapper');
+}
+
 
 /* main */
 $(function(){
@@ -38,22 +40,21 @@ $(function(){
         'width': vp.width - 120
     });
 
-    $("header").affix();
-
     $('body').scrollspy({ target: '#main-nav' });
     $('nav a').each(function(i){
-        var target = $(this).attr('href').replace('/', ''),
-            style = styles[(i%styles.length)];
-        $(target).css({'background-color':toRGBAString(hexToRgb(style), 0.5)});
-        $(this).css({'background-color':style});
+        var color = styles[(i%styles.length)];
+        $(this).css({'background-color': color});
     });
-    $('.slide img').on('load', function(){
-        fit(this, '#slide-wrapper');
+    $('section').each(function(i){
+        var color = styles[(i%styles.length)];
+        $(this).css({'background-color':toRGBAString(color, 0.5)});
     });
+    $('.slide img').on('load', fitImages);
+    $('#slides').on('init', collapseNavbar);
 
-    slide = $('#slides')
-                .slick(slickOptions)
-                .on('init', function(){console.log('caca')});
+    $("header").affix();
+
+    $('#slides').slick(slickOptions);
 
     setTimeout(function(){
         var new_color = styles[Math.floor(Math.random()*styles.length)];
