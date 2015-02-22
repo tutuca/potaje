@@ -35,6 +35,30 @@ p {
         text-shadow: none;
     }
 }
+header {
+    position:fixed;
+    left:0;
+    top:0;
+    width: 13em;
+    z-index:9999;
+    font-size:1.3em;
+    h1 {
+        box-shadow: 0 0 15px rgba(255,255,255,0.7);
+    }
+}
+details {
+    clear:both;
+}
+article li {
+    list-style: square;
+    margin: 3px 1.3em;
+}
+footer {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}
+
 #reel {
     position: fixed;
     top: -2em;
@@ -48,75 +72,6 @@ p {
     position:relative;
     width:100%;
     overflow:hidden;
-}
-header {
-    position:fixed;
-    left:0;
-    top:0;
-    width: 13em;
-    z-index:9999;
-    font-size:1.3em;
-    h1 {
-        box-shadow: 0 0 15px rgba(255,255,255,0.7);
-    }
-}
-#main-nav {
-    margin: 0 ;
-    padding:0;
-    @media (max-width: $screen-sm-min) {
-        display: none;
-    }
-    li {
-        margin:20px 0;
-    }
-    a {
-        display:inline !important;
-        padding: 0.3em 0.7em !important;  // these two !important should go if we import the right stylsheet
-        outline: 0;
-        text-decoration:none;
-        background-color: #004161;
-        border-radius: 0 3px 3px 0;
-        border: 0px solid #FFF;
-        font-size: 80%;
-        color: #FFF;
-        transition: all 0.02s;
-    }
-    a:hover {
-        background: #FFF !important;
-        color: #333;
-        box-shadow: 1px 1px 5px rgba(50,50,50,0.7);
-        border: 1px solid #FFF;
-        transition: all 0.2s;
-
-    }
-    .active a{
-        background: #FFF !important;
-        color: #004161;
-        box-shadow: 4px 4px 15px #000;
-        display: block;
-        text-align: right;
-    }
-}
-section {
-    position: relative;
-    text-align: center;
-
-}
-.wrapper {
-    width: 60%;
-    margin: 0 auto;
-}
-details {
-    clear:both;
-}
-article li {
-    list-style: square;
-    margin: 3px 1.3em;
-}
-footer {
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
 }
 #logo {
     background: #67e2ad url(../images/pojo.png) no-repeat center bottom;
@@ -142,16 +97,84 @@ footer {
 
     }
 }
+#main-nav {
+    margin: 0 ;
+    padding:0;
+    @media (max-width: $screen-sm-min) {
+        display: none;
+    }
+    li {
+        margin:20px 0;
+    }
+    a {
+        display:inline !important;
+        padding: 0.3em 0.7em !important;  // these two !important should go if we import the right stylsheet
+        outline: 0;
+        text-decoration:none;
+        background-color: #004161;
+        border-radius: 0 3px 3px 0;
+        border: 0 solid #FFF;
+        font-size: 80%;
+        color: #FFF;
+        transition: all 0.02s;
+    }
+    a:hover {
+        background: #FFF !important;
+        color: #333;
+        box-shadow: 1px 1px 5px rgba(50,50,50,0.7);
+        border: 1px solid #FFF;
+        transition: all 0.2s;
 
-.albums {
-    margin:0 auto;
+    }
+    .active a{
+        background: #FFF !important;
+        color: #004161;
+        box-shadow: 4px 4px 15px #000;
+        display: block;
+        text-align: right;
+    }
+}
+#manojo {
+    display: block;
+    margin: 1em auto;
+}
+#about{
+    text-align: center;
+    .avatar {
+        display: block;
+        margin: auto;
+        border-radius: 60px;
+        width:120px;
+        height:120px;
+        overflow:hidden;
+    }
+    .license {
+        font-size: 80%;
+    }
+    h1 {
+        color: #333;
+    }
+    p {
+        text-align: left;
+    }
+}
+#contact {
+    padding: $viewport-vertical-padding 2em;
+}
+.wrapper {
+    width: 60%;
+    margin: 0 auto;
+}
+.container-fluid {
+    position: relative;
+    text-align: center;
+    margin: 0 auto;
     @media (min-width: $screen-sm-min) {
         padding: $viewport-vertical-padding 2em;
     }
     @media (min-width: $screen-md-min) {
-        padding: $viewport-vertical-padding 3em $viewport-vertical-padding 10em;
+        padding: $viewport-vertical-padding 3em $viewport-vertical-padding 230px;
     }
-
 }
 .album {
     margin-bottom: $grid-gutter-width;
@@ -212,26 +235,7 @@ footer {
     width: 50%;
     height: 60%;
 }
-#about{
-    text-align: center;
-    .avatar {
-        display: block;
-        margin: auto;
-        border-radius: 60px;
-        width:120px;
-        height:120px;
-        overflow:hidden;
-    }
-    .license {
-        font-size: 80%;
-    }
-    h1 {
-        color: #333;
-    }
-    p {
-        text-align: left;
-    }
-}
+
 /* Form */
 form {
     width: 50em;
@@ -248,24 +252,6 @@ input[type="text"], textarea {
     border: 1px solid #CCC;
     border-radius: 3px;
     box-shadow: 0 0 1px #6DE6B1;
-}
-
-#manojo {
-    display: block;
-    margin: 1em auto;
-}
-
-
-#slide-wrapper {
-    padding: 3em 0;
-}
-@function slick-image-url($url) {
-    @if function-exists(image-url) {
-        @return image-url($url);
-    }
-    @else {
-        @return url($slick-loader-path + $url);
-    }
 }
 
 /* Slider */
@@ -286,27 +272,29 @@ input[type="text"], textarea {
 }
 
 /* Arrows */
-
+$slick-arrow-size: 45px;
 .slick-prev,
 .slick-next {
     position: absolute;
     display: block;
-    height: 20px;
-    width: 20px;
-    line-height: 0px;
-    font-size: 0px;
+    height: $slick-arrow-size;
+    width: $slick-arrow-size;
+    line-height: 0;
+    font-size: 0;
     cursor: pointer;
     background: transparent;
-    color: #FFF;
+    color: transparent;
     top: 50%;
-    margin-top: -10px;
+    margin-top: -20px;
     padding: 0;
     border: none;
     outline: none;
+    opacity: $slick-opacity-default;
     &:hover, &:focus {
         outline: none;
         background: transparent;
         color: transparent;
+        opacity: $slick-opacity-on-hover;
         &:before {
             opacity: $slick-opacity-on-hover;
         }
@@ -318,7 +306,7 @@ input[type="text"], textarea {
 
 .slick-prev:before, .slick-next:before {
     font-family: $slick-font-family;
-    font-size: 20px;
+    font-size: $slick-arrow-size;
     line-height: 1;
     color: #FFF;
     opacity: $slick-opacity-default;
@@ -330,7 +318,7 @@ input[type="text"], textarea {
     left: -25px;
     [dir="rtl"] & {
         left: auto;
-        right: -25px;
+        right: -5px;
     }
     &:before {
         content: $slick-prev-character;
@@ -341,9 +329,9 @@ input[type="text"], textarea {
 }
 
 .slick-next {
-    right: -25px;
+    right: -5px;
     [dir="rtl"] & {
-        left: -25px;
+        left: -5px;
         right: auto;
     }
     &:before {
@@ -378,8 +366,8 @@ input[type="text"], textarea {
             height: 20px;
             width: 20px;
             outline: none;
-            line-height: 0px;
-            font-size: 0px;
+            line-height: 0;
+            font-size: 0;
             color: transparent;
             padding: 5px;
             cursor: pointer;
@@ -414,6 +402,9 @@ input[type="text"], textarea {
 }
 /* Slider */
 
+.slider {
+    padding: 3em;
+}
 #slide-wrapper {
     height: 100%;
 }

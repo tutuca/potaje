@@ -39,7 +39,7 @@
     <div id="sections">
     {% for section in sections %}
     <section id="{{section|slugify}}" class="container-fluid">
-       <div class="row albums">
+       <div class="row">
         {% for album in section.album_set.all %}
         <article class="album col-md-3">
             <a class="cover" href="/album/{{album.id}}">
