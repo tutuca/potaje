@@ -17,68 +17,9 @@ var selected,
         variableWidth: true
     };
 
-function getSlidesContainer(caller){
-    "use strict";
-    var container = $('#slide-wrapper');
-        if (!container){
-            container = $(caller).after('<div>').attr('id', 'slide-wrapper');
-
-        }
-    return container;
-}
-
 
 /* Views */
-var section = {
-    // TODO: move it out.
-    // TODO: This is not a proper "class". Should need modifications to be actually useful.
-    init: function(event){
-        event.preventDefault();
-        event.stopPropagation();
-        selected = this; // TODO: move to local scope.
 
-        var hash = window.location.hash,
-            target = $(this).attr('href'),
-            container = getSlidesContainer();
-        section.fetch(target, container, '#slide-wrapper')
-        $('.control').one('click', section.close);
-    },
-    fetch: function(target, container, fragment) {
-        "use strict";
-        $.pjax({
-            url:this.target,
-            container: this.container,
-            fragment: this.fragment,
-            success: function() {
-                slide = section.render(); // TODO: move to local scope.
-            }
-        });
-
-    },
-    render: function(){
-        /*
-        * Pjax callback funcion
-        * */
-        'use strict';
-        if (selected){
-            $('body').css({'overflow':'hidden'});
-            $('nav').toggle('fade', 1000);
-
-            $('.work a').not(selected).each(function(index){
-                $(this).parent('article').toggle('fade', 1500*index);
-            });
-            return $('#slides').slick(slickOptions);
-        }
-    },
-
-    close: function(event) {
-        event.stopPropagation();
-        $('nav').toggle('fade');
-        slide.slickRemove(); // TODO: move `slide` to local scope.
-        history.pushState({}, "Potaje ", "/"+hash);
-
-    }
-}
 function collapseNavbar (){
     "use strict";
     debugger
@@ -90,7 +31,7 @@ $(function(){
     'use strict';
     var vp = viewport();
 
-    $('.albums').css({'min-height': vp.height});
+    $('section').css({'min-height': vp.height});
     $('.slider').css({'height': vp.height});
     $('.slide').css({
         'height': vp.height - 120,
