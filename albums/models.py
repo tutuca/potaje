@@ -8,7 +8,6 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 
 
-
 class Section(models.Model):
     name = models.CharField(max_length=60)
     description = models.TextField(null=True, blank=True)
