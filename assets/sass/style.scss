@@ -119,14 +119,13 @@ footer {
         transition: all 0.2s;
     }
     a:hover {
-        font-size: 1em;
         box-shadow: 4px 4px 15px #000;
         display: block;
         text-align: right;
 
     }
     .active a{
-        font-size: 1.1em;
+        font-size: 0.9em;
         box-shadow: 4px 4px 15px #000;
         display: block;
         text-align: right;
