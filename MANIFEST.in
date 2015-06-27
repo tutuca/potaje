@@ -1,4 +1,0 @@
-include *.json *.js *.txt
-recursive-include assets *.css *.js *.scss *.html
-recursive-include static *.css *.js *.scss *.html
-recursive-include templates *.html *.txt
