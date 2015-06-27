@@ -1,0 +1,41 @@
+body {
+    background:url('../img/background.png') center center;
+    margin:0;
+    body:0;
+    font: 100% "Trebuchet MS", Arial, sans-serif;
+}
+a {
+    color: #09136d;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+a:hover {
+    transition: color 0.2s;
+    color:#900;
+}
+a img {
+    border:none;
+}
+
+h1 {
+    text-align: center;
+    margin:2.5em;
+}
+p {
+    color: #09136d;
+    width:40em;
+    margin:1em auto;
+    text-align: center;
+    font-size:1.5em;
+}
+
+.facebook, .email {
+    display: inline-block;
+    padding: 1em 1.5em;
+}
+.facebook {
+    background:url('../img/facebook.png') no-repeat left center;
+}
+.email {
+    background:url('../img/email.png') no-repeat left center;
+}
