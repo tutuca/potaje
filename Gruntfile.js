@@ -1,12 +1,30 @@
+var webpack = require('webpack');
 module.exports = function(grunt) {
-  'use strict';
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    lib: './node_modules',
+    out: './assets/static/',
+    src: './assets/',
+    module_loaders: { 
+      loaders: [
+        {
+          test: /\.js$/,
+          exclude: /node_modules/,
+          loader: 'babel'
+        },
+        {
+          test: /\.jsx$/,
+          exclude: /node_modules/,
+          loader: 'babel'
+        }
+
+      ]
+    },
     sass: {
       options: {
         includePaths: [
           './assets/lib/bootstrap-sass-official/assets/stylesheets',
-          './assets/lib/slick.js/slick/'
+          './node_modules/slick-carousel/slick/'
         ]
       },
       dist: {
@@ -14,7 +32,7 @@ module.exports = function(grunt) {
           outputStyle: 'compact'
         },
         files: {
-          './static/css/style.css': './assets/sass/style.scss'
+          '<%= out%>css/style.css': '<%= src%>sass/style.scss'
         }        
       }
     },
@@ -23,99 +41,78 @@ module.exports = function(grunt) {
         files: [
           {
             flatten:true,
-            cwd: './assets/images/',
+            cwd: '<%= src%>images/',
             src: ['*.png', '*.jpg', '*.gif'],
-            dest: './static/images/',
+            dest: '<%= out%>images/',
             expand: true
           },
           {
-            cwd: './assets/lib/slick.js/slick/',
+            cwd: '<%= src%>lib/slick-carousel/slick/',
             src: ['*.gif'],
-            dest: './static/images/',
+            dest: '<%= out%>images/',
             expand: true
           },
           {
             cwd: './assets/lib/slick.js/slick/fonts/',
             src: ['*.eot', '*.svg','*.ttf','*.woff'],
-            dest: './static/fonts/',
+            dest: '<%= out%>fonts/',
             expand: true
           }
         ]
       }
     },
-    concat: {
-      options: {
-        separator: ';'
-      },
-      lib: {
-        src: [
-          './assets/lib/jquery/dist/jquery.js',
-          './assets/lib/bootstrap-sass-official/assets/javascripts/bootstrap/transitions.js',
-          './assets/lib/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js',
-          './assets/lib/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js',
-          './assets/lib/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js',
-          './assets/lib/jquery-pjax/jquery.pjax.js',
-          './assets/lib/slick.js/slick/slick.js'
-        ],
-        dest: './static/js/lib.js'
-      },
+    webpack: {
       main: {
-        src: [
-          'assets/js/helpers.js',
-          'assets/js/main.js'
-        ],
-        dest: './static/js/main.js'
-      }
-    },
-    uglify: {
-      options: {
-        mangle: true,
-        sourceMap: true
+        entry: {
+          main: "<%= src%>/js/main.js"
+        },
+        output: {
+          path: "<%= out%>/js",
+          filename: "main.js",
+          sourceMapFilename: "main.js.map",
+        },
+        devtool: 'source-map',
+        watch: true,
+        module: "<%= module_loaders%>"
       },
-      lib: {
-        files: {
-          './static/js/lib.min.js': './static/js/lib.js'
-        }
-      },
-      main: {
-        files: {
-          './static/js/main.min.js': './static/js/main.js'
-        }
+      prod: {
+        entry: {
+          main: "<%= src%>/js/main.js"
+        },
+        output: {
+          path: "<%= out%>/js",
+          filename: "main.min.js",
+        },
+        module: "<%= module_loaders%>",
+        plugins: [
+          new webpack.optimize.UglifyJsPlugin(),
+        ]
       }
     },
     watch: {
-      scss: {
-        files: [
-         //watched files
-          'assets/sass/*.scss',
-          ],
-        tasks: ['sass']
-      },
-      js : {
-        files: [
-          'assets/js/*.js',
-        ],
-        tasks: ['copy:main', 'concat:main']
-      },
-      config: {
-        files: [
-          'Gruntfile.js',
-          'bower.json',
-          'package.json'
-        ],
-        tasks: ['copy', 'concat', 'sass']
-      }
-    }
+        scss: {
+            files: [
+                '<%= src%>sass/*.scss'
+            ],
+            tasks: ['sass']
+        },
+        config: {
+            files: [
+                'Gruntfile.js',
+                'bower.json',
+                'package.json'
+            ],
+            tasks: ['build']
+        }
+    },
   });
   // Plugin loading
-  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-sass');
-
+  grunt.loadNpmTasks('grunt-webpack');
   // Task definition
-  grunt.registerTask('build', ['copy', 'sass', 'concat', 'uglify']);
+  grunt.registerTask('build', ['webpack', 'copy', 'sass']);
   grunt.registerTask('default', ['build', 'watch']);
 
 };

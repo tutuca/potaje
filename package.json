@@ -15,17 +15,20 @@
   "author": "Matias Iturburu <matias.iturburu@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "jquery": "~2.1",
+    "bootstrap-sass": "*",
+    "slick-carousel": "*",
+    "new-pjax": ""
   },
   "devDependencies": {
-    "node-sass": "*",
-    "bower": "*",
     "grunt": "*",
-    "grunt-cli": "*",
-
+    "node-sass": "*",
+    "webpack": "*",
+    "babel-loader": "*",
     "grunt-contrib-watch": "*",
-    "grunt-contrib-concat": "*",
+    "grunt-sass": "*",
     "grunt-contrib-copy": "*",
-    "grunt-contrib-uglify": "*",
-    "grunt-sass": "*"
+    "grunt-webpack": "*",
+    "grunt-contrib-concat": "*"
   }
 }
