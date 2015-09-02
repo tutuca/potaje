@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!doctype html>
 <html lang="es-AR">
 <head>
@@ -6,10 +7,9 @@
     <meta name="description" content="Un manojo de ideas">
     <meta name="author" content="Potaje Creativo <hola@potajecreativo.com.ar>">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="icon" href="/static/images/favicon.ico" type="image/png" />
-    <link rel="stylesheet" href="/static/css/style.css">
-    <script src="/static/js/lib.js"></script>
-    <script src="/static/js/main.js"></script>
+    <link rel="icon" href="{% static 'images/favicon.ico'%}" type="image/png" />
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <script src="{% static 'js/main.js'%}"></script>
     {% block head %}{% endblock %}
     <!--style>
         #reel {
@@ -70,7 +70,7 @@
                 </p>
             </article>
             {% endfor %}
-                <img src="/static/images/manojo.png" alt="Un manojo de ideas..." id="manojo" />
+                <img src="{% static 'images/manojo.png'%}" alt="Un manojo de ideas..." id="manojo" />
         </div>
     </section>
     <section id="contact" class="container-fluid">
@@ -79,9 +79,9 @@
             <h3>(54) 351 - 153848533</h3>
             <h3>Córdoba - Argentina</h3>
             <p>
-                <a href="http://flickr.com/destonosalemusica" target="blank"><img src="/static/images/flickr.png" alt="description" /></a>
-                <a href="http://facebook.com/ana.comes" target="blank" ><img src="/static/images/facebook.png" alt="description" /></a>
-                <a href="http://vimeo.com/user9007483" target="blank"><img src="/static/images/vimeo.png" alt="description" /></a>
+                <a href="http://flickr.com/destonosalemusica" target="blank"><img src="{% static 'images/flickr.png'%}" alt="description" /></a>
+                <a href="http://facebook.com/ana.comes" target="blank" ><img src="{% static 'images/facebook.png'%}" alt="description" /></a>
+                <a href="http://vimeo.com/user9007483" target="blank"><img src="{% static 'images/vimeo.png'%}" alt="description" /></a>
             </p>
            <p>
                 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"> <img alt="Licencia Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a>

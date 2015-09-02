@@ -42,11 +42,11 @@ function viewport(){
 }
 
 function fit(selector, to, padding){
-    'use strict'
-    var padding = padding || 0,
-        visible_height, visible_width,
+
+    var visible_height, visible_width,
         old_height, old_width,
         delta, landscape;
+    padding = padding || 0;
     if (to) {
         visible_height = $(to).height() - padding;
         visible_width = $(to).width() - padding;
@@ -74,6 +74,13 @@ function fit(selector, to, padding){
         }
         /* delta = (visible_width - $el.width())/2;
         $(this).css('margin-left', delta); */
-    })
+    });
 
+}
+
+module.exports = {
+    viewport,
+    hexToRgb,
+    toRGBAString,
+    fit
 };

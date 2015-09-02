@@ -1,5 +1,8 @@
 /* Globals */
-var selected,
+
+var $ = require('jquery'),
+    helpers = require('./helpers.js'),
+    selected,
     styles = [ // TODO: generate this using http://devmag.org.za/2012/07/29/how-to-choose-colours-procedurally-algorithms/
         '#67e2ad',
         '#003e5f',
@@ -16,22 +19,24 @@ var selected,
         variableWidth: true
     };
 
-
+window.jQuery = $;
+require('bootstrap-sass');
+require('slick-carousel');
+require('new-pjax');
+require('./sections.js');
 
 function collapseNavbar (){
     'use strict';
     $('#main-nav').hide();
 }
 function fitImages(){
-    'use strict';
-    fit(this, '#slide-wrapper');
+    helpers.fit(this, '#slide-wrapper');
 }
 
 
 /* main */
 $(function(){
-    'use strict';
-    var vp = viewport();
+    var vp = helpers.viewport();
 
     $('section').css({'min-height': vp.height});
     $('.slider').css({'height': vp.height});
@@ -47,9 +52,9 @@ $(function(){
     });
     $('section').each(function(i){
         var color = styles[(i%styles.length)];
-        $(this).css({'background-color':toRGBAString(color, 0.5)});
+        $(this).css({'background-color': helpers.toRGBAString(color, 0.5)});
     });
-    $('.slide img').on('load', fitImages);
+    $('.slide img').on('load', helpers.fitImages);
     $('#slides').on('init', collapseNavbar);
 
     $("header").affix();

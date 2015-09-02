@@ -1,10 +1,10 @@
+require('new-pjax');
 /* Album.Section, single display.
 *  Fetches the
 *
 * */
 
 var section = function() {
-    'use strict';
     // TODO: move it out.
     // TODO: This is not a proper "class". Should need modifications to be actually useful.
 
@@ -18,11 +18,10 @@ var section = function() {
                 target = $(this).attr('href'),
                 container = getSlidesContainer();
 
-            section.fetch(target, container, selector)
+            section.fetch(target, container, selector);
             $('.control').one('click', section.close);
         },
         fetch: function (target, container, fragment) {
-            "use strict";
             $.pjax({
                 url: this.target,
                 container: this.container,
@@ -37,8 +36,7 @@ var section = function() {
             /*
              * Pjax callback funcion
              * */
-            'use strict';
-            if (selected) {
+                if (selected) {
                 $('body').css({'overflow': 'hidden'});
                 $('nav').toggle('fade', 1000);
 
