@@ -16,9 +16,14 @@ def random_background(request):
     }
 
     '''
+    bg_url = ''
+    
     files = glob('%s/*.gif' % staticfiles.finders.find('bg/'))
-    bg_choice = os.path.basename(random.choice(files))
-    bg_url = settings.STATIC_URL + 'bg/' + bg_choice
+    
+    if files:
+        bg_choice = os.path.basename(random.choice(files))
+        bg_url = settings.STATIC_URL + 'bg/' + bg_choice
+
 
     return {
         'background': {
