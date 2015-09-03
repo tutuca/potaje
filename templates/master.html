@@ -19,24 +19,34 @@
     </style-->
 </head>
 <body>
-<div id="reel"></div>
 <div id="main">
     <header>
         <h1 id="logo"><a href="/">Potaje Creativo</a></h1>
         {% if sections %}
         <nav id="main-nav">
         <ul class="nav">
+            <li><a href="#reel">Reel</a></li>
             {% for section in sections %}
             <li><a href="#{{section|slugify}}">{{section.name}}</a></li>
             {% endfor %}
-            <li><a href="#about">Acerca de / About</a></li>
-            <li><a href="#contact">Contacto / Contact</a></li>
+            <li><a href="#about">Quienes somos</a></li>
+            <li><a href="#contact">Contacto</a></li>
         </ul>
         </nav>
         {% endif %}
     </header>
+
     {% block page %}
     <div id="sections">
+    <section id="reel" class="container-fluid">
+        <div class="row">
+
+            <iframe id="video-reel" 
+                    width="500" height="281" 
+                    src="https://player.vimeo.com/video/100610083?title=0&byline=0&portrait=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>
+            </iframe>
+        </div>
+    </section>
     {% for section in sections %}
     <section id="{{section|slugify}}" class="container-fluid">
        <div class="row">
