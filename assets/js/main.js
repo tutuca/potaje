@@ -1,7 +1,11 @@
 /* Globals */
 
-var $ = require('jquery'),
-    helpers = require('./helpers.js'),
+var $ = require('jquery');
+window.jQuery = $;
+
+var helpers = require('./helpers.js'),
+    sections = require('./sections.js'),
+
     selected,
     styles = [ // TODO: generate this using http://devmag.org.za/2012/07/29/how-to-choose-colours-procedurally-algorithms/
         '#67e2ad',
@@ -19,20 +23,22 @@ var $ = require('jquery'),
         variableWidth: true
     };
 
-window.jQuery = $;
+
 require('bootstrap-sass');
 require('slick-carousel');
 require('new-pjax');
-require('./sections.js');
 
 function collapseNavbar (){
     'use strict';
     $('#main-nav').hide();
 }
 function fitImages(){
-    helpers.fit(this, '#slide-wrapper');
+    helpers.fit($(this), '#slide-wrapper');
 }
-
+function colorizeNav (i){
+    var color = styles[(i%styles.length)];
+    $(this).css({'background-color': helpers.toRGBAString(color, 0.5)});
+}
 
 /* main */
 $(function(){
@@ -50,17 +56,14 @@ $(function(){
         var color = styles[(i%styles.length)];
         $(this).css({'background-color': color});
     });
-    $('section').each(function(i){
-        var color = styles[(i%styles.length)];
-        $(this).css({'background-color': helpers.toRGBAString(color, 0.5)});
-    });
-    $('.slide img').on('load', helpers.fitImages);
+    $('section').each(colorizeNav);
+    
     $('#slides').on('init', collapseNavbar);
-
+    helpers.fit('#video-reel', '#reel');
     $("header").affix();
 
     $('#slides').slick(slickOptions);
-
+    $('.slide img').each(helpers.fitImages);
     setTimeout(function(){
         var new_color = styles[Math.floor(Math.random()*styles.length)];
         $('#logo').css('background-color', new_color);

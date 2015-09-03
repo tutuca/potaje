@@ -1,3 +1,4 @@
+var $ = require('jquery');
 /* Helpers */
 function hexToRgb(hex) {
     /*
@@ -42,7 +43,6 @@ function viewport(){
 }
 
 function fit(selector, to, padding){
-
     var visible_height, visible_width,
         old_height, old_width,
         delta, landscape;
@@ -53,7 +53,7 @@ function fit(selector, to, padding){
     } else {
         var vp = viewport();
         visible_height = vp.height - padding;
-        visible_width = vp.width- padding;
+        visible_width = vp.width - padding;
 
     }
     $(selector).each(function() {

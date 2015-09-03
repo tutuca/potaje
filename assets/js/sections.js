@@ -62,5 +62,9 @@ var section = function() {
             }
             return container;
         }
-    }
+    };
+};
+
+module.exports = {
+    section,
 }

@@ -59,15 +59,6 @@ footer {
     right: 10px;
 }
 
-#reel {
-    position: fixed;
-    top: -2em;
-    left: -2em;
-    width: 110%;
-    min-height:110%;
-    background-size: 100%;
-    background-position: center center;
-}
 #main {
     position:relative;
     width:100%;
@@ -99,34 +90,34 @@ footer {
 }
 #main-nav {
     margin: 0 ;
-    padding:0;
+    padding: 50px 0;
     @media (max-width: $screen-sm-min) {
         display: none;
     }
     li {
-        margin:20px 0;
+        margin:2px 0;
     }
     a {
         display:inline !important;
+        text-transform: uppercase;
         padding: 0.3em 0.7em;  // these two !important should go if we import the right stylsheet
         outline: 0;
         text-decoration:none;
         background-color: #004161;
         border-radius: 0 3px 3px 0;
         border: 0 solid #FFF;
-        font-size: 80%;
+        font-size: 62%;
         color: #FFF;
         transition: all 0.3s ease-in-out;
     }
     a:hover {
-        box-shadow: 4px 4px 15px #000;
+        box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.6);
         display: block;
         text-align: right;
         transition: all 0.3s ease-in-out;
     }
     .active a{
-        font-size: 0.9em;
-        box-shadow: 4px 4px 15px #000;
+        box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.6);
         display: block;
         text-align: right;
     }
@@ -174,7 +165,9 @@ footer {
     }
 }
 .album {
-    margin-bottom: $grid-gutter-width;
+    margin: 0 15px $grid-gutter-width;
+    padding: 0;
+
     .inner {
         border-radius: 5px;
         overflow: hidden;
@@ -190,22 +183,27 @@ footer {
     img {
         margin-left:-20px;
         margin-top:-20px;
+        border: none;
+        outline: none;
     }
     h2 {
         position: absolute;
-        bottom: 0;
+        top: 0;
         left: 0;
         width:100%;
+        height: 100%;
         margin:0;
         padding: 4px;
         color:transparent;
         opacity:0;
         text-align: left;
         transition: all 0.2s;
+        font-size: 80%;
         z-index:999;
     }
     a  {
         display: block;
+        position:relative;
         padding: 0;
         text-decoration: none;
         transition: all 0.2s;
@@ -219,7 +217,7 @@ footer {
         h2 {
             width:100%;
             bottom: -2em;
-            background: #67e2ad;
+            background: rgba(103,226,173,0.97);
             color:#FFF;
             opacity: 100;
             cursor: pointer;
@@ -472,12 +470,16 @@ $slick-arrow-size: 45px;
     height: 100%;
     text-align: center;
     min-height: 1px;
+    border: 0;
+    outline: 0;
     [dir="rtl"] & {
         float: right;
     }
     img {
         display: block;
         margin: 0 auto;
+        border: none;
+        outline: none;
     }
     &.slick-loading img {
         display: none;
@@ -512,11 +514,11 @@ $slick-arrow-size: 45px;
 
 .caption {
     position: absolute;
-    bottom: -2em;
+    bottom: 0;
     left: 0;
     padding: 0 10em;
     color: white;
-    text-shadow: 0 1px 0 rgba(0,0,0,0.7);
+    background: rgba(254, 170, 146, 1);
     width: 100%;
     p {
         text-align: center;
