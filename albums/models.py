@@ -12,9 +12,10 @@ class Section(models.Model):
     name = models.CharField(max_length=60)
     description = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True, editable=False)
+    order = models.IntegerField()
 
     class Meta:
-        ordering = ('id',)
+        ordering = ('order',)
 
     def __str__(self):
         return self.name
