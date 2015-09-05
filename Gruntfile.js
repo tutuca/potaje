@@ -22,6 +22,7 @@ module.exports = function(grunt) {
     },
     sass: {
       options: {
+        sourceMap: true,
         includePaths: [
           './assets/lib/bootstrap-sass-official/assets/stylesheets',
           './node_modules/slick-carousel/slick/'
@@ -42,7 +43,7 @@ module.exports = function(grunt) {
           {
             flatten:true,
             cwd: '<%= src%>images/',
-            src: ['*.png', '*.jpg', '*.gif'],
+            src: ['*'],
             dest: '<%= out%>images/',
             expand: true
           },
