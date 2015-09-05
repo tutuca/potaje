@@ -1,3 +1,6 @@
+var $ = require('jquery');
+window.jQuery = $;
+
 require('new-pjax');
 /* Album.Section, single display.
 *  Fetches the

@@ -4,8 +4,6 @@ var $ = require('jquery');
 window.jQuery = $;
 
 var helpers = require('./helpers.js'),
-    sections = require('./sections.js'),
-
     selected,
     styles = [ // TODO: generate this using http://devmag.org.za/2012/07/29/how-to-choose-colours-procedurally-algorithms/
         '#67e2ad',
