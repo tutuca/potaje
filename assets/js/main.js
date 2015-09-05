@@ -33,29 +33,30 @@ function collapseNavbar (){
 function fitImages(){
     helpers.fit($(this), '#slide-wrapper');
 }
-function colorizeNav (i){
+
+function colorize (i){
     var color = styles[(i%styles.length)];
-    $(this).css({'background-color': helpers.toRGBAString(color, 0.5)});
+    $(this).css({'background-color': color});
 }
 
 /* main */
 $(function(){
-    var vp = helpers.viewport();
+    var vp = helpers.viewport(),
+        home_img = $('#home').css('background-image');
 
-    $('section').css({'min-height': vp.height});
+    $('nav a').each(colorize);
+    $('section:not(#home)').each(colorize);
+    $('section:not(#home)').css({'min-height': vp.height});
     $('.slider').css({'height': vp.height});
     $('.slide').css({
         'height': vp.height - 120,
         'width': vp.width - 120
     });
-
-    $('body').scrollspy({ target: '#main-nav' });
-    $('nav a').each(function(i){
-        var color = styles[(i%styles.length)];
-        $(this).css({'background-color': color});
+    $('#home').css({
+        'background-image': home_img,
+        'min-height': vp.height
     });
-    $('section').each(colorizeNav);
-    
+    $('body').scrollspy({ target: '#main-nav' });
     $('#slides').on('init', collapseNavbar);
     helpers.fit('#video-reel', '#reel');
     $("header").affix();
@@ -66,5 +67,5 @@ $(function(){
         var new_color = styles[Math.floor(Math.random()*styles.length)];
         $('#logo').css('background-color', new_color);
     }, 5000);
-    //$('.cover').on("click", section.init);
+    //$('.cover').each(section.init);
 });

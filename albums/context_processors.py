@@ -26,7 +26,5 @@ def random_background(request):
 
 
     return {
-        'background': {
-            'url': bg_url,
-        }
+        'background': bg_url,
     }

@@ -42,9 +42,6 @@ header {
     width: 13em;
     z-index:9999;
     font-size:1.3em;
-    h1 {
-        box-shadow: 0 0 15px rgba(255,255,255,0.7);
-    }
 }
 details {
     clear:both;
@@ -71,6 +68,7 @@ footer {
     width: 70px;
     margin: 0.5em;
     transition: all 0.3s ease-in-out;
+    box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.3);
     &:hover {
         box-shadow: 0 0 2px #FFF, 2px 2px 15px #000;
         transition: all 0.3s;
@@ -105,26 +103,33 @@ footer {
         text-decoration:none;
         background-color: #004161;
         border-radius: 0 3px 3px 0;
+        box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.3);
         border: 0 solid #FFF;
         font-size: 62%;
         color: #FFF;
         transition: all 0.3s ease-in-out;
     }
     a:hover {
-        box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.6);
+        box-shadow: 2px 3px 15px $nav-shadow-color;
         display: block;
         text-align: right;
         transition: all 0.3s ease-in-out;
     }
     .active a{
-        box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.6);
+        box-shadow: 2px 2px 15px $nav-shadow-color;
         display: block;
         text-align: right;
     }
 }
+#home {
+    background-position: -10% -10%;
+    background-attachment: fixed;
+    background-size: 100%;
+}
 #manojo {
     display: block;
     margin: 1em auto;
+    padding: 2em auto;
 }
 #about{
     text-align: center;
