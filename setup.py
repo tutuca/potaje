@@ -4,7 +4,7 @@ from pip.req import parse_requirements
 
 version = '0.3.2'
 
-requirements = parse_requirements('requirements.txt')
+requirements = parse_requirements('requirements.txt', session=False)
 
 setup(
     name='potaje',
