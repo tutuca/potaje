@@ -1,7 +1,8 @@
 import random
 import os
 from glob import glob
-from django.contrib import staticfiles
+from django.contrib.staticfiles import finders
+
 from django.conf import settings
 
 
@@ -18,7 +19,7 @@ def random_background(request):
     '''
     bg_url = ''
     
-    files = glob('%s/*.gif' % staticfiles.finders.find('bg/'))
+    files = glob('%s/*.gif' % finders.find('bg/'))
     
     if files:
         bg_choice = os.path.basename(random.choice(files))
