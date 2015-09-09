@@ -1,0 +1,21 @@
+language: python
+python:
+  - "2.7"
+  - "3.4"
+# command to install dependencies
+install: 
+  - "pip install -r requirements.txt"
+  - "python setup.py develop"
+
+# command to run tests
+script: 
+  - "grunt build"
+  - "fab production:%{user}:%{host}:%{base_dir} release upload_static restart_apache"
+notifications:
+  irc:
+    channels: "irc.freenode.org#presentes"
+    template:
+      - "%{repository}@%{branch}: %{message} (%{build_url})"
+    on_success: change
+    on_failure: change
+  email: false
