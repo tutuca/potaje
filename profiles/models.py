@@ -1,13 +1,20 @@
 from django.db import models
+import mistune
+
+markdown = mistune.Markdown()
 
 
 class Profile(models.Model):
     user = models.OneToOneField('auth.User')
     biopic = models.TextField()
     avatar = models.ImageField(upload_to='profiles', null=True, blank=True)
+    rendered = models.TextField(editable=False)
 
     def __str__(self):
         return '%s Profile' % self.user.get_full_name()
+
+    def save(self):
+        self.rendered = markdown(self.biopic)
 
 
 class Service(models.Model):
