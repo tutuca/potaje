@@ -23,8 +23,8 @@ env.tar = "%s-%s.tar.gz" % (
 )
 env.bundle = "%s-static.tar.gz" % (
     env.project_name,
-    
 )
+
 def production(username, host, base_dir):
     """Production environment."""
     env.hosts = host
@@ -62,7 +62,7 @@ def build_static_bundle():
 
     require("project_name", provided_by=[production])
     require("static_dir")
-    local("grunt build")
+    local("npm start")
     local("manage collectstatic --noinput")
 
     with lcd(env.static_dir):
@@ -72,7 +72,7 @@ def build_static_bundle():
 def upload_static(force=False):
     """
     Uploads `env.bundle` and decompresses it in the right path
-    This will attempt to create and delete local gzips. 
+    This will attempt to create and delete local gzips.
     Cleanup is not always what it should...
     """
     require("project_name", provided_by=[production])
