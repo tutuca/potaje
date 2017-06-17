@@ -1,5 +1,5 @@
 from django.contrib import admin
-from albums.models import Album, Section, Content
+from albums.models import Album, Section, Content, HomeReel
 
 
 class ContentInLine(admin.TabularInline):
@@ -22,3 +22,4 @@ class AlbumAdmin(admin.ModelAdmin):
 admin.site.register(Album, AlbumAdmin)
 admin.site.register(Content, ContentAdmin)
 admin.site.register(Section)
+admin.site.register(HomeReel)

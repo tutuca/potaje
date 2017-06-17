@@ -1,5 +1,6 @@
 import json
 import requests
+import mistune
 
 from urllib import parse
 
@@ -7,18 +8,77 @@ from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 
+markdown = mistune.Markdown()
+
+
+def fetch_vimeo(url):
+
+    options = {
+        "url": url,
+        "portrait": 0,
+        "title": 0,
+        "byline": 0,
+    }
+    target = "http://vimeo.com/api/oembed.json?%s" % parse.urlencode(
+        options
+    )
+    response = requests.get(target)
+    data = json.loads(response.text)
+    return data
+
+
+def responsive_embed(html):
+    html = html.replace('<iframe', '<iframe class="embed-responsive-item"')
+    embed = '<div class="embed-responsive embed-responsive-16by9">%s</div>'
+    return embed % html
+
+
+class HomeReel(models.Model):
+    reel = models.TextField(blank=True, null=True, editable=False)
+    reel_url = models.URLField(blank=True, null=True)
+
+    class Meta:
+        verbose_name = 'Reel de la home'
+        verbose_name_plural = 'Reeles de la home'
+
+    def __str__(self):
+        return self.reel_url
+
+    def save(self):
+        self.rendered = markdown(self.description)
+
+        if self.reel_url:
+            data = fetch_vimeo(self.reel_url)
+            self.reel = responsive_embed(data['html'])
+
+        super().save()
+
 
 class Section(models.Model):
     name = models.CharField(max_length=60)
     description = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True, editable=False)
     order = models.IntegerField()
+    rendered = models.TextField(editable=False)
+    reel = models.TextField(blank=True, null=True, editable=False)
+    reel_url = models.URLField(blank=True, null=True)
 
     class Meta:
+        verbose_name = 'Seccion'
+        verbose_name_plural = 'Secciones'
         ordering = ('order',)
 
     def __str__(self):
         return self.name
+
+    def save(self):
+        self.rendered = markdown(self.description)
+
+        if self.reel_url:
+            data = fetch_vimeo(self.reel_url)
+            self.reel = responsive_embed(data['html'])
+
+        super().save()
 
 
 class Album(models.Model):
@@ -26,6 +86,11 @@ class Album(models.Model):
     section = models.ForeignKey('Section')
     description = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True, editable=False)
+    modified = models.DateTimeField(auto_now=True, editable=False)
+    rendered = models.TextField(editable=False)
+
+    class Meta:
+        ordering = ('-modified', )
 
     @property
     def cover(self):
@@ -39,6 +104,10 @@ class Album(models.Model):
 
     def __str__(self):
         return self.name
+
+    def save(self):
+        self.rendered = markdown(self.description)
+        super().save()
 
 
 class Content(models.Model):
@@ -57,6 +126,9 @@ class Content(models.Model):
     thumbnail = models.URLField(editable=False, default="")
     code = models.TextField(editable=False, default="")
 
+    class Meta:
+        verbose_name = 'Contenido'
+        verbose_name_plural = 'Contenido, fotos y videos.'
 
 
 @receiver(post_save, sender=Content)
@@ -86,21 +158,11 @@ def fetch_image(sender, instance, **kwargs):
             img_id, instance.caption)
 
     if "vimeo" in instance.source:
-        options = {
-            "url": instance.source,
-            "&portrait": 0,
-            "title": 0,
-            "byline": 0,
-        }
-        target = "http://vimeo.com/api/oembed.json?%s" % parse.urlencode(
-            options
-        )
-        response = requests.get(target)
-        data = json.loads(response.text)
+        data = fetch_vimeo(instance.source)
 
         instance.kind = 20
         instance.caption = data['title']
         instance.thumbnail = data['thumbnail_url']
-        instance.code = data['html']
+        instance.code = responsive_embed(data['html'])
 
     instance.save()

@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
-from albums.models import Album, Section
+from albums.models import Album, Section, HomeReel
 from albums.forms import EmailForm
 from profiles.models import Profile
 
 
 def home(request):
+    reel = HomeReel.objects.first()
     profiles = Profile.objects.select_related().all()
     sections = Section.objects.select_related().all()
     return render(
@@ -25,14 +26,6 @@ def album(request, id):
         request,
         'album.html',
         {'album': album_object}
-    )
-
-
-def about(request):
-    return render(
-        request,
-        'about.html',
-        {}
     )
 
 
