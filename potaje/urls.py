@@ -1,9 +1,8 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 from django.contrib import admin
 from django.http import HttpResponse
 from django.contrib.sitemaps import GenericSitemap
-from django.conf.urls.static import static
-from django.conf import settings
+from django.contrib.sitemaps.views import sitemap
 from albums.models import Album
 from albums import views
 from albums.resources import AlbumResource, SectionResource
@@ -20,23 +19,22 @@ sitemaps = {
 }
 
 
-urlpatterns = patterns('albums.views',
-    url(r'^$', 'home', name='home'),
-    url(r'^album/(?P<id>\d+)$', 'album', name='album'),
-    url(r'^about/$', 'about', name='about'),
-)
-urlpatterns += patterns(
-    '',
+urlpatterns = [
+    url(r'^$', views.home, name='home'),
+    url(r'^album/(?P<id>\d+)$', views.album, name='album'),
+]
+
+urlpatterns += [
     url(r'api/', include(SectionResource.urls())),
     url(r'api/album/', include(AlbumResource.urls())),
+]
 
-)
-urlpatterns += patterns(
-    '',
+urlpatterns += [
     url(r'^lobby/', include(admin.site.urls)),
-    (r'^robots\.txt$', lambda r: HttpResponse(
-        "User-agent: *\nDisallow: /media/*\nDisallow: /lobby/*", mimetype="text/plain")),
-    (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap',
-        {'sitemaps': sitemaps})
+    url(r'^robots\.txt$', lambda r: HttpResponse(
+        "User-agent: *\nDisallow: /media/*\nDisallow: /lobby/*",
+        mimetype="text/plain")),
+    url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps},
+        name='django.contrib.sitemaps.views.sitemap')
 
-) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
