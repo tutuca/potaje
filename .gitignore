@@ -10,3 +10,6 @@ potaje.egg-info
 .sass-cache
 .idea
 assets/lib
+package-lock.json
+garbage/
+*.tar.gz

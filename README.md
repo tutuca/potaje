@@ -5,7 +5,7 @@ Se asume un sistema con:
 
 - [python](http://python.org) 2.6 o superior, incluso python 3.
 - [pip](http://www.pip-installer.org/), [virtualenv](http://www.virtualenv.org/)
-  (incluídos con python 3.4). 
+  (incluídos con python 3.4).
 
 Sólo para desarrollo:
 
@@ -35,8 +35,8 @@ Modificar los parámetros de la base de datos
     #local_settings.py
     DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', 
-        'NAME': 'fudepan',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'potaje',
         'USER': 'postgres',
         'PASSWORD': '',
         'HOST': '',
@@ -45,11 +45,11 @@ Modificar los parámetros de la base de datos
     }   
 
 > En producción local_settings.py debería tener DEBUG=False
-    
+
 # Inicializar la base de datos.
 
 Primero es necesario crear los esquemas y ejecutar las migraciones si hacen falta:
-    
+
     $ manage migrate
 
 Ahora podemos cargar el fixture para poblar nuestra base de datos:
@@ -62,7 +62,7 @@ De realizarse cambios en algún modelo ejecutar:
 
 Reemplazar *albums* con la aplicación que necesitamos migrar
 
-En este punto tenemos nuestra instancia lista para correr el servidor de 
+En este punto tenemos nuestra instancia lista para correr el servidor de
 desarrollo:
 
     $ manage runserver
@@ -76,7 +76,7 @@ Descargar las herramientas necesarias:
 
     $ npm install  
 
-> a la fecha, grunt no incluye la interfaz de linea de comandos por defecto y 
+> a la fecha, grunt no incluye la interfaz de linea de comandos por defecto y
 > necesita ser instalado separado.
 > para esto invocar:
     $ npm install -g grunt-cli
