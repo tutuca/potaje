@@ -1,7 +1,8 @@
-$font-size-base: 20px;
+$font-size-base: 15px;
 $grid-gutter-width: 40px;
 $viewport-vertical-padding: 60px;
-$text-color: white;
+$album-hover: rgba(103,226,173,0.97);
+$text-color: #333;
 $slick-opacity-on-hover: 1;
 $slick-opacity-not-active: 0.8;
 $slick-font-path: "../fonts/";
@@ -17,4 +18,6 @@ $slick-dot-character: "\2022";
 $slick-dot-color: black !default;
 $slick-dot-color-active: $slick-dot-color !default;
 $slick-dot-size: 6px;
-$nav-shadow-color: rgba(0, 0, 0, 0.6)
+
+$nav-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+$nav-shadow-hover: 1px 2px 7px  rgba(0, 0, 0, 0.2);

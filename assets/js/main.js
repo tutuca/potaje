@@ -45,7 +45,6 @@ $(function(){
         home_img = $('#home').css('background-image');
 
     $('nav a').each(colorize);
-    $('section:not(#home)').each(colorize);
     $('section:not(#home)').css({'min-height': vp.height});
     $('.slider').css({'height': vp.height});
     $('.slide').css({
