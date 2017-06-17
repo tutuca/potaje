@@ -11,12 +11,6 @@
     <link rel="stylesheet" href="{% static 'css/style.css'%}">
     <script src="{% static 'js/main.js'%}"></script>
     {% block head %}{% endblock %}
-    <!--style>
-        #reel {
-            background-image: url({{background.url}});
-
-        }
-    </style-->
 </head>
 <body>
 <div id="main">
@@ -25,11 +19,9 @@
         {% if sections %}
         <nav id="main-nav">
         <ul class="nav">
-            <li><a href="#reel">Reel</a></li>
             {% for section in sections %}
             <li><a href="#{{section|slugify}}">{{section.name}}</a></li>
             {% endfor %}
-            <li><a href="#about">Quienes somos</a></li>
             <li><a href="#contact">Contacto</a></li>
         </ul>
         </nav>
@@ -40,73 +32,53 @@
     <div id="sections">
     <section id="home" class="container-fluid" style="background-image:{{background}}">
         <div class="row">
-        </div>
-    </section>
-    <section id="reel" class="container-fluid">
-        <div class="row">
-            <iframe
-                src="https://player.vimeo.com/video/138346780?title=0&byline=0&portrait=0"
-                width="1000" height="562" frameborder="0"
-                webkitallowfullscreen mozallowfullscreen allowfullscreen>
-            </iframe>
+            {{reel.reel}}
         </div>
     </section>
     {% for section in sections %}
     <section id="{{section|slugify}}" class="container-fluid">
        <div class="row">
+        <div class="album-reel col-xs-12 col-sm-12 col-md-12">{{section.reel|default:''|safe}}</div>
+        <div class="detail col-xs-12 col-sm-12 col-md-12">{{section.rendered|safe}}</div>
         {% for album in section.album_set.all %}
-        <article class="album col-md-3">
+        <article class="album col-xs-12 col-sm-6 col-md-3">
             <a class="cover" href="/album/{{album.id}}">
             <div class="inner" style="background-image: url({{album.cover}})">
             </div>
-            <h2>{{album.name}}</h2>
+            <div class="album-name">
+              <h2>{{album.name}}</h2>
+            </div>
             </a>
         </article>
         {% endfor %}
-        <p class="detail">{{section.description|urlize}}</p>
         </div>
     </section>
     {% endfor %}
     <section id="about" class="container-fluid">
-        <div class="row" >
-            <h2>
-                <a href="http://potajecreativo.com.ar">POTAJE CREATIVO</a> es diseño gráfico  y audiovisual.
-            </h2>
-            {% for profile in profiles %}
-            <article class="col-md-6 col-sm-1" id="{{profile.user}}">
-                <a href="#{{profile.user}}" class="avatar"><img src="{{profile.avatar.url}}" alt="{{profile.user.get_full_name}}"/></a>
-                <h1>{{profile.user.get_full_name}}</h1>
-                {{profile.biopic|safe}}
-                <p>
-                {% for sc in profile.user.serviceconfiguration_set.all %}
-                    <a href="{{sc.user_profile}}" target="blank"><img src="{{sc.service.icon.url}}" alt="{{sc.service.name}}" /></a>
-                {% endfor %}
-                </p>
-            </article>
+
+      {% for profile in profiles %}
+        <article class="col-xs-12 col-sm-6 col-md-6" id="{{profile.user}}">
+            <a href="#{{profile.user}}" class="avatar"><img src="{{profile.avatar.url}}" alt="{{profile.user.get_full_name}}"/></a>
+            <h1>{{profile.user.get_full_name}}</h1>
+            {{profile.rendered|safe}}
+            <p>
+            {% for sc in profile.user.serviceconfiguration_set.all %}
+                <a href="{{sc.user_profile}}" target="blank"><img src="{{sc.service.icon.url}}" alt="{{sc.service.name}}" /></a>
             {% endfor %}
-                <img src="{% static 'images/manojo.png'%}" alt="Un manojo de ideas..." id="manojo" />
-        </div>
+            </p>
+        </article>
+        {% endfor %}
+            <img src="{% static 'images/manojo.png'%}" alt="Un manojo de ideas..." id="manojo" />
     </section>
     <section id="contact" class="container-fluid">
        <div class="row">
-            <h3><a href="mailto:hola@potaje.com.ar" rel="autor">hola@potaje.com.ar</a></h3>
+            <h3><a href="mailto:hola@potajecreativo.com.ar" rel="autor">hola@potajecreativo.com.ar</a></h3>
             <h3>(54) 351 - 153848533</h3>
             <h3>Córdoba - Argentina</h3>
             <p>
-                <a href="http://flickr.com/destonosalemusica" target="blank"><img src="{% static 'images/flickr.png'%}" alt="description" /></a>
-                <a href="http://facebook.com/ana.comes" target="blank" ><img src="{% static 'images/facebook.png'%}" alt="description" /></a>
-                <a href="http://vimeo.com/user9007483" target="blank"><img src="{% static 'images/vimeo.png'%}" alt="description" /></a>
+                <a href="http://facebook.com/potajecreativo" target="blank" ><img src="{% static 'images/facebook.png'%}" alt="Seguinos en facebook" /></a>
+                <a href="http://vimeo.com/potajecreativo" target="blank"><img src="{% static 'images/vimeo.png'%}" alt="Seguinos en vimeo" /></a>
             </p>
-           <p>
-                <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"> <img alt="Licencia Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a>
-            </p>
-            <p class="license">
-                <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Trabajos realizados por Potaje Creativo</span>
-                por <a xmlns:cc="http://creativecommons.org/ns#" href="http://potajecreativo.com.ar" property="cc:attributionName" rel="cc:attributionURL">Ana Fernandez Comes</a>
-                se encuentra bajo <br />una Licencia <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">
-                Creative Commons Atribución-No Comercial-Compartir Derivadas Igual</a>.
-            </p>
-
        </div>
     </section>
     </div>
