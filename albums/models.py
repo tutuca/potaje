@@ -45,8 +45,6 @@ class HomeReel(models.Model):
         return self.reel_url
 
     def save(self):
-        self.rendered = markdown(self.description)
-
         if self.reel_url:
             data = fetch_vimeo(self.reel_url)
             self.reel = responsive_embed(data['html'])
