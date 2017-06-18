@@ -13,6 +13,7 @@ def home(request):
         request,
         'master.html',
         {
+            'reel': reel,
             'sections': sections,
             'profiles': profiles,
             'is_staff': request.user.is_staff

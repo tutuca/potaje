@@ -32,7 +32,8 @@
     <div id="sections">
     <section id="home" class="container-fluid" style="background-image:{{background}}">
         <div class="row">
-            {{reel.reel}}
+          <div class="album-reel col-xs-12 col-sm-12 col-md-12">{{reel.reel|default:''|safe}}</div>
+
         </div>
     </section>
     {% for section in sections %}
