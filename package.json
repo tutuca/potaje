@@ -12,9 +12,11 @@
     "src": "assets"
   },
   "scripts": {
-    "start": "npm run watch:js && npm run watch:css", 
+    "start": "npm run watch:js && npm run watch:css",
+    "build": "npm run build:js && npm run build:css",
     "build:js": "webpack",
     "watch:js": "webpack --watch",
+    "build:css": "node-sass-chokidar --include-path node_modules/bootstrap-sass/assets/stylesheets assets/sass/ -o static/css/",
     "watch:css": "node-sass-chokidar --include-path node_modules/bootstrap-sass/assets/stylesheets -w assets/sass/ -o static/css/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -8,6 +8,9 @@ requirements = parse_requirements('requirements.txt', session=False)
 
 setup(
     name='potaje',
+    url='https://github.com/tutuca/potaje',
+    author='tutuca',
+    author_email='maturburu@gmail.com',
     version=version,
     include_package_data=True,
     packages=find_packages(),

@@ -1,3 +1,10 @@
+Potaje
+------
+
+Un manojo de ideas
+
+![build status](https://travis-ci.org/tutuca/potaje.svg?branch=master)
+
 Instalación
 -------------------
 
