@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 from pip.req import parse_requirements
 
-version = '0.3.2'
+version = '0.5.2'
 
 requirements = parse_requirements('requirements.txt', session=False)
 
@@ -14,7 +14,7 @@ setup(
     install_requires=[str(r.req) for r in requirements],
     entry_points={
         'console_scripts': [
-            'manage = potaje.manage:do_manage',
+            'potaje = potaje.manage:do_manage',
         ],
     },
 )

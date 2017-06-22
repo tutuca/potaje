@@ -3,3 +3,8 @@ Pillow
 requests
 restless
 mistune
+
+# dev dependencies
+fabric
+django-environ
+nodeenv
