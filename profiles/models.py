@@ -13,8 +13,9 @@ class Profile(models.Model):
     def __str__(self):
         return '%s Profile' % self.user.get_full_name()
 
-    def save(self):
+    def save(self, *args, **kwargs):
         self.rendered = markdown(self.biopic)
+        super().save(*args, **kwargs)
 
 
 class Service(models.Model):
