@@ -13,3 +13,5 @@ assets/lib
 package-lock.json
 garbage/
 *.tar.gz
+build
+dist
