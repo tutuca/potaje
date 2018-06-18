@@ -5,7 +5,7 @@ markdown = mistune.Markdown()
 
 
 class Profile(models.Model):
-    user = models.OneToOneField('auth.User')
+    user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
     biopic = models.TextField()
     avatar = models.ImageField(upload_to='profiles', null=True, blank=True)
     rendered = models.TextField(editable=False)
@@ -24,7 +24,7 @@ class Service(models.Model):
     endpoint = models.URLField(max_length=200)
     config = models.ManyToManyField(
         'auth.User',
-        through='ServiceConfiguration'
+        through='ServiceConfiguration',
     )
 
     def __str__(self):
@@ -32,8 +32,8 @@ class Service(models.Model):
 
 
 class ServiceConfiguration(models.Model):
-    profile = models.ForeignKey('auth.User')
-    service = models.ForeignKey(Service)
+    profile = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    service = models.ForeignKey('profiles.Service', on_delete=models.CASCADE)
     app_key = models.CharField(max_length=255, null=True, blank=True)
     app_secret = models.CharField(max_length=255, null=True, blank=True)
     user_profile = models.URLField(max_length=200)

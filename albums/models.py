@@ -81,7 +81,7 @@ class Section(models.Model):
 
 class Album(models.Model):
     name = models.CharField(max_length=60)
-    section = models.ForeignKey('Section')
+    section = models.ForeignKey('Section', models.CASCADE)
     description = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True, editable=False)
     modified = models.DateTimeField(auto_now=True, editable=False)
@@ -119,7 +119,7 @@ class Content(models.Model):
         default=10
     )
     caption = models.CharField(max_length=128, null=True, blank=True)
-    album = models.ForeignKey('Album')
+    album = models.ForeignKey('Album', on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True, editable=False)
     thumbnail = models.URLField(editable=False, default="")
     code = models.TextField(editable=False, default="")

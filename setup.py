@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup, find_packages
-from pip.req import parse_requirements
 
 version = '0.5.2'
 
-requirements = parse_requirements('requirements.txt', session=False)
 
 setup(
     name='potaje',
@@ -14,7 +12,14 @@ setup(
     version=version,
     include_package_data=True,
     packages=find_packages(),
-    install_requires=[str(r.req) for r in requirements],
+    install_requires=[
+        'Django',
+        'Pillow',
+        'requests',
+        'restless',
+        'django-environ',
+        'mistune'
+    ],
     entry_points={
         'console_scripts': [
             'potaje = potaje.manage:do_manage',

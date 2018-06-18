@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
                 ('image', models.ImageField(upload_to='pictures')),
                 ('caption', models.CharField(max_length=128, blank=True, null=True)),
                 ('created', models.DateTimeField(auto_now_add=True)),
-                ('album', models.ForeignKey(to='albums.Album')),
+                ('album', models.ForeignKey(to='albums.Album', on_delete=models.CASCADE)),
             ],
             options={
             },
@@ -51,7 +51,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='album',
             name='section',
-            field=models.ForeignKey(to='albums.Section'),
+            field=models.ForeignKey(to='albums.Section', on_delete=models.CASCADE),
             preserve_default=True,
         ),
     ]

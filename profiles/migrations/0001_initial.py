@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
                 ('biopic', models.TextField()),
-                ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
+                ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
             ],
             options={
             },
@@ -42,7 +42,7 @@ class Migration(migrations.Migration):
                 ('app_key', models.CharField(blank=True, max_length=255, null=True)),
                 ('app_secret', models.CharField(blank=True, max_length=255, null=True)),
                 ('user_profile', models.URLField()),
-                ('profile', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
+                ('profile', models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
             ],
             options={
             },
@@ -57,7 +57,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='serviceconfiguration',
             name='service',
-            field=models.ForeignKey(to='profiles.Service'),
+            field=models.ForeignKey(to='profiles.Service', on_delete=models.CASCADE),
             preserve_default=True,
         ),
     ]

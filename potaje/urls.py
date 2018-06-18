@@ -25,12 +25,12 @@ urlpatterns = [
 ]
 
 urlpatterns += [
-    url(r'api/', include(SectionResource.urls())),
-    url(r'api/album/', include(AlbumResource.urls())),
+    url(r'api/', SectionResource.urls),
+    url(r'api/album/', AlbumResource.urls),
 ]
 
 urlpatterns += [
-    url(r'^lobby/', include(admin.site.urls)),
+    url(r'^lobby/', admin.site.urls),
     url(r'^robots\.txt$', lambda r: HttpResponse(
         "User-agent: *\nDisallow: /media/*\nDisallow: /lobby/*",
         mimetype="text/plain")),

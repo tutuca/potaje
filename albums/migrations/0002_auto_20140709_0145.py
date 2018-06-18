@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('thumbnail', models.URLField(editable=False)),
                 ('code', models.TextField(editable=False)),
-                ('album', models.ForeignKey(to='albums.Album')),
+                ('album', models.ForeignKey(to='albums.Album', on_delete=models.CASCADE)),
             ],
             options={
             },
