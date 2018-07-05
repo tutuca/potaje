@@ -123,11 +123,14 @@ class Content(models.Model):
     created = models.DateTimeField(auto_now_add=True, editable=False)
     thumbnail = models.URLField(editable=False, default="")
     code = models.TextField(editable=False, default="")
-
+    rendered = models.TextField(editable=False)
     class Meta:
         verbose_name = 'Contenido'
         verbose_name_plural = 'Contenido, fotos y videos.'
 
+    def save(self):
+        self.rendered = markdown(self.description)
+        super().save()
 
 @receiver(post_save, sender=Content)
 def fetch_image(sender, instance, **kwargs):

@@ -6,6 +6,8 @@ from django.contrib.sitemaps.views import sitemap
 from albums.models import Album
 from albums import views
 from albums.resources import AlbumResource, SectionResource
+from django.conf.urls.static import static
+from django.conf import settings
 
 admin.autodiscover()
 
@@ -23,6 +25,7 @@ urlpatterns = [
     url(r'^$', views.home, name='home'),
     url(r'^album/(?P<id>\d+)$', views.album, name='album'),
 ]
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += [
     url(r'api/', SectionResource.urls),
