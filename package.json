@@ -12,12 +12,9 @@
     "src": "assets"
   },
   "scripts": {
-    "start": "npm run watch:js && npm run watch:css",
-    "build": "npm run build:js && npm run build:css",
-    "build:js": "webpack",
-    "watch:js": "webpack --watch",
-    "build:css": "node-sass-chokidar --include-path node_modules/bootstrap-sass/assets/stylesheets assets/sass/ -o static/css/",
-    "watch:css": "node-sass-chokidar --include-path node_modules/bootstrap-sass/assets/stylesheets -w assets/sass/ -o static/css/",
+    "start": "npm run watch",
+    "build": "webpack --mode=production",
+    "watch": "webpack --watch --mode=development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Matias Iturburu <matias.iturburu@gmail.com>",
@@ -30,14 +27,18 @@
     "slick-carousel": "*"
   },
   "devDependencies": {
-    "grunt": "*",
-    "node-sass": "*",
-    "webpack": "*",
-    "babel-loader": "*",
-    "grunt-contrib-watch": "*",
-    "grunt-sass": "*",
-    "grunt-contrib-copy": "*",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "copy-webpack-plugin": "^4.5.1",
+    "css-loader": "^0.28.11",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^1.1.11",
     "grunt-webpack": "*",
-    "grunt-contrib-concat": "*"
+    "node-sass": "*",
+    "resolve-url-loader": "^2.3.0",
+    "sass-loader": "^7.0.3",
+    "style-loader": "^0.21.0",
+    "webpack": "^4.12.0",
+    "webpack-cli": "^3.0.8"
   }
 }

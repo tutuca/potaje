@@ -1,6 +1,6 @@
-var $ = require('jquery');
+import $ from 'jquery';
 /* Helpers */
-function hexToRgb(hex) {
+export function hexToRgb(hex) {
     /*
     * Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
     * from http://stackoverflow.com/a/5624139/53468
@@ -19,14 +19,14 @@ function hexToRgb(hex) {
     } : null;
 }
 
-function toRGBAString (color, a) {
+export function toRGBAString (color, a) {
     'use strict';
     if (!a) {a=1;}
     color = hexToRgb(color);
     return 'rgba('+color.r+','+color.g+','+color.b+','+a+')';
 }
 
-function viewport(){
+export function viewport(){
     /*
     * Calculates the available surface on the client's window.
     * */
@@ -42,7 +42,7 @@ function viewport(){
     return { width : innerWidth , height : innerHeight };
 }
 
-function fit(selector, to, padding){
+export function fit(selector, to, padding){
     var visible_height, visible_width,
         old_height, old_width,
         delta, landscape;
@@ -77,10 +77,3 @@ function fit(selector, to, padding){
     });
 
 }
-
-module.exports = {
-    viewport,
-    hexToRgb,
-    toRGBAString,
-    fit
-};
