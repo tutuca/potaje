@@ -1,0 +1,6 @@
+.git
+data/
+static/
+media/
+*.egg-ingo
+node_modules/
