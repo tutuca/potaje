@@ -23,7 +23,7 @@
             <div id="main-nav">
                 <ul>
                     {% for section in sections %}
-                    <li class="nav-item"><a href="#{{section|slugify}}">{{section.name}}</a></li>
+                    <li class="nav-item"><a href="/#{{section|slugify}}">{{section.name}}</a></li>
                     {% endfor %}
                     <li><a href="#contact">Contacto</a></li>
                 </ul>
