@@ -31,7 +31,7 @@ def fetch_vimeo(url):
 
 def responsive_embed(html):
     html = html.replace('<iframe', '<iframe class="embed-responsive-item"')
-    embed = '<div class="embed-responsive">%s</div>'
+    embed = '<div class="embed-responsive embed-responsive-4by3">%s</div>'
     return embed % html
 
 

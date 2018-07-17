@@ -3,7 +3,7 @@ Pillow
 requests
 restless
 mistune
-
-# dev dependencies
+django-extensions
 django-environ
 nodeenv
+psycopg2

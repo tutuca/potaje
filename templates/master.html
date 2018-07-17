@@ -48,7 +48,7 @@
     {% block page %}
         <section id="home" style="background-image:{{background}}">
             <div class="row">
-            <div class="album-reel">{{reel.reel|default:''|safe}}</div>
+            <div class="album-reel col-12">{{reel.reel|default:''|safe}}</div>
             </div>
         </section>
         {% for section in sections %}

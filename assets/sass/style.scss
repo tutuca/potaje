@@ -15,7 +15,6 @@ nav, aside, header, footer, section, article {
     z-index:9999;
     font-size:1.3rem;
 }
-
 #logo {
     background: #67e2ad url(../images/pojo.png) no-repeat center bottom;
     border-radius: 50%;
@@ -118,6 +117,9 @@ nav, aside, header, footer, section, article {
             }
         }
     }
+}
+#sections #home {
+    padding-top: 0;
 }
 
 #about{

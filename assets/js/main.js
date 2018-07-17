@@ -3,6 +3,7 @@ import '../sass/style.scss';
 
 import $ from  'jquery';
 import 'bootstrap';
+import { fit } from './helpers';
 
 const styles = [ // TODO: generate this using http://devmag.org.za/2012/07/29/how-to-choose-colours-procedurally-algorithms/
     '#67e2ad',
@@ -22,7 +23,7 @@ function colorize (i){
 $(() => {
 
     $('#main-nav li a').each(colorize);
-        
+    $('#home .album-reel iframe').each(fit)        
     setTimeout(function(){
         const new_color = styles[Math.floor(Math.random()*styles.length)];
         $('#logo').css('background-color', new_color);
