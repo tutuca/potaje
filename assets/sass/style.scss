@@ -1,78 +1,37 @@
 @import "./_variables.scss";
-@import "~bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+@import "./_mixins.scss";
 
-body {
-    margin:0;
-    padding:0;
+@import "~bootstrap/scss/bootstrap";
 
-}
 nav, aside, header, footer, section, article {
     display:block;
     position:relative;
 }
 
-a {
-    text-decoration: none;
-    img {
-        outline: none;
-    }
-    &:hover {
-        color: #004161;
-        transition: all 0.3s ease-in-out;
-    }
-}
-p {
-    a {
-        text-shadow: none;
-    }
-}
-header {
+.header {
     position:fixed;
     left:0;
     top:0;
-    width: 13em;
     z-index:9999;
-    font-size:1.3em;
-}
-details {
-    clear:both;
-}
-article{
-  text-align: left;
-  li {
-    list-style: square;
-    margin: 3px 1.3em;
-  }
-}
-footer {
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
+    font-size:1.3rem;
 }
 
-#main {
-    position:relative;
-    width:100%;
-    overflow:hidden;
-}
 #logo {
     background: #67e2ad url(../images/pojo.png) no-repeat center bottom;
-    border-radius: 50px;
-    height: 70px;
-    width: 70px;
-    margin: 0.5em;
-    transition: all 0.3s ease-in-out;
+    border-radius: 50%;
+    height: $logo-height;
+    width: $logo-height;
+    margin: 3rem 2rem;
     box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.3);
     &:hover {
-        box-shadow: 0 0 2px #FFF, 2px 2px 15px #000;
-        transition: all 0.3s;
+        box-shadow: 0 0 2px #FFF, 1px 1px 15px #666;
     }
     a{
         text-indent: -9999px;
         display: block;
         overflow: hidden;
-        height: 70px;
-        width: 70px;
+        height: $logo-height;
+        width: $logo-height;
         background: transparent;
         &:hover {
             background:transparent;
@@ -81,54 +40,92 @@ footer {
     }
 }
 #main-nav {
+    @media (min-width: sm) {
+        display:none;
+    }
     margin: 0 ;
-    padding: 50px 0;
-    @media (max-width: $screen-sm-min) {
-        display: none;
+    padding: 0;
+    ul {
+        display: block;
+        list-style: none;
+        padding: 0;
+        margin: 0 0 0 -1.7rem;
     }
+
     li {
-        margin:1em 0;
+        margin:1.7rem 0;
+        padding:0;
+        a {
+            margin: 1rem;
+            display:inline !important;
+            text-transform: uppercase;
+            padding: 0.5rem 1rem 0.5rem 2.5rem;
+            outline: 0;
+            text-decoration:none;
+            background-color: #004161;
+            border-radius: 0 3px 3px 0;
+            box-shadow: $nav-shadow;
+            border: 0 solid #FFF;
+            color: #FFF;
+        }
+        a:hover {
+            box-shadow: $nav-shadow-hover;
+            display: block;
+            text-align: right;
+            width: 100%;
+            padding-left: 4em;
+        }
+        .active a{
+            box-shadow: $nav-shadow-hover;
+            display: block;
+            padding-left: 4em;
+            text-align: right;
+        }
     }
-    a {
-        display:inline !important;
-        text-transform: uppercase;
-        padding: 0.7em 1em 0.7em 2.5em;  // these two !important should go if we import the right stylsheet
-        outline: 0;
-        text-decoration:none;
-        background-color: #004161;
-        border-radius: 0 3px 3px 0;
-        box-shadow: $nav-shadow;
-        border: 0 solid #FFF;
-        font-size: 60%;
-        color: #FFF;
-        transition: all 0.3s ease-in-out;
+   
+}
+
+#sections > section {
+    min-height: 100vh;
+    padding: 8rem 4rem;
+    &.album-detail {
+        padding: 6rem 4rem;
     }
-    a:hover {
-        box-shadow: $nav-shadow-hover;
-        display: block;
-        text-align: right;
-        transition: all 0.3s ease-in-out;
+    .card-deck {
+        display: grid;
     }
-    .active a{
-        box-shadow: $nav-shadow-hover;
-        display: block;
-        text-align: right;
+    .card {
+        margin-bottom: $grid-gutter-width;
+        .card-img-overlay {
+            background: rgba($green, 0.7);
+            opacity: 0;
+            font-size: 1.61rem;
+        }
+        &:hover {
+            box-shadow: 2px 2px 4px $gray-300;
+            .card-img-overlay{
+                opacity: 1;
+                text-shadow: 0 0 2px black;
+            }
+        }
+    }
+    
+
+    @each $name, $breakpoint in $grid-breakpoints {
+        @media (min-width: $breakpoint) {
+            .card-deck {
+                grid-template-columns: repeat(map-get($cards-per-line, $name), 1fr);
+            }
+        }
     }
 }
-#home {
-    background-position: -10% -10%;
-    background-attachment: fixed;
-    background-size: 100%;
-}
-#manojo {
-    display: block;
-    margin: 1em auto;
-    padding: 2em auto;
-}
+
 #about{
     .avatar {
         display: block;
         margin: auto;
+        margin-bottom: 2em;
+        width: 50%;
 
     }
     .license {
@@ -139,125 +136,19 @@ footer {
 #contact {
     padding: $viewport-vertical-padding 2em;
 }
-.row {
-    padding: 0 15px;
-    margin: 0;
-}
-.wrapper {
-    width: 60%;
-    margin: 0 auto;
-}
-.container-fluid {
-    position: relative;
-    text-align: center;
-    margin: 0 auto;
-    @media (min-width: $screen-sm-min) {
-        padding: $viewport-vertical-padding 2em;
-    }
-    @media (min-width: $screen-md-min) {
-        padding: $viewport-vertical-padding 3em $viewport-vertical-padding 230px;
-    }
-}
-.album {
-  margin: 0 15px $grid-gutter-width;
-  padding: 0;
 
-  .inner {
-    border-radius: 5px;
-    overflow: hidden;
-    position: relative;
-    height: 170px;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 200%;
-  }
-  * {
-    transition: all 0.3s;
-  }
-  img {
-    margin:-20px;
-    border: none;
-    outline: none;
-  }
-  .album-name {
-    border-radius: 5px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width:100%;
-    height: 100%;
-    margin:0;
-    padding: 5px 25px;
-    color:transparent;
-    opacity:0;
-    text-align: left;
-    transition: all 0.2s;
-    z-index:999;
-    box-shadow: inset 0 0 1px $album-hover, 0 0 2px $album-hover;
-    h2 {
-      font-size: 0.9em;
-
+.social-links a {
+    display: inline-block;
+    
+    padding: 5px;
+    font-size: 1.65em;
+    &.vimeo {
+        color: #1ab7ea;
+    }
+    &.facebook {
+        color: #3b5999;
+    }
+    &.instagram {
+        color: #e4405f;
     }
   }
-  a  {
-    display: block;
-    position:relative;
-    padding: 0;
-    text-decoration: none;
-
-  }
-  &:hover{
-    .inner{
-        box-shadow: 4px 4px 25px rgba(0,0,0,0.6);
-    }
-    .album-name {
-        width:100%;
-        background: $album-hover;
-        color:#FFF;
-        opacity: 100;
-        cursor: pointer;
-        transition: all 0.3s ease-in-out;
-    }
-  }
-}
-.detail {
-  text-align: left;
-  margin-top: 1em;
-  margin-bottom: 1em;
-}
-.content{
-    min-width: 25em;
-    width: 50%;
-    height: 60%;
-}
-
-/* Form */
-form {
-    width: 50em;
-    margin: 0 auto;
-}
-label {
-    text-align: left;
-    display: block;
-    color: #000;
-    text-shadow: 1px 1px 0 #FFF, 0 0 6px #FFF;
-}
-input[type="text"], textarea {
-    width:100%;
-    border: 1px solid #CCC;
-    border-radius: 3px;
-    box-shadow: 0 0 1px #6DE6B1;
-}
-
-
-.caption {
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    .inner {
-      padding: 1em 10em;
-      background: rgba(254, 170, 146, 1);
-      width: 100%;
-
-    }
-}

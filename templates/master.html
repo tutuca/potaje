@@ -8,82 +8,96 @@
     <meta name="author" content="Potaje Creativo <hola@potajecreativo.com.ar>">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="icon" href="{% static 'images/favicon.ico'%}" type="image/png" />
+    <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
     <link rel="stylesheet" href="{% static 'css/style.css'%}">
     <script src="{% static 'main.js'%}"></script>
     {% block head %}{% endblock %}
 </head>
 <body>
-<div id="main">
-    <header>
-        <h1 id="logo"><a href="/">Potaje Creativo</a></h1>
-        {% if sections %}
-        <nav id="main-nav">
-        <ul class="nav">
-            {% for section in sections %}
-            <li><a href="#{{section|slugify}}">{{section.name}}</a></li>
-            {% endfor %}
-            <li><a href="#contact">Contacto</a></li>
-        </ul>
-        </nav>
-        {% endif %}
+<div id="main" class="container-fuild">
+    <header class="header">
+            <h1 id="logo"><a href="/">Potaje Creativo</a></h1>
+            {% if sections %}
+            <div id="main-nav">
+                <ul>
+                    {% for section in sections %}
+                    <li class="nav-item"><a href="#{{section|slugify}}">{{section.name}}</a></li>
+                    {% endfor %}
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+                <p class="social-links">
+                    <a class="facebook" href="http://facebook.com/potajecreativo" target="blank" title="Seguinos en facebook" />
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="vimeo" href="http://vimeo.com/potajecreativo" target="blank" title="Seguinos en vimeo" />
+                        <i class="fab fa-vimeo-v"></i>
+                    </a>
+                    <a class="instagram" href="http://instagram.com/potajecreativo" target="blank" title="Seguinos en instagram" />
+                        <i class="fab fa-instagram"></i>
+                    </a>
+
+                </p>
+
+            </div>
+            {% endif %}
     </header>
+    <div id="sections" class="col-sm-12 col-lg-10 offset-lg-2 col-md-10 offset-md-2">
 
     {% block page %}
-    <div id="sections">
-    <section id="home" class="container-fluid" style="background-image:{{background}}">
-        <div class="row">
-          <div class="album-reel col-xs-12 col-sm-12 col-md-12">{{reel.reel|default:''|safe}}</div>
-
-        </div>
-    </section>
-    {% for section in sections %}
-    <section id="{{section|slugify}}" class="container-fluid">
-       <div class="row">
-        <div class="album-reel col-xs-12 col-sm-12 col-md-12">{{section.reel|default:''|safe}}</div>
-        <div class="detail col-xs-12 col-sm-12 col-md-12">{{section.rendered|safe}}</div>
-        {% for album in section.album_set.all %}
-        <article class="album col-xs-12 col-sm-6 col-md-3">
-            <a class="cover" href="/album/{{album.id}}">
-            <div class="inner" style="background-image: url({{album.cover}})">
+        <section id="home" style="background-image:{{background}}">
+            <div class="row">
+            <div class="album-reel">{{reel.reel|default:''|safe}}</div>
             </div>
-            <div class="album-name">
-              <h2>{{album.name}}</h2>
+        </section>
+        {% for section in sections %}
+        <section id="{{section|slugify}}">
+            <div class="row">
+                <div class="col">
+                    <div class="album-reel">{{section.reel|default:''|safe}}</div>
+                    <div class="detail">{{section.rendered|safe}}</div>
+                </div>
             </div>
-            </a>
-        </article>
+            <div class="row card-deck">
+                {% for album in section.album_set.all %}
+                <a class="card text-white" href="/album/{{album.id}}">
+                    <img class="card-img" src="{{album.cover}}" />
+                    <div class="card-img-overlay ">
+                        {{album.name}}
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </section>
         {% endfor %}
-        </div>
-    </section>
-    {% endfor %}
-    <section id="about" class="container-fluid">
-
-      {% for profile in profiles %}
-        <article class="col-xs-12 col-sm-6 col-md-6" id="{{profile.user}}">
-            <a href="#{{profile.user}}" class="avatar"><img src="{{profile.avatar.url}}" alt="{{profile.user.get_full_name}}"/></a>
-            <h1>{{profile.user.get_full_name}}</h1>
-            {{profile.rendered|safe}}
-            <p>
-            {% for sc in profile.user.serviceconfiguration_set.all %}
-                <a href="{{sc.user_profile}}" target="blank"><img src="{{sc.service.icon.url}}" alt="{{sc.service.name}}" /></a>
+        <section id="about">
+            <div class="row">
+            {% for profile in profiles %}
+            <article class="col-lg-6 col-sm-12" id="{{profile.user}}">
+                <a href="#{{profile.user}}" class="avatar"><img src="{{profile.avatar.url}}" alt="{{profile.user.get_full_name}}"/></a>
+                <h1>{{profile.user.get_full_name}}</h1>
+                {{profile.rendered|safe}}
+                <p>
+                {% for sc in profile.user.serviceconfiguration_set.all %}
+                    <a href="{{sc.user_profile}}" target="blank"><img src="{{sc.service.icon.url}}" alt="{{sc.service.name}}" /></a>
+                {% endfor %}
+                </p>
+            </article>
             {% endfor %}
-            </p>
-        </article>
-        {% endfor %}
-            <img src="{% static 'images/manojo.png'%}" alt="Un manojo de ideas..." id="manojo" />
-    </section>
-    <section id="contact" class="container-fluid">
-       <div class="row">
-            <h3><a href="mailto:hola@potajecreativo.com.ar" rel="autor">hola@potajecreativo.com.ar</a></h3>
-            <h3>(54) 351 - 153848533</h3>
-            <h3>Córdoba - Argentina</h3>
-            <p>
-                <a href="http://facebook.com/potajecreativo" target="blank" ><img src="{% static 'images/facebook.png'%}" alt="Seguinos en facebook" /></a>
-                <a href="http://vimeo.com/potajecreativo" target="blank"><img src="{% static 'images/vimeo.png'%}" alt="Seguinos en vimeo" /></a>
-            </p>
-       </div>
-    </section>
-    </div>
+            </div>
+                <img src="{% static 'images/manojo.png'%}" alt="Un manojo de ideas..." id="manojo" />
+        </section>
+        
     {% endblock %}
+    <section id="contact" class="container-fluid">
+            <div class="col-12 text-center align-bottom">
+                    <h3><a href="mailto:hola@potajecreativo.com.ar" rel="autor">hola@potajecreativo.com.ar</a></h3>
+                    <h3>(54) 351 - 153848533</h3>
+                    <h3>Córdoba - Argentina</h3>
+            </div>
+    </section>
+</div>
 
 </div>
 </body>

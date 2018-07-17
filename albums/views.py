@@ -8,15 +8,12 @@ from profiles.models import Profile
 def home(request):
     reel = HomeReel.objects.first()
     profiles = Profile.objects.select_related().all()
-    sections = Section.objects.select_related().all()
     return render(
         request,
         'master.html',
         {
             'reel': reel,
-            'sections': sections,
             'profiles': profiles,
-            'is_staff': request.user.is_staff
         }
     )
 
@@ -26,7 +23,9 @@ def album(request, id):
     return render(
         request,
         'album.html',
-        {'album': album_object}
+        {
+            'album': album_object
+        }
     )
 
 

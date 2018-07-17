@@ -1,7 +1,21 @@
-$font-size-base: 15px;
-$grid-gutter-width: 40px;
+$logo-height: 85px;
+$font-family-base: 'Dosis', sans-serif;
+$font-size-base: 1rem;
 $viewport-vertical-padding: 60px;
 $album-hover: rgba(103,226,173,0.97);
 $text-color: #333;
-$nav-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+$nav-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 $nav-shadow-hover: 1px 2px 7px  rgba(0, 0, 0, 0.2);
+$blue: #003e5f;
+$green: #67e2ad;
+$red: #f84c53;
+$orange: #fa8e53;
+$enable-shadows: true;
+
+$cards-per-line: (
+    xs: 1,
+    sm: 2,
+    md: 3,
+    lg: 4,
+    xl: 4
+);

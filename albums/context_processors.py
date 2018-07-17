@@ -4,7 +4,7 @@ from glob import glob
 from django.contrib.staticfiles import finders
 
 from django.conf import settings
-
+from . import models
 
 def random_background(request):
     '''
@@ -28,4 +28,11 @@ def random_background(request):
 
     return {
         'background': bg_url,
+    }
+
+
+def sections(request):
+    sections = models.Section.objects.select_related().all()
+    return {
+        'sections': sections
     }

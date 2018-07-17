@@ -20,13 +20,17 @@
   "author": "Matias Iturburu <matias.iturburu@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "bootstrap-sass": "*",
-    "jquery": "~2.1",
+    "@fortawesome/fontawesome-free": "^5.1.0",
+    "@fortawesome/fontawesome-free-solid": "^5.0.13",
+    "bootstrap": "^4.1.1",
+    "jquery": "^2.2.4",
     "new-pjax": "",
     "node-sass-chokidar": "0.0.2",
-    "slick-carousel": "*"
+    "popmotion-pose": "^2.1.0",
+    "popper.js": "^1.14.3"
   },
   "devDependencies": {
+    "autoprefixer": "^8.6.5",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
     "copy-webpack-plugin": "^4.5.1",
@@ -35,6 +39,8 @@
     "file-loader": "^1.1.11",
     "grunt-webpack": "*",
     "node-sass": "*",
+    "postcss-loader": "^2.1.5",
+    "precss": "^3.1.2",
     "resolve-url-loader": "^2.3.0",
     "sass-loader": "^7.0.3",
     "style-loader": "^0.21.0",

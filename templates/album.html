@@ -1,20 +1,20 @@
 {% extends "master.html" %}
-{% block title %}{{album.name}}{% endblock %}
-{% block page %}
-<div id="sections">
-    <section id="{{album.section|slugify}}" class="container-fluid slider">
-       <div class="row">
-            <div class="col-md-12">
-                {% for content in album.content_set.all %}
+{% block title %}{{album.name}}{% endblock %} {% block page %}
+
+<section class="album-detail">
+    <h1 class="page-header mb-5">{{album.name}}</h1>
+    <div class="row">
+        <div class="col-md-6">
+            {% for content in album.content_set.all %}
+            <div class="container-fluid">
                 {{content.code|safe}}
-                <div class="caption">
-                    <div class="inner">
-                    {{content.caption|urlize}}
-                    </div>
-                </div>
-                {% endfor %}
+                <p>{{content.rendered|safe}}</p>
             </div>
+            {% endfor %}
         </div>
-    </section>
-</div>
+        <div class="col-md-6">
+            {{album.rendered|safe}}
+        </div>
+    </div>
+</section>
 {% endblock %}

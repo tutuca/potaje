@@ -37,7 +37,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'albums.context_processors.random_background'
+                # 'albums.context_processors.random_background',
+                'albums.context_processors.sections'
+
             ],
         },
     },

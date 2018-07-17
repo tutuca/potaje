@@ -7,6 +7,8 @@ from urllib import parse
 from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from django.utils.html import strip_tags, urlize
+
 
 markdown = mistune.Markdown()
 
@@ -29,7 +31,7 @@ def fetch_vimeo(url):
 
 def responsive_embed(html):
     html = html.replace('<iframe', '<iframe class="embed-responsive-item"')
-    embed = '<div class="embed-responsive embed-responsive-16by9">%s</div>'
+    embed = '<div class="embed-responsive">%s</div>'
     return embed % html
 
 
@@ -124,46 +126,53 @@ class Content(models.Model):
     thumbnail = models.URLField(editable=False, default="")
     code = models.TextField(editable=False, default="")
     rendered = models.TextField(editable=False)
+
+    def __str__(self):
+        return strip_tags(self.rendered)[:100]
+
     class Meta:
         verbose_name = 'Contenido'
         verbose_name_plural = 'Contenido, fotos y videos.'
 
     def save(self):
-        self.rendered = markdown(self.description)
+        self.rendered = markdown(self.caption)
         super().save()
+
 
 @receiver(post_save, sender=Content)
 def fetch_image(sender, instance, **kwargs):
-    if instance.thumbnail or kwargs.get('raw'):
+    img_template = '<img class="img-fluid" src="%s" alt="%s" />'
+    if instance.code:
         return
 
     if instance.image:
         instance.caption = instance.caption or instance.image.name
         instance.kind = 10
         instance.thumbnail = instance.image.url
-        instance.code = '<img src="%s" alt="%s" />' % (
+        instance.code = img_template % (
             instance.image.url, instance.caption)
 
-    if "imgur" in instance.source:
-        old_code = instance.source
-        split = parse.urlsplit(instance.source)
-        img_id = split.path[1:]  # sacamos el primer /
-        if any(x in split.path for x in ('.gif', '.jpg', '.png',)):
-            # es una imágen directa, sacamos la extensión
-            img_id = img_id[:-4]
+    if instance.source:
+        if "imgur" in instance.source:
+            old_code = instance.source
+            split = parse.urlsplit(instance.source)
+            img_id = split.path[1:]  # sacamos el primer /
+            if any(x in split.path for x in ('.gif', '.jpg', '.png',)):
+                # es una imágen directa, sacamos la extensión
+                img_id = img_id[:-4]
 
-        instance.kind = 10
-        instance.caption = old_code
-        instance.thumbnail = "http://i.imgur.com/%st.jpg" % img_id
-        instance.code = '<img src="http://i.imgur.com/%s.jpg" alt="%s" />' % (
-            img_id, instance.caption)
+            instance.kind = 10
+            instance.caption = old_code
+            instance.thumbnail = "http://i.imgur.com/%st.jpg" % img_id
+            instance.code = img_template % (
+                img_id, instance.caption)
 
-    if "vimeo" in instance.source:
-        data = fetch_vimeo(instance.source)
+        if "vimeo" in instance.source:
+            data = fetch_vimeo(instance.source)
 
-        instance.kind = 20
-        instance.caption = data['title']
-        instance.thumbnail = data['thumbnail_url']
-        instance.code = responsive_embed(data['html'])
+            instance.kind = 20
+            instance.caption = data['title']
+            instance.thumbnail = data['thumbnail_url']
+            instance.code = responsive_embed(data['html'])
 
     instance.save()
