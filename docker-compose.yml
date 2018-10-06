@@ -37,6 +37,17 @@ services:
       - db
     networks:
       - potaje
-
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./static:/usr/share/nginx/static
+      - ./media:/usr/share/nginx/media
+    ports:
+      - "80:80"
+    networks:
+      - potaje
+    depends_on:
+      - backend
 networks:
   potaje:
