@@ -6,4 +6,4 @@ mistune
 django-extensions
 django-environ
 nodeenv
-psycopg2
+psycopg2-binary
