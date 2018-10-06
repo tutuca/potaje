@@ -1,4 +1,3 @@
-
 @mixin card-deck-column-count($count: 1) {
-    flex: 0 0 calc(100% / #{$count} - #{$card-deck-margin} * 2);
-  }
+  flex: 0 0 calc(100% / #{$count} - #{$card-deck-margin} * 2);
+}

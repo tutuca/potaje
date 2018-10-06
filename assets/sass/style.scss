@@ -3,154 +3,154 @@
 
 @import "~bootstrap/scss/bootstrap";
 
-nav, aside, header, footer, section, article {
-    display:block;
-    position:relative;
+nav,
+aside,
+header,
+footer,
+section,
+article {
+  display: block;
+  position: relative;
 }
 
 .header {
-    position:fixed;
-    left:0;
-    top:0;
-    z-index:9999;
-    font-size:1.3rem;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  font-size: 1.3rem;
 }
 #logo {
-    background: #67e2ad url(../images/pojo.png) no-repeat center bottom;
-    border-radius: 50%;
+  background: #67e2ad url(../images/pojo.png) no-repeat center bottom;
+  border-radius: 50%;
+  height: $logo-height;
+  width: $logo-height;
+  margin: 3rem 2rem;
+  box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.3);
+  &:hover {
+    box-shadow: 0 0 2px #fff, 1px 1px 15px #666;
+  }
+  a {
+    text-indent: -9999px;
+    display: block;
+    overflow: hidden;
     height: $logo-height;
     width: $logo-height;
-    margin: 3rem 2rem;
-    box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.3);
+    background: transparent;
     &:hover {
-        box-shadow: 0 0 2px #FFF, 1px 1px 15px #666;
+      background: transparent;
     }
-    a{
-        text-indent: -9999px;
-        display: block;
-        overflow: hidden;
-        height: $logo-height;
-        width: $logo-height;
-        background: transparent;
-        &:hover {
-            background:transparent;
-        }
-
-    }
+  }
 }
 #main-nav {
-    @media (min-width: sm) {
-        display:none;
-    }
-    margin: 0 ;
+  @media (min-width: sm) {
+    display: none;
+  }
+  margin: 0;
+  padding: 0;
+  ul {
+    display: block;
+    list-style: none;
     padding: 0;
-    ul {
-        display: block;
-        list-style: none;
-        padding: 0;
-        margin: 0 0 0 -1.7rem;
-    }
+    margin: 0 0 0 -1.7rem;
+  }
 
-    li {
-        margin:1.7rem 0;
-        padding:0;
-        a {
-            margin: 1rem;
-            display:inline !important;
-            text-transform: uppercase;
-            padding: 0.5rem 1rem 0.5rem 2.5rem;
-            outline: 0;
-            text-decoration:none;
-            background-color: #004161;
-            border-radius: 0 3px 3px 0;
-            box-shadow: $nav-shadow;
-            border: 0 solid #FFF;
-            color: #FFF;
-        }
-        a:hover {
-            box-shadow: $nav-shadow-hover;
-            display: block;
-            text-align: right;
-            width: 100%;
-            padding-left: 4em;
-        }
-        .active a{
-            box-shadow: $nav-shadow-hover;
-            display: block;
-            padding-left: 4em;
-            text-align: right;
-        }
+  li {
+    margin: 1.7rem 0;
+    padding: 0;
+    a {
+      margin: 1rem;
+      display: inline !important;
+      text-transform: uppercase;
+      padding: 0.5rem 1rem 0.5rem 2.5rem;
+      outline: 0;
+      text-decoration: none;
+      background-color: #004161;
+      border-radius: 0 3px 3px 0;
+      box-shadow: $nav-shadow;
+      border: 0 solid #fff;
+      color: #fff;
     }
-   
+    a:hover {
+      box-shadow: $nav-shadow-hover;
+      display: block;
+      text-align: right;
+      width: 100%;
+      padding-left: 4em;
+    }
+    .active a {
+      box-shadow: $nav-shadow-hover;
+      display: block;
+      padding-left: 4em;
+      text-align: right;
+    }
+  }
 }
 
 #sections > section {
-    min-height: 100vh;
-    padding: 8rem 4rem;
-    &.album-detail {
-        padding: 6rem 4rem;
+  min-height: 100vh;
+  padding: 8rem 4rem;
+  &.album-detail {
+    padding: 6rem 4rem;
+  }
+  .card-deck {
+    display: grid;
+  }
+  .card {
+    margin-bottom: $grid-gutter-width;
+    .card-img-overlay {
+      background: rgba($green, 0.7);
+      opacity: 0;
+      font-size: 1.61rem;
     }
-    .card-deck {
-        display: grid;
+    &:hover {
+      box-shadow: 2px 2px 4px $gray-300;
+      .card-img-overlay {
+        opacity: 1;
+        text-shadow: 0 0 2px black;
+      }
     }
-    .card {
-        margin-bottom: $grid-gutter-width;
-        .card-img-overlay {
-            background: rgba($green, 0.7);
-            opacity: 0;
-            font-size: 1.61rem;
-        }
-        &:hover {
-            box-shadow: 2px 2px 4px $gray-300;
-            .card-img-overlay{
-                opacity: 1;
-                text-shadow: 0 0 2px black;
-            }
-        }
-    }
-    
+  }
 
-    @each $name, $breakpoint in $grid-breakpoints {
-        @media (min-width: $breakpoint) {
-            .card-deck {
-                grid-template-columns: repeat(map-get($cards-per-line, $name), 1fr);
-            }
-        }
+  @each $name, $breakpoint in $grid-breakpoints {
+    @media (min-width: $breakpoint) {
+      .card-deck {
+        grid-template-columns: repeat(map-get($cards-per-line, $name), 1fr);
+      }
     }
+  }
 }
 #sections #home {
-    padding-top: 0;
+  padding-top: 0;
 }
 
-#about{
-    .avatar {
-        display: block;
-        margin: auto;
-        margin-bottom: 2em;
-        width: 50%;
-
-    }
-    .license {
-        font-size: 0.9em;
-    }
-
+#about {
+  .avatar {
+    display: block;
+    margin: auto;
+    margin-bottom: 2em;
+    width: 50%;
+  }
+  .license {
+    font-size: 0.9em;
+  }
 }
 #contact {
-    padding: $viewport-vertical-padding 2em;
+  padding: $viewport-vertical-padding 2em;
 }
 
 .social-links a {
-    display: inline-block;
-    
-    padding: 5px;
-    font-size: 1.65em;
-    &.vimeo {
-        color: #1ab7ea;
-    }
-    &.facebook {
-        color: #3b5999;
-    }
-    &.instagram {
-        color: #e4405f;
-    }
+  display: inline-block;
+
+  padding: 5px;
+  font-size: 1.65em;
+  &.vimeo {
+    color: #1ab7ea;
   }
+  &.facebook {
+    color: #3b5999;
+  }
+  &.instagram {
+    color: #e4405f;
+  }
+}
