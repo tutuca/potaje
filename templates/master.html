@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load static %}
 <!doctype html>
 <html lang="es-AR">
 <head>
@@ -7,7 +7,7 @@
     <meta name="description" content="Un manojo de ideas">
     <meta name="author" content="Potaje Creativo <hola@potajecreativo.com.ar>">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="icon" href="{% static 'images/favicon.ico'%}" type="image/png" />
+    <link rel="icon" href="{% static 'assets/favicon.ico'%}" type="image/png" />
     <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 
@@ -34,7 +34,7 @@
                     <a class="vimeo" href="http://vimeo.com/potajecreativo" target="blank" title="Seguinos en vimeo" />
                         <i class="fab fa-vimeo-v"></i>
                     </a>
-                    <a class="instagram" href="http://instagram.com/potajecreativo" target="blank" title="Seguinos en instagram" />
+                    <a class="instagram" href="http://instagram.com/potaje_creativo" target="blank" title="Seguinos en instagram" />
                         <i class="fab fa-instagram"></i>
                     </a>
 
@@ -86,7 +86,7 @@
             </article>
             {% endfor %}
             </div>
-                <img src="{% static 'images/manojo.png'%}" alt="Un manojo de ideas..." id="manojo" />
+                <img src="{% static 'assets/manojo.png'%}" alt="Un manojo de ideas..." id="manojo" />
         </section>
         
     {% endblock %}

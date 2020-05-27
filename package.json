@@ -22,29 +22,29 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.1.0",
     "@fortawesome/fontawesome-free-solid": "^5.0.13",
-    "bootstrap": "^4.1.1",
-    "jquery": "^2.2.4",
-    "new-pjax": "",
-    "node-sass-chokidar": "0.0.2",
+    "bootstrap": "^4.5.0",
+    "jquery": "^3.5.1",
+    "new-pjax": "*",
     "popmotion-pose": "^2.1.0",
     "popper.js": "^1.14.3"
   },
   "devDependencies": {
-    "autoprefixer": "^8.6.5",
+    "autoprefixer": "^9.7.5",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
-    "copy-webpack-plugin": "^4.5.1",
-    "css-loader": "^0.28.11",
-    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "copy-webpack-plugin": "^5.1.1",
+    "css-loader": "^3.5.3",
+    "mini-css-extract-plugin": "^0.9.0",
     "file-loader": "^1.1.11",
     "grunt-webpack": "*",
-    "node-sass": "*",
+    "node-sass": "^4.14.1",
+    "node-sass-chokidar": "0.0.2",
     "postcss-loader": "^2.1.5",
     "precss": "^3.1.2",
     "resolve-url-loader": "^2.3.0",
     "sass-loader": "^7.0.3",
     "style-loader": "^0.21.0",
-    "webpack": "^4.12.0",
-    "webpack-cli": "^3.0.8"
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
   }
 }
