@@ -121,7 +121,8 @@ class Content(models.Model):
             self.thumbnail = self.image.url
             self.code = img_template % (
                 f"/media/pictures/{self.image.image}",
-                self.caption)
+                self.caption,
+            )
             return
 
         if "imgur" in self.source:
@@ -145,7 +146,6 @@ class Content(models.Model):
             self.code = self.__responsive_embed(data["html"])
             return
 
-
     def __extract_img_id(self):
         path = parse.urlparse(self.source).path
         img_id = path
@@ -153,7 +153,6 @@ class Content(models.Model):
             # es una imagen directa, sacamos la extensión
             img_id = posixpath.basename(path)
         return img_id
-
 
     def __fetch_vimeo(self, url):
 
@@ -167,7 +166,6 @@ class Content(models.Model):
         response = requests.get(target)
         data = json.loads(response.text)
         return data
-
 
     def __responsive_embed(self, html):
         html = html.replace("<iframe", '<iframe class="embed-responsive-item"')
