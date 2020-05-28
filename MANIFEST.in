@@ -1,5 +1,6 @@
-include *.json *.js *.txt *.md
-recursive-exclude static
-recursive-include assets *.*
+include *.js *.txt *.md
+exclude webpack.config.js
+recursive-exclude assets *
+recursive-include static *
 recursive-include templates *.html
 

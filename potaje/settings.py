@@ -57,7 +57,6 @@ INSTALLED_APPS = [
     "potaje",
     "albums",
     "profiles",
-    "assets",
 ]
 
 MIDDLEWARE = [

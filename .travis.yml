@@ -13,11 +13,18 @@ install:
 script:
   - potaje collectstatic
   - npm run build
-  - git archive HEAD -o potaje.tar.gz
-  - tar cf potaje-static.tar.gz static/
+  - python setup.py sdist
 
 notifications:
   email: false
 
 addons:
   artifacts: true
+
+deploy:
+  provider: releases
+  api_key: "GITHUB OAUTH TOKEN"
+  file: "FILE TO UPLOAD"
+  skip_cleanup: true
+  on:
+    tags: true
