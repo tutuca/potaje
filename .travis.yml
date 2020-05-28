@@ -17,10 +17,7 @@ script:
   - tar cf potaje-static.tar.gz static/
 
 notifications:
-#  irc:
-#    channels: "irc.freenode.org#potaje"
-#    template:
-#      - "%{repository}@%{branch}: %{message} (%{build_url})"
-#    on_success: change
-#    on_failure: change
   email: false
+
+addons:
+  artifacts: true
