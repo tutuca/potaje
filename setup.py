@@ -10,15 +10,18 @@ setup(
     author='tutuca',
     author_email='maturburu@gmail.com',
     version=version,
-    include_package_data=True,
+    package_data={
+        "static": ["*"],
+        "templates": ["*.html"]
+    },
     packages=find_packages(),
     install_requires=[
+        'django-environ',
         'Django',
+        'mistune',
         'Pillow',
         'requests',
         'restless',
-        'django-environ',
-        'mistune'
     ],
     entry_points={
         'console_scripts': [

@@ -28,7 +28,7 @@ DEBUG = True
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [root("templates/"),],
+        "DIRS": [root("templates/")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -54,7 +54,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "django_extensions",
     "potaje",
     "albums",
     "profiles",
@@ -86,9 +85,9 @@ DATABASES = {"default": env.db("DB_URL", default="sqlite:///db.sqlite3")}
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "es-AR"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "America/Argentina/Cordoba"
 
 USE_I18N = True
 
@@ -105,3 +104,6 @@ STATIC_ROOT = root("static/")
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = root("media/")
+
+if DEBUG:
+    INSTALLED_APPS += ['django_extensions']

@@ -9,14 +9,15 @@ USE: fab <hosts>:<username> <action>
 EX: fab staging:admin release
 """
 import os
+from pathlib import Path
 import datetime
 from fabric.api import env, run, local, require, put, cd, lcd, prefix
 from fabric.contrib.files import exists
 
-BASEDIR = os.path.dirname(__file__)
-env.static_dir = os.path.join(BASEDIR, 'static')
+BASEDIR = Path(".")
+env.static_dir = BASEDIR / 'static'
 env.project_name = 'potaje'
-env.bundle_built = False
+
 env.tar = "%s-%s.tar.gz" % (
     env.project_name,
     datetime.datetime.now().strftime("%Y%m%d%H%M%S"),

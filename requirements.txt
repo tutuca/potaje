@@ -1,9 +1,16 @@
+django-environ
 Django
+mistune
 Pillow
 requests
 restless
-mistune
+
+# Dev 
+black
 django-extensions
-django-environ
+flake8
+ipdb
 nodeenv
 psycopg2-binary
+twine
+wheel

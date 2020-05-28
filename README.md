@@ -1,57 +1,37 @@
-Potaje
-------
+## Potaje
 
 Un manojo de ideas
 
 ![build status](https://travis-ci.org/tutuca/potaje.svg?branch=master)
 
-Instalación
--------------------
+## Instalación
 
 Se asume un sistema con:
 
 - [python](http://python.org).
 - [pip](http://www.pip-installer.org/), [virtualenv](http://www.virtualenv.org/)
-  (incluídos con python 3.4).
 
-Sólo para desarrollo:
+Solo para desarrollo:
 
 - [node](http://nodejs.org/)
 - [npm](https://www.npmjs.org/)
 
 Clonar el repositorio
 
+```sh
     $ git clone git@github.com:tutuca/potaje.git
+    ...
     $ cd potaje
-
-Opcional: Crear un entorno virtual.
-
-    $ virtualenv .
-    $ source ./bin/activate
+```
 
 Instalar las dependencias
 
     $ pip install -r requirements.txt
 
-## Ajustar los parametros locales
+## Configuración local
 
-    $ vim potaje/local_settings.py
-
-Modificar los parámetros de la base de datos
-
-    #local_settings.py
-    DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'potaje',
-        'USER': 'postgres',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '',
-        }
-    }   
-
-> En producción local_settings.py debería tener DEBUG=False
+Se usa [django-environ](https://django-environ.readthedocs.io/en/latest/) para las configuraciones de entorno.
+Los valores por defecto deberían funcionar sin más configuración.
 
 # Inicializar la base de datos.
 
@@ -70,7 +50,7 @@ Ahora queda generar los recursos de estilos, imágenes, íconos y scripts.
 
 Descargar las herramientas necesarias:
 
-    $ npm install  
+    $ npm install
 
 Compilar los assets:
 

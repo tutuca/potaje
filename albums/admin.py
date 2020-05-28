@@ -17,6 +17,7 @@ class AlbumAdmin(admin.ModelAdmin):
     inlines = [ContentInLine]
     list_display = ('name', 'section', 'created')
     list_filter = ('section', )
+    date_hierarchy = 'created'
 
 
 admin.site.register(Album, AlbumAdmin)

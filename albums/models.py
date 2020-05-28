@@ -1,7 +1,7 @@
 import json
 import requests
 import mistune
-
+import posixpath
 from urllib import parse
 
 from django.db import models
@@ -54,7 +54,7 @@ class HomeReel(models.Model):
 
 class Section(models.Model):
     name = models.CharField(max_length=60)
-    description = models.TextField(null=True, blank=True)
+    description = models.TextField(default="", blank=True)
     created = models.DateTimeField(auto_now_add=True, editable=False)
     order = models.IntegerField()
     rendered = models.TextField(editable=False)
@@ -82,7 +82,7 @@ class Section(models.Model):
 class Album(models.Model):
     name = models.CharField(max_length=60)
     section = models.ForeignKey("Section", models.CASCADE)
-    description = models.TextField(null=True, blank=True)
+    description = models.TextField(default="", blank=True)
     created = models.DateTimeField(auto_now_add=True, editable=False)
     modified = models.DateTimeField(auto_now=True, editable=False)
     rendered = models.TextField(editable=False)
@@ -116,7 +116,7 @@ class Content(models.Model):
     kind = models.SmallIntegerField(
         choices=((10, "Picture"), (20, "Video"),), default=10
     )
-    caption = models.CharField(max_length=128, null=True, blank=True)
+    caption = models.CharField(max_length=128, default="", blank=True)
     album = models.ForeignKey("Album", on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True, editable=False)
     thumbnail = models.URLField(editable=False, default="")
@@ -150,16 +150,16 @@ def fetch_image(sender, instance, **kwargs):
     if instance.source:
         if "imgur" in instance.source:
             old_code = instance.source
-            split = parse.urlsplit(instance.source)
-            img_id = split.path[1:]  # sacamos el primer /
-            if any(x in split.path for x in (".gif", ".jpg", ".png",)):
-                # es una imágen directa, sacamos la extensión
-                img_id = img_id[:-4]
+            path = parse.urlparse(instance.source).path
+            img_id = path
+            if any(x in path for x in (".gif", ".jpg", ".png", ".jpeg")):
+                # es una imagen directa, sacamos la extensión
+                img_id = posixpath.basename(path)
 
             instance.kind = 10
             instance.caption = old_code
             instance.thumbnail = "http://i.imgur.com/%st.jpg" % img_id
-            instance.code = img_template % (img_id, instance.caption)
+            instance.code = img_template % (f"https://i.imgur.com/{img_id}.jpg", instance.caption)
 
         if "vimeo" in instance.source:
             data = fetch_vimeo(instance.source)
