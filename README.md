@@ -2,7 +2,7 @@
 
 Un manojo de ideas
 
-![build status](https://travis-ci.org/tutuca/potaje.svg?branch=master)
+![Python package](https://github.com/tutuca/potaje/workflows/Python%20package/badge.svg?branch=master)
 
 ## Instalación
 
