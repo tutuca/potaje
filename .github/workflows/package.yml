@@ -37,7 +37,7 @@ jobs:
     - name: bundle
       run: |
         python setup.py develop
-        nodeenv -pn latest
+        nodeenv -n latest
         npm install
         npm run build
         potaje collectstatic --noinput
