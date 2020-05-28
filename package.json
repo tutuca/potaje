@@ -15,7 +15,7 @@
     "start": "npm run watch",
     "build": "webpack --mode=production",
     "watch": "webpack --watch --mode=development",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint:check": "prettier -c ."
   },
   "author": "Matias Iturburu <matias.iturburu@gmail.com>",
   "license": "MIT",
