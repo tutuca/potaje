@@ -1,4 +1,4 @@
-FROM python:3.6-alpine
+FROM python:3.7-alpine
 RUN mkdir /usr/src/app
 WORKDIR /usr/src/app
 ENV LIBRARY_PATH=/lib:/usr/lib
