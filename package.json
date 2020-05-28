@@ -15,7 +15,8 @@
     "start": "npm run watch",
     "build": "webpack --mode=production",
     "watch": "webpack --watch --mode=development",
-    "lint:check": "prettier -c ."
+    "lint": "prettier --write assets",
+    "lint:check": "prettier -c assets"
   },
   "author": "Matias Iturburu <matias.iturburu@gmail.com>",
   "license": "MIT",
