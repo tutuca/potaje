@@ -105,4 +105,4 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = root("media/")
 
 if DEBUG:
-    INSTALLED_APPS += ['django_extensions']
+    INSTALLED_APPS += ["django_extensions"]

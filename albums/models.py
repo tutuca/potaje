@@ -5,32 +5,10 @@ import posixpath
 from urllib import parse
 
 from django.db import models
-from django.dispatch import receiver
-from django.db.models.signals import post_save
 from django.utils.html import strip_tags
 
 
 markdown = mistune.Markdown()
-
-
-def fetch_vimeo(url):
-
-    options = {
-        "url": url,
-        "portrait": 0,
-        "title": 0,
-        "byline": 0,
-    }
-    target = "http://vimeo.com/api/oembed.json?%s" % parse.urlencode(options)
-    response = requests.get(target)
-    data = json.loads(response.text)
-    return data
-
-
-def responsive_embed(html):
-    html = html.replace("<iframe", '<iframe class="embed-responsive-item"')
-    embed = '<div class="embed-responsive embed-responsive-4by3">%s</div>'
-    return embed % html
 
 
 class HomeReel(models.Model):
@@ -46,8 +24,8 @@ class HomeReel(models.Model):
 
     def save(self):
         if self.reel_url:
-            data = fetch_vimeo(self.reel_url)
-            self.reel = responsive_embed(data["html"])
+            data = __fetch_vimeo(self.reel_url)
+            self.reel = __responsive_embed(data["html"])
 
         super().save()
 
@@ -73,8 +51,8 @@ class Section(models.Model):
         self.rendered = markdown(self.description)
 
         if self.reel_url:
-            data = fetch_vimeo(self.reel_url)
-            self.reel = responsive_embed(data["html"])
+            data = __fetch_vimeo(self.reel_url)
+            self.reel = __responsive_embed(data["html"])
 
         super().save()
 
@@ -132,41 +110,67 @@ class Content(models.Model):
 
     def save(self):
         self.rendered = markdown(self.caption)
+        self.fetch_image()
         super().save()
 
+    def fetch_image(self, **kwargs):
+        img_template = '<img class="img-fluid" src="%s" alt="%s" />'
+        if self.code:
+            return
 
-@receiver(post_save, sender=Content)
-def fetch_image(sender, instance, **kwargs):
-    img_template = '<img class="img-fluid" src="%s" alt="%s" />'
-    if instance.code:
-        return
+        if self.image:
+            self.caption = self.caption or self.image.name
+            self.kind = 10
+            self.thumbnail = self.image.url
+            self.code = img_template % (self.image.url, self.caption)
+            return
 
-    if instance.image:
-        instance.caption = instance.caption or instance.image.name
-        instance.kind = 10
-        instance.thumbnail = instance.image.url
-        instance.code = img_template % (instance.image.url, instance.caption)
+        if "imgur" in self.source:
+            source = self.source
+            img_id = __extract_img_id(source)
+            self.kind = 10
+            self.caption = source
+            self.thumbnail = f"http://i.imgur.com/{img_id}t.jpg"
+            self.code = img_template % (
+                f"https://i.imgur.com/{img_id}.jpg",
+                self.caption,
+            )
+            return
 
-    if instance.source:
-        if "imgur" in instance.source:
-            old_code = instance.source
-            path = parse.urlparse(instance.source).path
-            img_id = path
-            if any(x in path for x in (".gif", ".jpg", ".png", ".jpeg")):
-                # es una imagen directa, sacamos la extensión
-                img_id = posixpath.basename(path)
+        if "vimeo" in self.source:
+            data = __fetch_vimeo(self.source)
 
-            instance.kind = 10
-            instance.caption = old_code
-            instance.thumbnail = "http://i.imgur.com/%st.jpg" % img_id
-            instance.code = img_template % (f"https://i.imgur.com/{img_id}.jpg", instance.caption)
+            self.kind = 20
+            self.caption = data["title"]
+            self.thumbnail = data["thumbnail_url"]
+            self.code = __responsive_embed(data["html"])
+            return
 
-        if "vimeo" in instance.source:
-            data = fetch_vimeo(instance.source)
 
-            instance.kind = 20
-            instance.caption = data["title"]
-            instance.thumbnail = data["thumbnail_url"]
-            instance.code = responsive_embed(data["html"])
+def __extract_img_id(source):
+    path = parse.urlparse(source).path
+    img_id = path
+    if any(x in path for x in (".gif", ".jpg", ".png", ".jpeg")):
+        # es una imagen directa, sacamos la extensión
+        img_id = posixpath.basename(path)
+    return img_id
 
-    instance.save()
+
+def __fetch_vimeo(url):
+
+    options = {
+        "url": url,
+        "portrait": 0,
+        "title": 0,
+        "byline": 0,
+    }
+    target = "http://vimeo.com/api/oembed.json?%s" % parse.urlencode(options)
+    response = requests.get(target)
+    data = json.loads(response.text)
+    return data
+
+
+def __responsive_embed(html):
+    html = html.replace("<iframe", '<iframe class="embed-responsive-item"')
+    embed = f'<div class="embed-responsive embed-responsive-4by3">{html}</div>'
+    return embed

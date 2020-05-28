@@ -6,52 +6,74 @@ from django.db import models, migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Album',
+            name="Album",
             fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True, verbose_name='ID', auto_created=True)),
-                ('name', models.CharField(max_length=60)),
-                ('description', models.TextField(blank=True, null=True)),
-                ('created', models.DateTimeField(auto_now_add=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        serialize=False,
+                        primary_key=True,
+                        verbose_name="ID",
+                        auto_created=True,
+                    ),
+                ),
+                ("name", models.CharField(max_length=60)),
+                ("description", models.TextField(blank=True, null=True)),
+                ("created", models.DateTimeField(auto_now_add=True)),
             ],
-            options={
-            },
+            options={},
             bases=(models.Model,),
         ),
         migrations.CreateModel(
-            name='Picture',
+            name="Picture",
             fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True, verbose_name='ID', auto_created=True)),
-                ('image', models.ImageField(upload_to='pictures')),
-                ('caption', models.CharField(max_length=128, blank=True, null=True)),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('album', models.ForeignKey(to='albums.Album', on_delete=models.CASCADE)),
+                (
+                    "id",
+                    models.AutoField(
+                        serialize=False,
+                        primary_key=True,
+                        verbose_name="ID",
+                        auto_created=True,
+                    ),
+                ),
+                ("image", models.ImageField(upload_to="pictures")),
+                ("caption", models.CharField(max_length=128, blank=True, null=True)),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                (
+                    "album",
+                    models.ForeignKey(to="albums.Album", on_delete=models.CASCADE),
+                ),
             ],
-            options={
-            },
+            options={},
             bases=(models.Model,),
         ),
         migrations.CreateModel(
-            name='Section',
+            name="Section",
             fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True, verbose_name='ID', auto_created=True)),
-                ('name', models.CharField(max_length=60)),
-                ('description', models.TextField(blank=True, null=True)),
-                ('created', models.DateTimeField(auto_now_add=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        serialize=False,
+                        primary_key=True,
+                        verbose_name="ID",
+                        auto_created=True,
+                    ),
+                ),
+                ("name", models.CharField(max_length=60)),
+                ("description", models.TextField(blank=True, null=True)),
+                ("created", models.DateTimeField(auto_now_add=True)),
             ],
-            options={
-                'ordering': ('id',),
-            },
+            options={"ordering": ("id",)},
             bases=(models.Model,),
         ),
         migrations.AddField(
-            model_name='album',
-            name='section',
-            field=models.ForeignKey(to='albums.Section', on_delete=models.CASCADE),
+            model_name="album",
+            name="section",
+            field=models.ForeignKey(to="albums.Section", on_delete=models.CASCADE),
             preserve_default=True,
         ),
     ]

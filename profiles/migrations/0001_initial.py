@@ -13,51 +13,84 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Profile',
+            name="Profile",
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
-                ('biopic', models.TextField()),
-                ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
+                (
+                    "id",
+                    models.AutoField(
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                        auto_created=True,
+                    ),
+                ),
+                ("biopic", models.TextField()),
+                (
+                    "user",
+                    models.OneToOneField(
+                        to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE
+                    ),
+                ),
             ],
-            options={
-            },
+            options={},
             bases=(models.Model,),
         ),
         migrations.CreateModel(
-            name='Service',
+            name="Service",
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
-                ('name', models.CharField(max_length=100)),
-                ('icon', models.ImageField(upload_to='services')),
-                ('endpoint', models.URLField()),
+                (
+                    "id",
+                    models.AutoField(
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                        auto_created=True,
+                    ),
+                ),
+                ("name", models.CharField(max_length=100)),
+                ("icon", models.ImageField(upload_to="services")),
+                ("endpoint", models.URLField()),
             ],
-            options={
-            },
+            options={},
             bases=(models.Model,),
         ),
         migrations.CreateModel(
-            name='ServiceConfiguration',
+            name="ServiceConfiguration",
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
-                ('app_key', models.CharField(blank=True, max_length=255, null=True)),
-                ('app_secret', models.CharField(blank=True, max_length=255, null=True)),
-                ('user_profile', models.URLField()),
-                ('profile', models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
+                (
+                    "id",
+                    models.AutoField(
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                        auto_created=True,
+                    ),
+                ),
+                ("app_key", models.CharField(blank=True, max_length=255, null=True)),
+                ("app_secret", models.CharField(blank=True, max_length=255, null=True)),
+                ("user_profile", models.URLField()),
+                (
+                    "profile",
+                    models.ForeignKey(
+                        to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE
+                    ),
+                ),
             ],
-            options={
-            },
+            options={},
             bases=(models.Model,),
         ),
         migrations.AddField(
-            model_name='service',
-            name='config',
-            field=models.ManyToManyField(to=settings.AUTH_USER_MODEL, through='profiles.ServiceConfiguration'),
+            model_name="service",
+            name="config",
+            field=models.ManyToManyField(
+                to=settings.AUTH_USER_MODEL, through="profiles.ServiceConfiguration"
+            ),
             preserve_default=True,
         ),
         migrations.AddField(
-            model_name='serviceconfiguration',
-            name='service',
-            field=models.ForeignKey(to='profiles.Service', on_delete=models.CASCADE),
+            model_name="serviceconfiguration",
+            name="service",
+            field=models.ForeignKey(to="profiles.Service", on_delete=models.CASCADE),
             preserve_default=True,
         ),
     ]

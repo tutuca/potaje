@@ -8,18 +8,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('albums', '0007_album_rendered'),
+        ("albums", "0007_album_rendered"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='section',
-            name='reel',
+            model_name="section",
+            name="reel",
             field=models.TextField(blank=True, editable=False, null=True),
         ),
         migrations.AddField(
-            model_name='section',
-            name='reel_url',
+            model_name="section",
+            name="reel_url",
             field=models.URLField(blank=True, null=True),
         ),
     ]

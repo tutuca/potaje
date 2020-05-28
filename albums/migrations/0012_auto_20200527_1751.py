@@ -6,23 +6,23 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('albums', '0011_content_rendered'),
+        ("albums", "0011_content_rendered"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='album',
-            name='description',
-            field=models.TextField(blank=True, default=''),
+            model_name="album",
+            name="description",
+            field=models.TextField(blank=True, default=""),
         ),
         migrations.AlterField(
-            model_name='content',
-            name='caption',
-            field=models.CharField(blank=True, default='', max_length=128),
+            model_name="content",
+            name="caption",
+            field=models.CharField(blank=True, default="", max_length=128),
         ),
         migrations.AlterField(
-            model_name='section',
-            name='description',
-            field=models.TextField(blank=True, default=''),
+            model_name="section",
+            name="description",
+            field=models.TextField(blank=True, default=""),
         ),
     ]

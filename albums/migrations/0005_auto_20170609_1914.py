@@ -8,12 +8,9 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('albums', '0004_section_order'),
+        ("albums", "0004_section_order"),
     ]
 
     operations = [
-        migrations.AlterModelOptions(
-            name='section',
-            options={'ordering': ('order',)},
-        ),
+        migrations.AlterModelOptions(name="section", options={"ordering": ("order",)},),
     ]

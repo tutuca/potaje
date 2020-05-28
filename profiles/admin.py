@@ -16,13 +16,13 @@ class ServiceConfigurationInline(admin.StackedInline):
 class ProfileInline(admin.StackedInline):
     model = Profile
     can_delete = False
-    verbose_name_plural = 'profiles'
+    verbose_name_plural = "profiles"
 
 
 class UserAdmin(UserAdmin):
     inlines = (
         ProfileInline,
-        #ServiceConfigurationInline
+        # ServiceConfigurationInline
     )
 
 

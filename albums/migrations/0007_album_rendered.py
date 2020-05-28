@@ -8,14 +8,14 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('albums', '0006_section_rendered'),
+        ("albums", "0006_section_rendered"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='album',
-            name='rendered',
-            field=models.TextField(default='', editable=False),
+            model_name="album",
+            name="rendered",
+            field=models.TextField(default="", editable=False),
             preserve_default=False,
         ),
     ]
