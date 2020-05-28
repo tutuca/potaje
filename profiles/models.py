@@ -1,8 +1,6 @@
 from django.db import models
 import mistune
 
-markdown = mistune.Markdown()
-
 
 class Profile(models.Model):
     user = models.OneToOneField("auth.User", on_delete=models.CASCADE)
@@ -14,7 +12,7 @@ class Profile(models.Model):
         return "%s Profile" % self.user.get_full_name()
 
     def save(self, *args, **kwargs):
-        self.rendered = markdown(self.biopic)
+        self.rendered = mistune.html(self.biopic)
         super().save(*args, **kwargs)
 
 

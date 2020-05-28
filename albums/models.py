@@ -8,9 +8,6 @@ from django.db import models
 from django.utils.html import strip_tags
 
 
-markdown = mistune.Markdown()
-
-
 class HomeReel(models.Model):
     reel = models.TextField(blank=True, null=True, editable=False)
     reel_url = models.URLField(blank=True, null=True)
@@ -48,7 +45,7 @@ class Section(models.Model):
         return self.name
 
     def save(self):
-        self.rendered = markdown(self.description)
+        self.rendered = mistune.html(self.description)
 
         if self.reel_url:
             data = __fetch_vimeo(self.reel_url)
@@ -84,7 +81,7 @@ class Album(models.Model):
         return self.name
 
     def save(self):
-        self.rendered = markdown(self.description)
+        self.rendered = mistune.html(self.description)
         super().save()
 
 
@@ -109,7 +106,7 @@ class Content(models.Model):
         verbose_name_plural = "Contenido, fotos y videos."
 
     def save(self):
-        self.rendered = markdown(self.caption)
+        self.rendered = mistune.html(self.caption)
         self.fetch_image()
         super().save()
 
@@ -122,12 +119,14 @@ class Content(models.Model):
             self.caption = self.caption or self.image.name
             self.kind = 10
             self.thumbnail = self.image.url
-            self.code = img_template % (self.image.url, self.caption)
+            self.code = img_template % (
+                f"/media/pictures/{self.image.image}",
+                self.caption)
             return
 
         if "imgur" in self.source:
             source = self.source
-            img_id = __extract_img_id(source)
+            img_id = self.__extract_img_id()
             self.kind = 10
             self.caption = source
             self.thumbnail = f"http://i.imgur.com/{img_id}t.jpg"
@@ -138,39 +137,39 @@ class Content(models.Model):
             return
 
         if "vimeo" in self.source:
-            data = __fetch_vimeo(self.source)
+            data = self.__fetch_vimeo()
 
             self.kind = 20
             self.caption = data["title"]
             self.thumbnail = data["thumbnail_url"]
-            self.code = __responsive_embed(data["html"])
+            self.code = self.__responsive_embed(data["html"])
             return
 
 
-def __extract_img_id(source):
-    path = parse.urlparse(source).path
-    img_id = path
-    if any(x in path for x in (".gif", ".jpg", ".png", ".jpeg")):
-        # es una imagen directa, sacamos la extensión
-        img_id = posixpath.basename(path)
-    return img_id
+    def __extract_img_id(self):
+        path = parse.urlparse(self.source).path
+        img_id = path
+        if any(x in path for x in (".gif", ".jpg", ".png", ".jpeg")):
+            # es una imagen directa, sacamos la extensión
+            img_id = posixpath.basename(path)
+        return img_id
 
 
-def __fetch_vimeo(url):
+    def __fetch_vimeo(self, url):
 
-    options = {
-        "url": url,
-        "portrait": 0,
-        "title": 0,
-        "byline": 0,
-    }
-    target = "http://vimeo.com/api/oembed.json?%s" % parse.urlencode(options)
-    response = requests.get(target)
-    data = json.loads(response.text)
-    return data
+        options = {
+            "url": url,
+            "portrait": 0,
+            "title": 0,
+            "byline": 0,
+        }
+        target = "http://vimeo.com/api/oembed.json?%s" % parse.urlencode(options)
+        response = requests.get(target)
+        data = json.loads(response.text)
+        return data
 
 
-def __responsive_embed(html):
-    html = html.replace("<iframe", '<iframe class="embed-responsive-item"')
-    embed = f'<div class="embed-responsive embed-responsive-4by3">{html}</div>'
-    return embed
+    def __responsive_embed(self, html):
+        html = html.replace("<iframe", '<iframe class="embed-responsive-item"')
+        embed = f'<div class="embed-responsive embed-responsive-4by3">{html}</div>'
+        return embed

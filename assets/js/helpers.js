@@ -1,51 +1,53 @@
-import $ from 'jquery';
+import $ from "jquery";
 /* Helpers */
 export function hexToRgb(hex) {
   /*
-  * Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
-  * from http://stackoverflow.com/a/5624139/53468
-  */
-  'use strict';
+   * Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+   * from http://stackoverflow.com/a/5624139/53468
+   */
+  "use strict";
   var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
   hex = hex.replace(shorthandRegex, function (m, r, g, b) {
     return r + r + g + g + b + b;
   });
 
   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result ? {
-    r: parseInt(result[1], 16),
-    g: parseInt(result[2], 16),
-    b: parseInt(result[3], 16)
-  } : null;
+  return result
+    ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16),
+      }
+    : null;
 }
 
 export function toRGBAString(color, a) {
-  'use strict';
-  if (!a) { a = 1; }
+  "use strict";
+  if (!a) {
+    a = 1;
+  }
   color = hexToRgb(color);
-  return 'rgba(' + color.r + ',' + color.g + ',' + color.b + ',' + a + ')';
+  return "rgba(" + color.r + "," + color.g + "," + color.b + "," + a + ")";
 }
 
 export function viewport() {
   /*
-  * Calculates the available surface on the client's window.
-  * */
-  'use strict';
+   * Calculates the available surface on the client's window.
+   * */
+  "use strict";
   var e = window,
-    a = 'inner';
-  if (!('innerWidth' in window)) {
-    a = 'client';
+    a = "inner";
+  if (!("innerWidth" in window)) {
+    a = "client";
     e = document.documentElement || document.body;
   }
-  var innerWidth = Math.max(e[a + 'Width'], 580),
-    innerHeight = Math.max(e[a + 'Height'], 580);
+  var innerWidth = Math.max(e[a + "Width"], 580),
+    innerHeight = Math.max(e[a + "Height"], 580);
   return { width: innerWidth, height: innerHeight };
 }
 
 export function fit(selector, to, padding) {
-  var visible_height, visible_width,
-    old_height, old_width,
-    delta, landscape;
+  var visible_height, visible_width, old_height, old_width, delta, landscape;
   padding = padding || 0;
   if (to) {
     visible_height = $(to).height() - padding;
@@ -54,7 +56,6 @@ export function fit(selector, to, padding) {
     var vp = viewport();
     visible_height = vp.height - padding;
     visible_width = vp.width - padding;
-
   }
   $(selector).each(function () {
     var $el = $(this);
@@ -63,17 +64,16 @@ export function fit(selector, to, padding) {
     landscape = old_width > old_height;
     if (landscape) {
       $el.css({
-        width: Math.floor(visible_height / old_height * old_width),
-        height: 'auto'
+        width: Math.floor((visible_height / old_height) * old_width),
+        height: "auto",
       });
     } else {
       $el.css({
         height: visible_height,
-        width: 'auto'
+        width: "auto",
       });
     }
     /* delta = (visible_width - $el.width())/2;
     $(this).css('margin-left', delta); */
   });
-
 }
